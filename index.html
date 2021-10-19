@@ -9,7 +9,53 @@
     <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
 <body>
-    <h1>Phases of the Moon</h1>
-    <script src="./assets/js/scripts.js"></script>
+    <section class="hero is-medium">
+        <div class="hero-body">
+            <h1>Moon phases</h1>
+            <div class="column is-one-fifth level-right" id="input-column">
+            <input class="input is-rounded is-small mgr-large pr-6" id="location-input" type="text" placeholder="Enter your location.">
+            <button class="button is-link is-rounded">Submit</button>
+        </div>
+        </div>
+    </section>
+   
+           <!-- Content -->
+    
+          <div class="columns">
+            <div class="column is-three-quarters ml-4">
+                    <article class="tile is-child">
+                      <p class="title">Moon Calander</p>
+                      <p class="subtitle">Aligned with the right tile</p>
+                        </article>
+                    </div>
+                <div class="tile is-child is-6 pr-6" id="weather-info">
+                    <article class="tile is-child box">
+                      <p class="title">Weather</p>
+                      <p class="subtitle">With some content</p>
+                      <div class="container">
+                        <p>roin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
+                      </div>
+                    </article>
+                  </div>
+            </div>
+            
+            
+            <div class="modal">
+                <button class="trigger-modal">triggermodal</button>
+                <div class="modal-background"></div>
+                <div class="modal-card">
+                  <header class="modal-card-head">
+                    <p class="modal-card-title">Todays moon phase</p>
+                    <button class="delete" aria-label="close"></button>
+                  </header>
+                  <section class="modal-card-body">
+                    <!-- Content ... -->
+                  </section>
+                </div>
+              </div>
+       
+            
+            
+<script src="./assets/js/scripts.js"></script>
 </body>
 </html>
