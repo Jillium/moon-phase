@@ -31,3 +31,8 @@ function outsideModal(event) {
     modal.style.display = 'none';}
 }
 
+//put moon stormglass API to display information about the moon date 
+// get info on moon phase moon rise and moon set 
+//can you change modal color based on these phases use a condiotnal?
+
+
