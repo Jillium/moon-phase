@@ -15,8 +15,8 @@ body {
     background: rgba(128, 128, 128, 0.37);
     border-radius: 6px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, .3);
-    height: 560px;
-    padding:  0 0 0 20px;
+    height: 625px;
+    padding:  20px 0 0 20px;
     width: 70%;
 }
 
@@ -32,6 +32,13 @@ body {
 
 .column {
     width: 14.29%;
+}
+
+.monthYear div {
+    height: 50px;
+    /* justify-content: center; */
+    align-items: center;
+    text-align: center;
 }
 
 .weekDays div {

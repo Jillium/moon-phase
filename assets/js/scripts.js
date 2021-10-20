@@ -1,46 +1,44 @@
 var calendarData = [];
+var currentYear = 2021;
+var currentMonth = 5; //June
 
 // calendarData.push("February");
 
-let lastDay = new Date(2021,2,0).getDate();
+let lastDay = new Date(currentYear,currentMonth,0).getDate();
 console.log(lastDay);
 
 for (let i = 1; i <= lastDay;i++){
-    var d = new Date(2021,2,i);
+    var d = new Date(currentYear,currentMonth,i);
     var date = d.getDate();
     var day = d.getDay();
 
     var weekOfMonth = Math.ceil((date - 1 - day) / 7)+1;
 
-    calendarData.push({day:i,dayOfWeek:day,weekOfMonth:weekOfMonth,image:'magine name',brightness:.1});
+    calendarData.push({day:i,dayOfWeek:day,weekOfMonth:weekOfMonth,image:'image name',brightness:.1});
 
 };
 
 console.log(calendarData);
 
-
 var currentDay = {};
-calendarData.forEach(function(entry) {
+let getData = function(dOW,wOM){
+
+    calendarData.forEach(function(entry) {
+    if((entry.dayOfWeek == dOW) && (entry.weekOfMonth == wOM)){
     currentDay = entry;
-    console.log(currentDay.dayOfWeek);
+    return true;
+    }
 });
+}
 
-// let index = calendarData.findIndex(a => a.dayOfWeek === 2);
+var calendarDay = document.getElementsByClassName("days");
+var i;
+for (i = 0; i < calendarDay.length; i++) {
+    getData(calendarDay[i].dataset.dow, calendarDay[i].dataset.wom);
 
-// var index;
-// calendarData.some(function(entry, i) {
-//     if (entry.dayOfWeek === 2) {
-//         index = i;
-//         return true;
-//     }
-//     console.log(entry.dayOfWeek);
-// });
-
-// console.log(index);
-
-// var x = document.getElementsByClassName("days");
-// var i;
-// for (i = 0; i < x.length; i++) {
-//     console.log(x[i].textContent);
-
-// }
+    if(currentDay){
+        calendarDay[i].textContent=currentDay.day;
+        
+    }
+    currentDay = {};
+}
