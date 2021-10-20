@@ -5,20 +5,6 @@
     --grey: #E7DFDD;
 }
 
-#input-column {
-    margin-left: auto;
-}
-
-#weather-info {
-    padding-right: 20px;
-}
-
-body {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 17px;
-    line-height: 1.6;
-}
-
 .model-open-btn{
     background: #A239CA;
     padding: 1em 2em;
@@ -27,6 +13,8 @@ body {
     border-radius: 50%;
     position: absolute;
     left: 50%;
+    bottom: 50%;
+    
 }
 
 .btn:hover{
@@ -37,7 +25,7 @@ body {
     display: none;
     position: absolute;
     z-index: 1;
-    left: 30%;
+    left: 40%;
     top: 50%;
     height: 50%;
     width: 30%;
@@ -55,7 +43,7 @@ body {
     animation-duration: 1s;
 }
 
-.model-close-button {
+#modal-close {
     color: #000;
     float: right;
     font-size: 30px;

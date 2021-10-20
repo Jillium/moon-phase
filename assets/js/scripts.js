@@ -2,7 +2,7 @@
 // get modal elements and make variable 
 var modal = document.getElementById('moon-modal');
 var modalbtn = document.getElementById('modal-btn');
-var closeBtn = document.getElementsByClassName('model-close-button');
+var closeBtn = document.getElementById('modal-close');
 
 //listen for open click 
 modalbtn.addEventListener('click', openModal);
@@ -11,22 +11,23 @@ modalbtn.addEventListener('click', openModal);
 closeBtn.addEventListener('click', closeModal);
 
 //click outside modal to close 
-window.addEventListener('click', outsideModel);
+window.addEventListener('click', outsideModal);
 
 //function to open modal 
 function openModal(){
     modal.style.display = 'block';
+    modalbtn.style.display = 'none';
 }
 
-//close modal 
+//close modal on button
 function closeModal() {
     console.log("modal closed");
     modal.style.display = 'none';
 }
 
-function outsideModel(event) {
+function outsideModal(event) {
     console.log("clicked outside model");
-    if(event.target === modal) {
+    if(event.target == modal) {
     modal.style.display = 'none';}
 }
 
