@@ -1,3 +1,8 @@
+/* Fonts Added */
+/*  font-family: 'BioRhyme', serif;
+    font-family: 'IM Fell English SC', serif;
+    font-family: 'Noto Serif', serif; */
+
 /* Color Variables */
 :root {
     --black: #0E0B16;
@@ -5,3 +10,16 @@
     --blue: #4717F6;
     --grey: #E7DFDD;
 }
+
+* {
+    box-sizing: border-box;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'IM Fell English SC', serif;
+  }
