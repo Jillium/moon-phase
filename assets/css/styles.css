@@ -94,6 +94,8 @@ h2 {
     font-size: 3em;
 }
 
+/* modal start*/
+
 .model-open-btn{
     background: #A239CA;
     padding: 1em 2em;
@@ -112,8 +114,8 @@ h2 {
     z-index: 1;
     left: 40%;
     top: 50%;
-    height: 50%;
-    width: 30%;
+    height: 70%;
+    width: 40%;
     overflow: auto;
     background-color: #0e0b16;
     color: #E7DFDD;
