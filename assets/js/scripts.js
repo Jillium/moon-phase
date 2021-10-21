@@ -3,6 +3,7 @@ var currentDay = {};
 var currentYear = 2021;
 var currentMonth = 5; //June
 var calendarDay = document.getElementsByClassName("days");
+var sixthWeek = document.getElementsByClassName("sixth");
 var  selectedMonth = document.getElementById("start");
 console.log(selectedMonth.value);
 
@@ -41,11 +42,18 @@ let getData = function(dOW,wOM){
 let loadCalendar = function() {
     for (let i = 0; i < calendarDay.length; i++) {
         getData(calendarDay[i].dataset.dow, calendarDay[i].dataset.wom);
+        // if (i = 0){
+        //     calendarDay[36].parentElement.style.visibility = "hidden";
+        // }
 
         if(currentDay){
-            calendarDay[i].textContent=currentDay.day;
-            
+            calendarDay[i].textContent=currentDay.day;   
+        };
+
+        if ((currentDay.weekOfMonth == 6) && (currentDay.dayOfWeek == 0)) {
+            console.log("visible");
         }
+
         currentDay = {};
     }
 }
@@ -55,4 +63,5 @@ let loadPage = function(){
     loadCalendar();
 }
 
+console.log(sixthWeek);
 loadPage();

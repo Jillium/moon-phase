@@ -55,3 +55,7 @@ body {
     border-width: 1px;
     border-style: solid;
 }
+
+.sixth {
+    visibility:hidden;
+}
