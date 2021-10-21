@@ -92,6 +92,20 @@ function outsideModal(event) {
     modal.style.display = 'none';}
 }
 
+//stormglass API 
+//get variables 
+const apiKey = "02465fec-307a-11ec-93e3-0242ac130002-0246608c-307a-11ec-93e3-0242ac130002";
+const apiUrlWeather = "https://api.stormglass.io/v2/weather/point";
+const apiUrlAstronomy = "https://api.stormglass.io/v2/astronomy/point";
+var riseSet = document.getElementById('rise-set');
+var phaseInfo = document.getElementById('moon-info');
+
+
+
+function getLocation () {
+
+}
+
 
 //variable for the submit button
 var submitButton = document.querySelector("#search-btn");
