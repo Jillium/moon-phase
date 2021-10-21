@@ -50,5 +50,9 @@ let loadCalendar = function() {
     }
 }
 
-loadArray();
-loadCalendar();
+let loadPage = function(){
+    loadArray();
+    loadCalendar();
+}
+
+loadPage();

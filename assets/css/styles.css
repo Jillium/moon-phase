@@ -36,14 +36,12 @@ body {
 
 .monthYear div {
     height: 50px;
-    /* justify-content: center; */
     align-items: center;
     text-align: center;
 }
 
 .weekDays div {
     height: 50px;
-    /* justify-content: center; */
     align-items: center;
     text-align: center;
 }
