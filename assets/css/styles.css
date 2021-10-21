@@ -1,4 +1,55 @@
+/* Fonts Added */
+/*  font-family: 'BioRhyme', serif;
+font-family: 'IM Fell English SC', serif;
+    font-family: 'Noto Serif', serif; */
 
+/* Color Variables */
+:root {
+    --black: #0E0B16;
+    --fuschia: #A239CA;
+    --blue: #4717F6;
+    --grey: #E7DFDD;
+}
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: var(--black);
+    color: var(--grey)
+}
+
+body {
+    font-family: 'BioRhyme', serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'IM Fell English SC', serif;
+}
+
+h1 {
+    font-size: 5em;
+    padding-left: 1rem;
+}
+
+
+h2 {
+    font-size: 3em;
+}
+
+.title {
+    color: var(--grey);
+}
+
+.month-input {
+    margin: 1rem 0 1rem 2rem;
+}
 
 .calendar {
     background: rgba(128, 128, 128, 0.37);
@@ -7,12 +58,15 @@
     height: 625px;
     padding:  20px 0 0 20px;
     width: 70%;
+    margin-left: 2rem;
 }
 
 .calendar div {
-    border: blueviolet;
+    border: var(--fuschia);
     border-style: solid;
     border-width: .5px;
+    border-radius: 15px;
+    color: var(--black);
 }
 
 .columns {
@@ -27,21 +81,24 @@
     height: 50px;
     align-items: center;
     text-align: center;
+    background-color: var(--grey);
 }
 
 .weekDays div {
     height: 50px;
     align-items: center;
     text-align: center;
+    background-color: var(--grey);
 }
 
 .weeks div {
     height: 100px;
+    background-color: var(--grey);
 }
 
 .weeks div:hover{
-    border: crimson;
-    border-width: 1px;
+    border: var(--blue);
+    border-width: 3px;
     border-style: solid;
 }
 
