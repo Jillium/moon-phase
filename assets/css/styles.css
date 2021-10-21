@@ -1,11 +1,50 @@
 
+/* Fonts Added */
+/*  font-family: 'BioRhyme', serif;
+    font-family: 'IM Fell English SC', serif;
+    font-family: 'Noto Serif', serif; */
+
+/* Color Variables */
+
+
 /* Root Colors */
+
 
 :root {
     --black: #0E0B16;
     --fuschia: #A239CA;
     --blue: #4717F6;
     --grey: #E7DFDD;
+}
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: var(--black);
+    color: var(--grey)
+  }
+
+body {
+    font-family: 'BioRhyme', serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'IM Fell English SC', serif;
+}
+
+h1 {
+    font-size: 5em;
+}
+  
+h2 {
+    font-size: 3em;
 }
 
 .model-open-btn{
@@ -62,3 +101,4 @@
     from{opacity: 0}
     to {opacity: 1}
 }
+
