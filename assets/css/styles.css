@@ -1,15 +1,22 @@
+
 /* Fonts Added */
 /*  font-family: 'BioRhyme', serif;
     font-family: 'IM Fell English SC', serif;
     font-family: 'Noto Serif', serif; */
 
 /* Color Variables */
+
+
+/* Root Colors */
+
+
 :root {
     --black: #0E0B16;
     --fuschia: #A239CA;
     --blue: #4717F6;
     --grey: #E7DFDD;
 }
+
 
 * {
     box-sizing: border-box;
@@ -39,3 +46,59 @@ h1 {
 h2 {
     font-size: 3em;
 }
+
+.model-open-btn{
+    background: #A239CA;
+    padding: 1em 2em;
+    color: #fff;
+    border: 0;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    bottom: 50%;
+    
+}
+
+.btn:hover{
+    background: #333;
+}
+
+.modal{
+    display: none;
+    position: absolute;
+    z-index: 1;
+    left: 40%;
+    top: 50%;
+    height: 50%;
+    width: 30%;
+    overflow: auto;
+    background-color: #E7DFDD;
+}
+
+.model-body {
+    background-color:#4717F6;
+    margin: 20% auto;
+    padding: 20px;
+    width: 70%;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0);
+    animation-name:modalopen;
+    animation-duration: 1s;
+}
+
+#modal-close {
+    color: #000;
+    float: right;
+    font-size: 30px;
+}
+
+.close-button:hover,.close-button:focus{
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@keyframes modalopen{
+    from{opacity: 0}
+    to {opacity: 1}
+}
+
