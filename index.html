@@ -7,10 +7,23 @@
     <title>Moon Phase</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=BioRhyme:wght@300&family=IM+Fell+English+SC&family=Noto+Serif&display=swap" rel="stylesheet"> 
 </head>
 <body>
+  <main>
     <header>
-        <h1>Phases of the Moon</h1>
+
+      <h1 class="title is-1">Phases of the Moon</h1>
+    
+        <div>
+            <h3>Weather by City</h3>
+            <form class="form">
+                <input name="city" type="text" id="input">
+                <button type="submit" id="search-btn">Search</button>
+            </form>
+        </div>
         <label for="start">Select Month:</label>
         <input type="month" id="start" name="start" min="2021-01" value="2021-10" onchange="loadPage()">
     </header>
@@ -74,12 +87,28 @@
             <div class="days column" data-wom="5" data-dow="6"></div>
         </div>
     </div>
-    <div class="weather">
+    <div class="weather"></div>
 
-    </div>
-    <div class="modal">
-        
-    </div>
+    <div id="weather-container"></div>
+  
+    <button id="modal-btn" class="model-open-btn">Click</button>
+        <div id="moon-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button id="modal-close" type="button">&times;</button>
+                    <h2>Todays Moon Information</h2>
+                    </div>
+                <div class="modal-body">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. A non minus magni vitae. Incidunt ipsum voluptas fugiat optio, sed blanditiis et sunt! Architecto animi mollitia nostrum ratione, et voluptatibus id.</p>
+                </div>
+                <div class="modal-footer">
+                    <h3>modal footer</h3>  
+                </div>
+            </div>
+         </div>
+
+
+</main>
     <script src="./assets/js/scripts.js"></script>
 </body>
 </html>
