@@ -9,9 +9,25 @@
     <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
 <body>
+    <header>
+        <h1 class="title is-1">Phases of the Moon</h1>
+    
+        <div>
+            <h3>Weather by City</h3>
+            <form class="form">
+                <input name="city" type="text" id="input">
+                <button type="submit" id="search-btn">Search</button>
+            </form>
+        </div>
+    
+        </header>
 
    
-    
+<main>
+    <div id="calendar-container"></div>
+  
+    <div id="weather-container"></div>
+  
     <button id="modal-btn" class="model-open-btn">Click</button>
         <div id="moon-modal" class="modal">
             <div class="modal-content">
@@ -27,9 +43,8 @@
                 </div>
             </div>
          </div>
-       
-            
-            
-<script src="./assets/js/scripts.js"></script>
+
+</main>
+    <script src="./assets/js/scripts.js"></script>
 </body>
 </html>
