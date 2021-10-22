@@ -99,9 +99,14 @@ const apiUrlWeather = "https://api.stormglass.io/v2/weather/point";
 const apiUrlAstronomy = "https://api.stormglass.io/v2/astronomy/point";
 var riseSet = document.getElementById('rise-set');
 var phaseInfo = document.getElementById('moon-info');
+var savedCities = [];
 
+//neeed city locations 
+function cityLocation () {
+    let city = document.getElementById('city-input').value;
 
-
+}
+//Use get request to get moonphase rise and set 
 function moonPhase () {
     var lat = data.coord.lat;
     let lng = data.coord.lng;
