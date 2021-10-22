@@ -15,7 +15,7 @@ let loadArray = function(){
     currentMonth = selected[1];
   
 
-    let lastDay = new Date(currentYear,currentMonth+1,0).getDate();
+    let lastDay = new Date(currentYear,parseInt(currentMonth),0).getDate();
 
     for (let i = 1; i <= lastDay;i++){
         var d = new Date(currentYear,currentMonth-1,i);
@@ -48,7 +48,6 @@ let loadCalendar = function() {
         
         if (currentDay.weekOfMonth == "6"){
             sixthWeek[0].style.visibility = "visible";
-            console.log(sixthWeek[0].style.visibility);
         }
         currentDay = {};
     }
