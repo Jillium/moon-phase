@@ -228,6 +228,14 @@ h2 {
     
 }
 
+.sixth {
+    visibility: hidden;
+}
+
+.btn:hover{
+    background: #333;
+}
+
 .modal{
     display: none;
     position: absolute;
