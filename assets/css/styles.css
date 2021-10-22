@@ -114,6 +114,10 @@ h2 {
     
 }
 
+.sixth {
+    visibility: hidden;
+}
+
 .btn:hover{
     background: #333;
 }
