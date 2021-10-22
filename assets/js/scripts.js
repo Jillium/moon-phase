@@ -100,6 +100,18 @@ var cityInputEl = document.querySelector("input")
 // variable for the selected city
 
 
+// Storm Glass Weather API 1e6476cc-3387-11ec-b37c-0242ac130002-1e647744-3387-11ec-b37c-0242ac130002
+const lat = 58.7984;
+const lng = 17.8081;
+const params = 'windSpeed';
+
+fetch(`https://api.stormglass.io/v2/weather/point?lat=${lat}&lng=${lng}&params=${params}`, {
+  headers: {
+    'Authorization': '1e6476cc-3387-11ec-b37c-0242ac130002-1e647744-3387-11ec-b37c-0242ac130002'
+  }
+}).then((response) => response.json()).then((jsonData) => {
+  console.log('This Works!!!')
+});
 
 
 
