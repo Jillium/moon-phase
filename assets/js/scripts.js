@@ -102,9 +102,20 @@ var phaseInfo = document.getElementById('moon-info');
 
 
 
-function getLocation () {
+function moonPhase () {
+    var lat = data.coord.lat;
+    let lng = data.coord.lng;
 
+    fetch(`https://api.stormglass.io/v2/astronomy/point?lat=${lat}&lng=${lng}&end=${end}`, {
+        headers: {
+            'Authorization': apiKey
+        }
+    }).then((response) => response.json()).then((jsonData) => {
+        console.log(data);
+    });
 }
+
+moonPhase();
 
 
 //variable for the submit button
