@@ -172,10 +172,8 @@ var submitButtonHandler = function (event) {
         // if a city is entered then run code 
         if (selectedCity) {
             getLatLong(selectedCity);
-            var cityNameEl = document.querySelector('#city-name');
-            
-            cityNameEl.textContent = selectedCity;
-            cityInputEl.value = "";
+
+            localStorage.setItem('savedCity',selectedCity);
             
         }
         else {
@@ -209,12 +207,82 @@ var getLatLong = function (selectedCity) {
             localStorage.setItem('savedLat', lat);
             localStorage.setItem('savedLon', lon);
             // need to figure out how to pull latitude and longitude from the data, it isn't working
+        }
+        
+    };
+    
+    
+    // this function will get the latitude and longitude to be used in the weather search 
+    var getLatLong = function (selectedCity) {
+        // this creates a URL for the api request based off of the city entered
+        var apiUrl = "http://api.positionstack.com/v1/forward?access_key=c4bf58a019f128c64c20b6e41582639b&query=" + selectedCity + "&limit=1";
+        console.log(apiUrl);
+        // fetch request to get lat and long from url we just created
+        fetch(apiUrl).then(function (response) {
+            // take response and convert it to data we cna use
+            response.json().then(function (data) {
+                
+                // Hey Corrie, you can use these variables in your api call for the weather information. This will give you the latitude and longitude based on their search 
+                let lat = data.data[0].latitude;
+                let lon = data.data[0].longitude;
+                console.log(lat);
+                console.log(lon);
+                
+                localStorage.setItem('savedLat', lat);
+                localStorage.setItem('savedLon', lon);
+
+                getWeather();
+                // need to figure out how to pull latitude and longitude from the data, it isn't working
+            })
         })
-    })
+        
+        
+    };
+    
+    // Pulling the weather information
+    function getWeather() {
+        const lat = localStorage.getItem('savedLat');
+        const lng = localStorage.getItem('savedLon');
+        const cityName = localStorage.getItem('savedCity');
 
+        // Displaying City Weather is pulling
+        var cityNameEl = document.querySelector('#city-name');
+        
+        cityNameEl.textContent = cityName;
+        cityInputEl.value = "";
+        console.log(`Lat/Lon ${lat} & ${lng}`);
+        
+        // Storm Glass API 1e6476cc-3387-11ec-b37c-0242ac130002-1e647744-3387-11ec-b37c-0242ac130002
+        let params = 'cloudCover,precipitation,airTemperature';
+        
+        // Weather Fetch
+        fetch(`https://api.stormglass.io/v2/weather/point?lat=${lat}&lng=${lng}&params=${params}`, {
+            headers: {
+                'Authorization': '1e6476cc-3387-11ec-b37c-0242ac130002-1e647744-3387-11ec-b37c-0242ac130002'
+            }
+}).then((response) => response.json()).then((res) => {
+    
+    // Pulling in Cloud Coverage
+    const cloudCoverage = res.hours[0].cloudCover.noaa + '%'
+    
+    // Displaying Cloud Coversage
+    var cloudCoverEl = document.querySelector('#cloud-coverage');
+    cloudCoverEl.textContent = `Cloud Coverage: ${cloudCoverage}`;
 
-};
+    // Saving Cloud Coverage
+    localStorage.setItem('savedCloudCoverage', cloudCoverage);
+    
+    // Pulling in Air Temp
+    const airTemp = res.hours[0].airTemperature.noaa + '°C'
+    
+    // Displaying Temp
+    var airTempEl = document.querySelector('#air-temp');
+    airTempEl.textContent = `Temperatur: ${airTemp}`;
 
+    // Saving Temp
+    localStorage.setItem('savedAirTemperature', airTemp);
+
+<<<<<<< HEAD
 <<<<<<< HEAD
 const apiKey = "02465fec-307a-11ec-93e3-0242ac130002-0246608c-307a-11ec-93e3-0242ac130002";
 const apiUrlWeather = "https://api.stormglass.io/v2/weather/point";
@@ -249,24 +317,19 @@ console.log("get");
 function getWeather() {
     const lat = localStorage.getItem('savedLat');
     const lng = localStorage.getItem('savedLon');
-
-    console.log(`Lat/Lon ${lat} & ${lng}`);
-
-// Storm Glass API 1e6476cc-3387-11ec-b37c-0242ac130002-1e647744-3387-11ec-b37c-0242ac130002
-let params = 'cloudCover,precipitation,airTemperature';
-
-// Weather Fetch
-fetch(`https://api.stormglass.io/v2/weather/point?lat=${lat}&lng=${lng}&params=${params}`, {
-  headers: {
-    'Authorization': '1e6476cc-3387-11ec-b37c-0242ac130002-1e647744-3387-11ec-b37c-0242ac130002'
-  }
-}).then((response) => response.json()).then((res) => {
-    const cloudCoverage = res.hours[0].cloudCover.noaa + '%'
-  console.log(`cloud coverage ${cloudCoverage}`)
+=======
+    // Pulling in Precipitation
     const precipitation = res.hours[0].precipitation.noaa + '%'
-  console.log(`precipitation ${precipitation}`)
-    const airTemp = res.hours[0].airTemperature.noaa + '°C'
-  console.log(`temperature ${airTemp}`)
+>>>>>>> 5a17f07 (weather features are now displaying)
+
+    // Display Precipitation
+    var precipitationEl = document.querySelector('#precipitation')
+    precipitationEl.textContent = `Precipitation: ${precipitation}`;
+    
+    // Saving Precipitation
+    localStorage.setItem('savedPrecipitation', precipitation);
+
+
 });
 
 // Astronomy Fetch
@@ -280,6 +343,37 @@ fetch(`https://api.stormglass.io/v2/astronomy/point?lat=${lat}&lng=${lng}&end=${
   console.log(res);
   const moonPhase = res.object.data[0].moonPhase.current.text
   console.log(moonPhase);
+
+
+    //   // Pulling in Moon Phase
+    //   const moonPhase = res.hours[0].cloudCover.noaa
+    
+    //   // Displaying Moon Phase
+    //   var moonPhaseEl = document.querySelector('#moon-phase');
+    //   moonPhaseEl.textContent = `Moon Phase: ${moonPhase}`;
+  
+    //   // Saving Moon Phase
+    //   localStorage.setItem('savedMoonPhase', moonPhase);
+      
+    //   // Pulling in Moon Rise
+    //   const moonRise = res.hours[0].airTemperature.noaa
+      
+    //   // Displaying Moon Rise
+    //   var moonRiseEl = document.querySelector('#moon-rise');
+    //   moonRiseEl.textContent = `Moon Set: ${moonRise}`;
+  
+    //   // Saving Moon Rise
+    //   localStorage.setItem('savedMoonRise', moonRise);
+  
+    //   // Pulling in Moon Set
+    //   const precipitation = res.hours[0].precipitation.noaa
+  
+    //   // Display Moon Set
+    //   var moonSetEl = document.querySelector('#moon-set')
+    //   moonSetEl.textContent = `Moon Set: ${moonSet}`;
+      
+    //   // Saving Moon Set
+    //   localStorage.setItem('savedmoonSet', moonSet);
 });
 };
 
