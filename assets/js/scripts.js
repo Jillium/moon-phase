@@ -1,4 +1,3 @@
-
 var calendarData = [];
 var currentDay = {};
 var currentYear = 2021;
@@ -16,7 +15,7 @@ let loadArray = function(){
 
     let lastDay = new Date(currentYear,currentMonth+1,0).getDate();
     console.log(lastDay);
-
+    
     for (let i = 1; i <= lastDay;i++){
         var d = new Date(currentYear,currentMonth-1,i);
         var date = d.getDate();
@@ -25,17 +24,17 @@ let loadArray = function(){
         var weekOfMonth = Math.ceil((date - 1 - day) / 7)+1;
         console.log(d+":"+date+":"+day+":"+weekOfMonth+":"+currentMonth);
         calendarData.push({day:i,dayOfWeek:day,weekOfMonth:weekOfMonth,image:'image name',brightness:.1});
-
+        
     };
 }
 
 let getData = function(dOW,wOM){
-
+    
     calendarData.forEach(function(entry) {
-    if((entry.dayOfWeek == dOW) && (entry.weekOfMonth == wOM)){
-    currentDay = entry;
-    return true;
-    }
+        if((entry.dayOfWeek == dOW) && (entry.weekOfMonth == wOM)){
+            currentDay = entry;
+            return true;
+        }
 });
 }
 
@@ -149,6 +148,39 @@ var submitButtonHandler = function (event) {
         
         errorBox.setAttribute("class", "display: block");
 
+        modal.style.display = 'none';}
+    }
+    
+    
+    //variable for the submit button
+    var submitButton = document.querySelector("#search-btn");
+    //variable for the input to search a city 
+    var cityInputEl = document.querySelector("input")
+    // variable for the selected city
+    
+    
+    
+    
+    
+    
+    // this function runs when the submit button is clicked 
+    var submitButtonHandler = function (event) {
+        event.preventDefault();
+        // get city value from input element
+        var selectedCity = cityInputEl.value.trim();
+        
+        // if a city is entered then run code 
+        if (selectedCity) {
+            getLatLong(selectedCity);
+            var cityNameEl = document.querySelector('#city-name');
+            
+            cityNameEl.textContent = selectedCity;
+            cityInputEl.value = "";
+            
+        }
+        else {
+            // I need to make this into a modal 
+            alert("please enter a city");
     }
 
 };
@@ -163,18 +195,27 @@ var getLatLong = function (selectedCity) {
     fetch(apiUrl).then(function (response) {
         // take response and convert it to data we cna use
         response.json().then(function (data) {
-
+            
             // Hey Corrie, you can use these variables in your api call for the weather information. This will give you the latitude and longitude based on their search 
             var lat = data.data[0].latitude;
             var lon = data.data[0].longitude;
            
             
+            let lat = data.data[0].latitude;
+            let lon = data.data[0].longitude;
+            console.log(lat);
+            console.log(lon);
+
+            localStorage.setItem('savedLat', lat);
+            localStorage.setItem('savedLon', lon);
+            // need to figure out how to pull latitude and longitude from the data, it isn't working
         })
     })
 
 
 };
 
+<<<<<<< HEAD
 const apiKey = "02465fec-307a-11ec-93e3-0242ac130002-0246608c-307a-11ec-93e3-0242ac130002";
 const apiUrlWeather = "https://api.stormglass.io/v2/weather/point";
 const apiUrlAstronomy = "https://api.stormglass.io/v2/astronomy/point";
@@ -203,6 +244,47 @@ console.log("get");
 //     }
 // ,}};
 
+=======
+// Pulling the weather information
+function getWeather() {
+    const lat = localStorage.getItem('savedLat');
+    const lng = localStorage.getItem('savedLon');
+
+    console.log(`Lat/Lon ${lat} & ${lng}`);
+
+// Storm Glass API 1e6476cc-3387-11ec-b37c-0242ac130002-1e647744-3387-11ec-b37c-0242ac130002
+let params = 'cloudCover,precipitation,airTemperature';
+
+// Weather Fetch
+fetch(`https://api.stormglass.io/v2/weather/point?lat=${lat}&lng=${lng}&params=${params}`, {
+  headers: {
+    'Authorization': '1e6476cc-3387-11ec-b37c-0242ac130002-1e647744-3387-11ec-b37c-0242ac130002'
+  }
+}).then((response) => response.json()).then((res) => {
+    const cloudCoverage = res.hours[0].cloudCover.noaa + '%'
+  console.log(`cloud coverage ${cloudCoverage}`)
+    const precipitation = res.hours[0].precipitation.noaa + '%'
+  console.log(`precipitation ${precipitation}`)
+    const airTemp = res.hours[0].airTemperature.noaa + '°C'
+  console.log(`temperature ${airTemp}`)
+});
+
+// Astronomy Fetch
+let end = 2021-02-28;
+
+fetch(`https://api.stormglass.io/v2/astronomy/point?lat=${lat}&lng=${lng}&end=${end}`, {
+  headers: {
+    'Authorization': '1e6476cc-3387-11ec-b37c-0242ac130002-1e647744-3387-11ec-b37c-0242ac130002'
+  }
+}).then((response) => response.json()).then((res) => {
+  console.log(res);
+  const moonPhase = res.object.data[0].moonPhase.current.text
+  console.log(moonPhase);
+});
+};
+
+getWeather();
+>>>>>>> 3fa6abe (added weather area and the name of the city)
 
 getMoonPhase();
 
