@@ -42,10 +42,8 @@ let loadCalendar = function() {
     for (let i = 0; i < calendarDay.length; i++) {
         getData(calendarDay[i].dataset.dow, calendarDay[i].dataset.wom);
 
-        if(currentDay){
-            calendarDay[i].textContent=currentDay.day;   
-        }
-        
+        calendarDay[i].textContent=currentDay.day;   
+
         if (currentDay.weekOfMonth == "6"){
             sixthWeek[0].style.visibility = "visible";
         }
