@@ -47,6 +47,10 @@ h2 {
     color: var(--grey);
 }
 
+.weather {
+    text-align: center;
+}
+
 .month-input {
     margin: 1rem 0 1rem 2rem;
 }

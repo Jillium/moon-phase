@@ -18,7 +18,7 @@
       <h1 class="title is-1">Phases of the Moon</h1>
     
         <div>
-            <h3>Weather by City</h3>
+            <h2>Weather by City</h2>
             <form class="form">
                 <input name="city" type="text" id="input">
                 <button type="submit" id="search-btn">Search</button>
@@ -29,6 +29,7 @@
         <label for="start">Select Month:</label>
         <input type="month" id="start" name="start" min="2021-01" value="2021-10" onchange="loadPage()">
     </div>
+    <div class="columns">
     <div class="calendar">
         <div class="monthYear columns">
             <div class="month column">Month</div>
@@ -91,7 +92,11 @@
     </div>
     <div class="weather"></div>
 
-    <div id="weather-container"></div>
+    <div id="weather-container" class="weather column ml-2">
+        <h3 class="is-size-3"> Weather</h3>
+        <div id="city-name" class="is-size-5"></div>
+    </div>
+    </div>
   
     <button id="modal-btn" class="modal-open-btn">Click</button>
         <div id="moon-modal" class="modal">
