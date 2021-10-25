@@ -56,13 +56,13 @@ let loadCalendar = function() {
     }
 }
 
-let loadPage = function(){
-    sixthWeek[0].style.visibility = "hidden";
-    loadArray();
-    loadCalendar();
-}
+// let loadPage = function(){
+//     sixthWeek[0].style.visibility = "hidden";
+//     loadArray();
+//     loadCalendar();
+// }
 
-loadPage();
+// loadPage();
 
 
 
@@ -144,6 +144,8 @@ function outsideModal(event) {
                 let lon = data.data[0].longitude;
                 console.log(lat);
                 console.log(lon);
+
+                console.log(`Lat/Lon ${lat} & ${lon}`);
                 
                 localStorage.setItem('savedLat', lat);
                 localStorage.setItem('savedLon', lon);
@@ -199,6 +201,7 @@ function outsideModal(event) {
             }).then((response) => response.json()).then((res) => {
             // Pulling in Precipitation
             const precipitation = res.daily[0].rain
+            console.log(`API pulled this for precipication: ${precipitation}`)
             // Saving Precipitation
             localStorage.setItem('savedPrecipitation', precipitation);
             
