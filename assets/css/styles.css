@@ -177,6 +177,10 @@ header form button {
     
 }
 
+.sixth {
+    visibility: hidden;
+}
+
 .btn:hover{
     background: #333;
 }
@@ -221,3 +225,14 @@ header form button {
 }
 
 
+/* Media Queries */
+
+/* Media query for phones and smaller */
+@media screen and (max-widht: 575px) {
+    
+}
+
+/* Media query for tablets and smaller */
+@media screen and (max-width: 768px) {
+    
+}

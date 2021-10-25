@@ -8,23 +8,24 @@ var clearCityButtonEl = document.querySelector('#clear-city');
 var weatherDataContainerEl = document.getElementById('weather-data-container');
 console.log(selectedMonth.value);
 
+
 let loadArray = function(){
     calendarData = [];
     let selected = selectedMonth.value.split('-');
     currentYear = selected[0];
     currentMonth = selected[1];
-    console.log(currentMonth);
+  
+
 
     let lastDay = new Date(currentYear,currentMonth+1,0).getDate();
     console.log(lastDay);
-    
+
     for (let i = 1; i <= lastDay;i++){
         var d = new Date(currentYear,currentMonth-1,i);
         var date = d.getDate();
         var day = d.getDay();
 
         var weekOfMonth = Math.ceil((date - 1 - day) / 7)+1;
-        console.log(d+":"+date+":"+day+":"+weekOfMonth+":"+currentMonth);
         calendarData.push({day:i,dayOfWeek:day,weekOfMonth:weekOfMonth,image:'image name',brightness:.1});
         
     };
@@ -45,14 +46,18 @@ let loadCalendar = function() {
         getData(calendarDay[i].dataset.dow, calendarDay[i].dataset.wom);
 
         if(currentDay){
-            calendarDay[i].textContent=currentDay.day;
-            
+            calendarDay[i].textContent=currentDay.day;   
+        }
+        
+        if (currentDay.weekOfMonth == "6"){
+            sixthWeek[0].style.visibility = "visible";
         }
         currentDay = {};
     }
 }
 
 let loadPage = function(){
+    sixthWeek[0].style.visibility = "hidden";
     loadArray();
     loadCalendar();
 }
@@ -90,6 +95,7 @@ function outsideModal(event) {
     if(event.target == modal) {
         modal.style.display = 'none';}
     }
+
     
     
     //variable for the submit button
@@ -145,6 +151,7 @@ function outsideModal(event) {
                 getWeather();
                 // need to figure out how to pull latitude and longitude from the data, it isn't working
             })
+
         })
         
         
