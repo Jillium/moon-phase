@@ -102,6 +102,24 @@ header form button {
     margin-left: 2rem;
 }
 
+#weather-container {
+    padding: 5px 0 0 5px;
+}
+
+#weather-container h3, #weather-container-data {
+    border: var(--fuschia);
+    border-style: solid;
+    border-width: .5px;
+    border-radius: 15px;
+    color: var(--black);
+}
+
+#weather-container h3:hover, #weather-container-data:hover {
+    border: var(--blue);
+    border-width: 3px;
+    border-style: solid;
+}
+
 .calendar div {
     border: var(--fuschia);
     border-style: solid;
