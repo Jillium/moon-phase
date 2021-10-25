@@ -56,13 +56,13 @@ let loadCalendar = function() {
     }
 }
 
-let loadPage = function(){
-    sixthWeek[0].style.visibility = "hidden";
-    loadArray();
-    loadCalendar();
-}
+// let loadPage = function(){
+//     sixthWeek[0].style.visibility = "hidden";
+//     loadArray();
+//     loadCalendar();
+// }
 
-loadPage();
+// loadPage();
 
 
 
@@ -93,8 +93,43 @@ function closeModal() {
 
 function outsideModal(event) {
     if(event.target == modal) {
-        modal.style.display = 'none';}
+
+    modal.style.display = 'none';}
+}
+
+
+//variable for the submit button
+var submitButton = document.querySelector("#search-btn");
+// variable for the close button on error modal
+var errorCloseButton = document.querySelector("#error-close");
+//variable for the input to search a city 
+var cityInputEl = document.querySelector("input")
+// variable for the error modal box
+var errorBox = document.querySelector(".error-modal-container");
+
+
+// this function runs when the submit button is clicked 
+var submitButtonHandler = function (event) {
+    event.preventDefault();
+    // get city value from input element
+    var selectedCity = cityInputEl.value.trim();
+
+    // if a city is entered then run code 
+    if (selectedCity) {
+        getLatLong(selectedCity);
+        cityInputEl.value = "";
+
     }
+    else {
+        // error modal appears 
+        
+        errorBox.setAttribute("class", "display: block");
+
+    }
+
+};
+
+
 
     
     
@@ -119,11 +154,13 @@ function outsideModal(event) {
             getLatLong(selectedCity);
 
             localStorage.setItem('savedCity',selectedCity);
+
             
         }
         else {
-            // I need to make this into a modal 
-            alert("please enter a city");
+        // error modal appears 
+        
+        errorBox.setAttribute("class", "display: block");
         }
         
     };
@@ -144,13 +181,17 @@ function outsideModal(event) {
                 let lon = data.data[0].longitude;
                 console.log(lat);
                 console.log(lon);
+
+                console.log(`Lat/Lon ${lat} & ${lon}`);
                 
                 localStorage.setItem('savedLat', lat);
                 localStorage.setItem('savedLon', lon);
 
                 getWeather();
-                // need to figure out how to pull latitude and longitude from the data, it isn't working
+                
             })
+
+
 
         })
         
@@ -199,6 +240,7 @@ function outsideModal(event) {
             }).then((response) => response.json()).then((res) => {
             // Pulling in Precipitation
             const precipitation = res.daily[0].rain
+            console.log(`API pulled this for precipication: ${precipitation}`)
             // Saving Precipitation
             localStorage.setItem('savedPrecipitation', precipitation);
             
@@ -292,6 +334,10 @@ function outsideModal(event) {
     };
     
 getWeather();
+// event listener for error modal close button
+errorCloseButton.addEventListener("click", function() {
+    errorBox.setAttribute("style", "display: none");
+})
 
 
 // Clear City Data
