@@ -16,12 +16,17 @@ font-family: 'Noto Serif', serif; */
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background-color: var(--black);
+    /* background-color: var(--black); */
     color: var(--grey)
 }
 
 body {
     font-family: 'BioRhyme', serif;
+    background-image: url("../images/moon-header-background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-position: 80%;
 }
 
 h1,
@@ -81,6 +86,13 @@ header form button {
     font-size: 1em;
     margin-top: 2em;
 }
+
+.city-search-btn:hover {
+    border: var(--grey);
+    border-width: 3px;
+    border-style: solid;
+}
+
 
 .weather-background {
     background-color: var(--grey);
