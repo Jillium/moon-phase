@@ -94,33 +94,14 @@ function outsideModal(event) {
 
 //stormglass API 
 //get variables 
-const apiKey = "02465fec-307a-11ec-93e3-0242ac130002-0246608c-307a-11ec-93e3-0242ac130002";
-const apiUrlWeather = "https://api.stormglass.io/v2/weather/point";
-const apiUrlAstronomy = "https://api.stormglass.io/v2/astronomy/point";
-var riseSet = document.getElementById('rise-set');
-var phaseInfo = document.getElementById('moon-info');
 var savedCities = [];
-
 //neeed city locations 
 function cityLocation () {
     let city = document.getElementById('city-input').value;
 
 }
 //Use get request to get moonphase rise and set 
-function moonPhase () {
-    var lat = data.coord.lat;
-    let lng = data.coord.lng;
 
-    fetch(`https://api.stormglass.io/v2/astronomy/point?lat=${lat}&lng=${lng}&end=${end}`, {
-        headers: {
-            'Authorization': apiKey
-        }
-    }).then((response) => response.json()).then((jsonData) => {
-        console.log(data);
-    });
-}
-
-moonPhase();
 
 
 //variable for the submit button
@@ -177,6 +158,36 @@ var getLatLong = function (selectedCity) {
 
 };
 
+const apiKey = "02465fec-307a-11ec-93e3-0242ac130002-0246608c-307a-11ec-93e3-0242ac130002";
+const apiUrlWeather = "https://api.stormglass.io/v2/weather/point";
+const apiUrlAstronomy = "https://api.stormglass.io/v2/astronomy/point";
+var riseSet = document.getElementById('rise-set');
+var phaseInfo = document.getElementById('moon-info');
+
+
+
+function getMoonPhase () {
+     var lat = 58.7984;
+     var lng = 17.8081;
+var end = 2021-25-10;
+
+fetch(`https://api.stormglass.io/v2/astronomy/point?lat=${lat}&lng=${lng}&end=${end})`, {
+    headers: {
+        'Authorization': '02465fec-307a-11ec-93e3-0242ac130002-0246608c-307a-11ec-93e3-0242ac130002',
+    }
+}).then((response) => response.json()).then((jsondata) => {
+    console.log(jsondata);
+});
+}
+console.log("get");
+// if(response.ok) {
+//     response.json().then(function(data) {
+//         console.log(data);
+//     }
+// ,}};
+
+
+getMoonPhase();
 
 
 
@@ -199,6 +210,6 @@ var getLatLong = function (selectedCity) {
 
 
 
-// event listener for the submit button-- needs to be near bottom of page 
-submitButton.addEventListener("click", submitButtonHandler)
 
+// // event listener for the submit button-- needs to be near bottom of page 
+// submitButton.addEventListener("click", submitButtonHandler)*/
