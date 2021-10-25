@@ -179,8 +179,19 @@ function outsideModal(event) {
             // Saving Temp
             localStorage.setItem('savedAirTemperature', airTemp);
             
+            // // Pulling in Precipitation
+            // const precipitation = res.hours[0].precipitation.noaa + '%'
+            // // Saving Precipitation
+            // localStorage.setItem('savedPrecipitation', precipitation);
+            
+            
+        });
+
+        // Precipitation Fetch
+        fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&exclude=current,minute,hourly,alert&appid=f17ddf4709497b276463e08f28044887`, {
+            }).then((response) => response.json()).then((res) => {
             // Pulling in Precipitation
-            const precipitation = res.hours[0].precipitation.noaa + '%'
+            const precipitation = res.daily[0].rain
             // Saving Precipitation
             localStorage.setItem('savedPrecipitation', precipitation);
             
@@ -195,7 +206,6 @@ function outsideModal(event) {
                 'Authorization': '1e6476cc-3387-11ec-b37c-0242ac130002-1e647744-3387-11ec-b37c-0242ac130002'
             }
         }).then((response) => response.json()).then((res) => {
-            console.log(res);
 
             // Pulling in Moon Phase
             const moonPhase = res.data[0].moonPhase.current.text
@@ -213,7 +223,6 @@ function outsideModal(event) {
             const moonSet = res.data[0].moonset
             const moonSetDate = moonSet.replace(/202.+?-.+?-.+?T/, '');
             const moonSetTime = moonSetDate.slice(0, -9)
-            console.log(moonSetTime);
             // Saving Moon Rise
             localStorage.setItem('savedMoonSet', moonSetTime);
         });
@@ -253,7 +262,7 @@ function outsideModal(event) {
         // Display Precipitation
         const precipitationDisplay = localStorage.getItem('savedPrecipitation');
         var precipitationEl = document.querySelector('#precipitation')
-        precipitationEl.textContent = `Precipitation: ${precipitationDisplay}`;
+        precipitationEl.textContent = `Precipitation: ${precipitationDisplay}mm`;
         
         // Displaying Moon Phase
         const moonPhaseDisplay = localStorage.getItem('savedMoonPhase');
