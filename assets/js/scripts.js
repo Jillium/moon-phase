@@ -4,7 +4,10 @@ var currentYear = 2021;
 var currentMonth = 5; //June
 var calendarDay = document.getElementsByClassName("days");
 var  selectedMonth = document.getElementById("start");
-console.log(selectedMonth.value);
+var clearCityButtonEl = document.querySelector('#clear-city');
+var weatherDataContainerEl = document.getElementById('weather-data-container');
+console.log(selectedMonth
+    .value);
 
 let loadArray = function(){
     calendarData = [];
@@ -81,12 +84,10 @@ function openModal(){
 
 //close modal on button
 function closeModal() {
-    console.log("modal closed");
     modal.style.display = 'none';
 }
 
 function outsideModal(event) {
-    console.log("clicked outside model");
     if(event.target == modal) {
     modal.style.display = 'none';}
 }
@@ -157,7 +158,6 @@ var submitButtonHandler = function (event) {
     //variable for the input to search a city 
     var cityInputEl = document.querySelector("input")
     // variable for the selected city
-    
     
     
     
@@ -243,13 +243,7 @@ var getLatLong = function (selectedCity) {
     function getWeather() {
         const lat = localStorage.getItem('savedLat');
         const lng = localStorage.getItem('savedLon');
-        const cityName = localStorage.getItem('savedCity');
-
-        // Displaying City Weather is pulling
-        var cityNameEl = document.querySelector('#city-name');
         
-        cityNameEl.textContent = cityName;
-        cityInputEl.value = "";
         console.log(`Lat/Lon ${lat} & ${lng}`);
         
         // Storm Glass API 1e6476cc-3387-11ec-b37c-0242ac130002-1e647744-3387-11ec-b37c-0242ac130002
@@ -260,30 +254,15 @@ var getLatLong = function (selectedCity) {
             headers: {
                 'Authorization': '1e6476cc-3387-11ec-b37c-0242ac130002-1e647744-3387-11ec-b37c-0242ac130002'
             }
-}).then((response) => response.json()).then((res) => {
+            }).then((response) => response.json()).then((res) => {
     
-    // Pulling in Cloud Coverage
-    const cloudCoverage = res.hours[0].cloudCover.noaa + '%'
-    
-    // Displaying Cloud Coversage
-    var cloudCoverEl = document.querySelector('#cloud-coverage');
-    cloudCoverEl.textContent = `Cloud Coverage: ${cloudCoverage}`;
+            
+            // Pulling in Cloud Coverage
+            const cloudCoverage = res.hours[0].cloudCover.noaa + '%'
+            // Saving Cloud Coverage
+            localStorage.setItem('savedCloudCoverage', cloudCoverage);
+            
 
-    // Saving Cloud Coverage
-    localStorage.setItem('savedCloudCoverage', cloudCoverage);
-    
-    // Pulling in Air Temp
-    const airTemp = res.hours[0].airTemperature.noaa + '°C'
-    
-    // Displaying Temp
-    var airTempEl = document.querySelector('#air-temp');
-    airTempEl.textContent = `Temperatur: ${airTemp}`;
-
-    // Saving Temp
-    localStorage.setItem('savedAirTemperature', airTemp);
-
-<<<<<<< HEAD
-<<<<<<< HEAD
 const apiKey = "02465fec-307a-11ec-93e3-0242ac130002-0246608c-307a-11ec-93e3-0242ac130002";
 const apiUrlWeather = "https://api.stormglass.io/v2/weather/point";
 const apiUrlAstronomy = "https://api.stormglass.io/v2/astronomy/point";
@@ -312,73 +291,114 @@ console.log("get");
 //     }
 // ,}};
 
-=======
 // Pulling the weather information
 function getWeather() {
     const lat = localStorage.getItem('savedLat');
     const lng = localStorage.getItem('savedLon');
-=======
     // Pulling in Precipitation
     const precipitation = res.hours[0].precipitation.noaa + '%'
->>>>>>> 5a17f07 (weather features are now displaying)
+            // Pulling in Air Temp
+            const airTemp = res.hours[0].airTemperature.noaa
+            // Saving Temp
+            localStorage.setItem('savedAirTemperature', airTemp);
+            
+            // Pulling in Precipitation
+            const precipitation = res.hours[0].precipitation.noaa + '%'
+            // Saving Precipitation
+            localStorage.setItem('savedPrecipitation', precipitation);
+            
+            
+        });
+        
+        // Astronomy Fetch
+        let end = '2021-11-30';
+        
+        fetch(`https://api.stormglass.io/v2/astronomy/point?lat=${lat}&lng=${lng}&end=${end}`, {
+            headers: {
+                'Authorization': '1e6476cc-3387-11ec-b37c-0242ac130002-1e647744-3387-11ec-b37c-0242ac130002'
+            }
+        }).then((response) => response.json()).then((res) => {
+            console.log(res);
 
-    // Display Precipitation
-    var precipitationEl = document.querySelector('#precipitation')
-    precipitationEl.textContent = `Precipitation: ${precipitation}`;
+            // Pulling in Moon Phase
+            const moonPhase = res.data[0].moonPhase.current.text
+            // Saving Moon Phase
+            localStorage.setItem('savedMoonPhase', moonPhase);
+            
+            // Pulling in Moon Rise
+            const moonRise = res.data[0].moonrise
+            const moonRiseDate = moonRise.replace(/202.+?-.+?-.+?T0/, '');
+            const moonRiseTime = moonRiseDate.slice(0, -9)
+            // Saving Moon Rise
+            localStorage.setItem('savedMoonRise', moonRiseTime);
+            
+            // Pulling in Moon Rise
+            const moonSet = res.data[0].moonset
+            const moonSetDate = moonSet.replace(/202.+?-.+?-.+?T/, '');
+            const moonSetTime = moonSetDate.slice(0, -9)
+            console.log(moonSetTime);
+            // Saving Moon Rise
+            localStorage.setItem('savedMoonSet', moonSetTime);
+        });
+        
+        showWeather();
+    };
     
-    // Saving Precipitation
-    localStorage.setItem('savedPrecipitation', precipitation);
+    // Function to display saved Weather/Astrology info
+    function showWeather() {
+        const cityName = localStorage.getItem('savedCity');
+        
+        if (cityName) {
+        // Displaying City Weather is pulling
+        var cityNameEl = document.querySelector('#city-name');
+        
+        cityNameEl.textContent = cityName;
+        cityInputEl.value = "";
+        
+        // Displaying Today's Date
+        var weatherTodayEl = document.querySelector('#weather-today');
+        
+        const today = new Date();
+        weatherTodayEl.textContent = (today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear();
+        
+        // Display Cloud Coverage Information
+        const cloudCoverageDisplay = localStorage.getItem('savedCloudCoverage')
+        var cloudCoverEl = document.querySelector('#cloud-coverage');
+        cloudCoverEl.textContent = `Cloud Coverage: ${cloudCoverageDisplay}`;
+        
+        // Display Air Temparature Information
+        const airTempDisplay = localStorage.getItem('savedAirTemperature')
+        var airTempEl = document.querySelector('#air-temp');
+        const celsius = Math.round(parseInt(airTempDisplay));
+        const fahrenheit = Math.round(celsius * 9/5 + 32);
+        airTempEl.textContent = `Temperature: ${celsius}°C/ ${fahrenheit}°F`;
+        
+        // Display Precipitation
+        const precipitationDisplay = localStorage.getItem('savedPrecipitation');
+        var precipitationEl = document.querySelector('#precipitation')
+        precipitationEl.textContent = `Precipitation: ${precipitationDisplay}`;
+        
+        // Displaying Moon Phase
+        const moonPhaseDisplay = localStorage.getItem('savedMoonPhase');
+        var moonPhaseEl = document.querySelector('#moon-phase');
+        moonPhaseEl.textContent = `Moon Phase: ${moonPhaseDisplay}`;
 
+        // Displaying Moon Rise
+        const moonRiseDisplay = localStorage.getItem('savedMoonRise');
+        var moonRiseEl = document.querySelector('#moon-rise');
+        moonRiseEl.textContent = `Moon Rise: ${moonRiseDisplay} am`;
 
-});
-
-// Astronomy Fetch
-let end = 2021-02-28;
-
-fetch(`https://api.stormglass.io/v2/astronomy/point?lat=${lat}&lng=${lng}&end=${end}`, {
-  headers: {
-    'Authorization': '1e6476cc-3387-11ec-b37c-0242ac130002-1e647744-3387-11ec-b37c-0242ac130002'
-  }
-}).then((response) => response.json()).then((res) => {
-  console.log(res);
-  const moonPhase = res.object.data[0].moonPhase.current.text
-  console.log(moonPhase);
-
-
-    //   // Pulling in Moon Phase
-    //   const moonPhase = res.hours[0].cloudCover.noaa
+        // Displaying Moon Set
+        const moonSetDisplay = localStorage.getItem('savedMoonSet');
+        var moonSetEl = document.querySelector('#moon-set');
+        moonSetEl.textContent = `Moon Set: ${moonSetDisplay} pm`;
+        }
+        else {
+            weatherDataContainerEl.textContent = "Enter a City to Get Started!"
+        };
+    };
     
-    //   // Displaying Moon Phase
-    //   var moonPhaseEl = document.querySelector('#moon-phase');
-    //   moonPhaseEl.textContent = `Moon Phase: ${moonPhase}`;
-  
-    //   // Saving Moon Phase
-    //   localStorage.setItem('savedMoonPhase', moonPhase);
-      
-    //   // Pulling in Moon Rise
-    //   const moonRise = res.hours[0].airTemperature.noaa
-      
-    //   // Displaying Moon Rise
-    //   var moonRiseEl = document.querySelector('#moon-rise');
-    //   moonRiseEl.textContent = `Moon Set: ${moonRise}`;
-  
-    //   // Saving Moon Rise
-    //   localStorage.setItem('savedMoonRise', moonRise);
-  
-    //   // Pulling in Moon Set
-    //   const precipitation = res.hours[0].precipitation.noaa
-  
-    //   // Display Moon Set
-    //   var moonSetEl = document.querySelector('#moon-set')
-    //   moonSetEl.textContent = `Moon Set: ${moonSet}`;
-      
-    //   // Saving Moon Set
-    //   localStorage.setItem('savedmoonSet', moonSet);
-});
-};
-
 getWeather();
->>>>>>> 3fa6abe (added weather area and the name of the city)
 
 getMoonPhase();
 
@@ -406,6 +426,13 @@ errorCloseButton.addEventListener("click", function() {
 })
 
 
+// Clear City Data
+clearCityButtonEl.addEventListener('click', function() {
+    localStorage.clear();
+    weatherDataContainerEl.textContent = "Enter a City to Get Started!"
+});
+// event listener for the submit button-- needs to be near bottom of page 
+submitButton.addEventListener("click", submitButtonHandler)
 
 // // event listener for the submit button-- needs to be near bottom of page 
 // submitButton.addEventListener("click", submitButtonHandler)*/
