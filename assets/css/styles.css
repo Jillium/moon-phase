@@ -1,7 +1,7 @@
 /* Fonts Added */
 /*  font-family: 'BioRhyme', serif;
 font-family: 'IM Fell English SC', serif;
-    font-family: 'Noto Serif', serif; */
+font-family: 'Noto Serif', serif; */
 
 /* Color Variables */
 :root {
@@ -29,7 +29,8 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+label {
     font-family: 'IM Fell English SC', serif;
 }
 
@@ -38,9 +39,29 @@ h1 {
     padding-left: 1rem;
 }
 
+header {
+    display: inline-flex;
+    align-items: center;
+}
 
-h2 {
-    font-size: 3em;
+header form input, #start {
+    background-color: var(--grey);
+    padding: 1em;
+    border-radius: 25%;
+    margin-right: 1em;
+    color: var(--black);
+    font-size: 1em;
+}
+
+header form button {
+    padding: 1em;
+    border-radius: 25%;
+    background-color: var(--fuschia);
+    font-size: 1em;
+}
+
+.weather-by-city {
+    padding-left: 8em;
 }
 
 .title {
@@ -51,11 +72,27 @@ h2 {
     text-align: center;
 }
 
+.clear-city {
+    background: #A239CA;
+    padding: 1em;
+    color: #fff;
+    border: 0;
+    border-radius: 25%;
+    font-size: 1em;
+    margin-top: 2em;
+}
+
+.weather-background {
+    background-color: var(--grey);
+    color: var(--black);
+    border-radius: 6px;
+}
+
 .month-input {
     margin: 1rem 0 1rem 2rem;
 }
 
-.calendar {
+.calendar, #weather-container {
     background: rgba(128, 128, 128, 0.37);
     border-radius: 6px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, .3);
