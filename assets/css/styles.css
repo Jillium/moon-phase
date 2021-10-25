@@ -150,3 +150,14 @@ h2 {
 }
 
 
+/* Media Queries */
+
+/* Media query for phones and smaller */
+@media screen and (max-widht: 575px) {
+    
+}
+
+/* Media query for tablets and smaller */
+@media screen and (max-width: 768px) {
+    
+}
