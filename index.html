@@ -17,18 +17,20 @@
 
       <h1 class="title is-1">Phases of the Moon</h1>
     
-        <div>
-            <h3>Weather by City</h3>
-            <form class="form">
+        <div class="weather-by-city">
+            <h2 class="is-size-3 is-inline">Weather by City</h2>
+            <form class="form is-inline ml-4">
                 <input name="city" type="text" id="input">
-                <button type="submit" id="search-btn">Search</button>
+                <button type="submit" id="search-btn" class="city-search-btn">Search</button>
+                <button id="clear-city" class="city-search-btn ml-2" type="button">Clear City</button>
             </form>
         </div>
     </header>
     <div class="month-input">
-        <label for="start">Select Month:</label>
+        <label for="start" class="is-size-3">Select Month:</label>
         <input type="month" id="start" name="start" min="2021-01" value="2021-10" onchange="loadPage()">
     </div>
+    <div class="columns">
     <div class="calendar">
         <div class="monthYear columns">
             <div class="month column">Month</div>
@@ -100,7 +102,20 @@
     </div>
     <div class="weather"></div>
 
-    <div id="weather-container"></div>
+    <div id="weather-container" class="weather column ml-2">
+        <h3 class="weather-background is-size-3"> Weather</h3>
+        <div id="weather-data-container" class="weather-background">
+            <div id="city-name" class="is-size-5 is-inline mb-4 pl-6 weather-background"></div>
+            <div id="weather-today" class="is-size-5 is-inline mb-4 weather-background"></div>
+            <div id="moon-phase" class="is-size-6 has-text-left mb-3 weather-background pl-5"></div>
+            <div id="moon-rise" class="is-size-6 has-text-left mb-3 weather-background pl-5"></div>
+            <div id="moon-set" class="is-size-6 has-text-left mb-3 weather-background pl-5"></div>
+            <div id="cloud-coverage" class="is-size-6 has-text-left mb-3 weather-background pl-5"></div>
+            <div id="air-temp" class="is-size-6 has-text-left mb-3 weather-background pl-5"></div>
+            <div id="precipitation" class="is-size-6 has-text-left mb-3 weather-background pl-5"></div>
+        </div>
+    </div>
+    </div>
   
     <button id="modal-btn" class="modal-open-btn">Click</button>
         <div id="moon-modal" class="modal">
