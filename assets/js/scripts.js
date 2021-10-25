@@ -138,8 +138,11 @@ var getLatLong = function (selectedCity) {
             // Hey Corrie, you can use these variables in your api call for the weather information. This will give you the latitude and longitude based on their search 
             var lat = data.data[0].latitude;
             var lon = data.data[0].longitude;
+<<<<<<< HEAD
             console.log(lat);
             console.log(lon);
+=======
+>>>>>>> develop
            
             
         })
