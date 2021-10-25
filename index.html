@@ -25,6 +25,18 @@
                 <button id="clear-city" class="city-search-btn ml-2" type="button">Clear City</button>
             </form>
         </div>
+
+
+        <!-- container for modal-->
+        <div class = "error-modal-container">
+            <div class="error-modal">
+                <h3>Please search a valid city!</h3>
+                <button id="error-close">Close</button>
+            </div>
+        </div>
+        <label for="start">Select Month:</label>
+        <input type="month" id="start" name="start" min="2021-01" value="2021-10" onchange="loadPage()">
+
     </header>
     <div class="month-input">
         <label for="start" class="is-size-3">Select Month:</label>
