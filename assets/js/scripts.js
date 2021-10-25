@@ -95,14 +95,12 @@ function outsideModal(event) {
 
 //variable for the submit button
 var submitButton = document.querySelector("#search-btn");
+// variable for the close button on error modal
+var errorCloseButton = document.querySelector("#error-close");
 //variable for the input to search a city 
 var cityInputEl = document.querySelector("input")
-// variable for the selected city
-
-
-
-
-
+// variable for the error modal box
+var errorBox = document.querySelector(".error-modal-container");
 
 
 // this function runs when the submit button is clicked 
@@ -118,8 +116,10 @@ var submitButtonHandler = function (event) {
 
     }
     else {
-        // I need to make this into a modal 
-        alert("please enter a city");
+        // error modal appears 
+        
+        errorBox.setAttribute("class", "display: block");
+
     }
 
 };
@@ -138,6 +138,8 @@ var getLatLong = function (selectedCity) {
             // Hey Corrie, you can use these variables in your api call for the weather information. This will give you the latitude and longitude based on their search 
             var lat = data.data[0].latitude;
             var lon = data.data[0].longitude;
+            console.log(lat);
+            console.log(lon);
            
             
         })
@@ -165,7 +167,10 @@ var getLatLong = function (selectedCity) {
 
 
 
-
+// event listener for error modal close button
+errorCloseButton.addEventListener("click", function() {
+    errorBox.setAttribute("style", "display: none");
+})
 
 
 // event listener for the submit button-- needs to be near bottom of page 

@@ -24,6 +24,14 @@
                 <button type="submit" id="search-btn">Search</button>
             </form>
         </div>
+
+        <!-- container for modal-->
+        <div class = "error-modal-container">
+            <div class="error-modal">
+                <h3>Please search a valid city!</h3>
+                <button id="error-close">Close</button>
+            </div>
+        </div>
         <label for="start">Select Month:</label>
         <input type="month" id="start" name="start" min="2021-01" value="2021-10" onchange="loadPage()">
     </header>
