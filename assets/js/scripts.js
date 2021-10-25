@@ -10,9 +10,7 @@ var yearEl = document.querySelector(".year");
 var selectedMonth = document.getElementById("start");
 var clearCityButtonEl = document.querySelector('#clear-city');
 var weatherDataContainerEl = document.getElementById('weather-data-container');
-console.log(selectedMonth.value);
 
-document.querySelector("body > main > div.columns > div.calendar > div.monthYear.columns > div.month.column")
 let loadArray = function(){
     calendarData = [];
     let selected = selectedMonth.value.split('-');
@@ -20,7 +18,6 @@ let loadArray = function(){
     currentMonth = selected[1];
     
     let lastDay = new Date(currentYear,parseInt(currentMonth),0).getDate();
-    console.log(lastDay);
 
     for (let i = 1; i <= lastDay;i++){
         var d = new Date(currentYear,parseInt(currentMonth)-1,i);
@@ -57,10 +54,6 @@ let loadCalendar = function() {
         currentDay = {};
         
     }
-
-    
-    console.log(monthEl.innerHTML);
-
 }
 
 let loadPage = function(){
