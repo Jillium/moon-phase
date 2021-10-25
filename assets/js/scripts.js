@@ -1,27 +1,29 @@
 var calendarData = [];
+var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 var currentDay = {};
 var currentYear = 2021;
 var currentMonth = 5; //June
 var calendarDay = document.getElementsByClassName("days");
-var  selectedMonth = document.getElementById("start");
+var sixthWeek = document.getElementsByClassName("sixth");
+var monthEl = document.querySelector(".month");
+var yearEl = document.querySelector(".year");
+var selectedMonth = document.getElementById("start");
 var clearCityButtonEl = document.querySelector('#clear-city');
 var weatherDataContainerEl = document.getElementById('weather-data-container');
 console.log(selectedMonth.value);
 
-
+document.querySelector("body > main > div.columns > div.calendar > div.monthYear.columns > div.month.column")
 let loadArray = function(){
     calendarData = [];
     let selected = selectedMonth.value.split('-');
     currentYear = selected[0];
     currentMonth = selected[1];
-  
-
-
-    let lastDay = new Date(currentYear,currentMonth+1,0).getDate();
+    
+    let lastDay = new Date(currentYear,parseInt(currentMonth),0).getDate();
     console.log(lastDay);
 
     for (let i = 1; i <= lastDay;i++){
-        var d = new Date(currentYear,currentMonth-1,i);
+        var d = new Date(currentYear,parseInt(currentMonth)-1,i);
         var date = d.getDate();
         var day = d.getDay();
 
@@ -42,6 +44,8 @@ let getData = function(dOW,wOM){
 }
 
 let loadCalendar = function() {
+    monthEl.innerHTML = months[parseInt(currentMonth)-1];
+    yearEl.textContent = currentYear;
     for (let i = 0; i < calendarDay.length; i++) {
         getData(calendarDay[i].dataset.dow, calendarDay[i].dataset.wom);
 
@@ -51,7 +55,12 @@ let loadCalendar = function() {
             sixthWeek[0].style.visibility = "visible";
         }
         currentDay = {};
+        
     }
+
+    
+    console.log(monthEl.innerHTML);
+
 }
 
 let loadPage = function(){
