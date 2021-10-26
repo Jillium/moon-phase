@@ -96,6 +96,12 @@ header form button {
     border-style: solid;
 }
 
+input:hover {
+    border: var(--blue);
+    border-width: 3px;
+    border-style: solid;
+}
+
 
 .weather-background {
     background-color: var(--grey);
