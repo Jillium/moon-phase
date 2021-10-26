@@ -16,6 +16,7 @@ font-family: 'Noto Serif', serif; */
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    /* background-color: var(--black); */
     color: var(--grey)
 }
 
@@ -176,34 +177,15 @@ header form button {
     border-style: solid;
 }
 
-/* Fonts Added */
-/*  font-family: 'BioRhyme', serif;
-    font-family: 'IM Fell English SC', serif;
-    font-family: 'Noto Serif', serif; */
-
-/* Color Variables */
-
-
-
-h1 {
-    font-size: 5em;
-}
-  
-h2 {
-    font-size: 3em;
-}
-
-/* modal start*/
-
 .modal-open-btn{
     background: #A239CA;
     padding: 1em 2em;
-    color: #E7DFDD;
-    border: 2px;
+    color: #fff;
+    border: 0;
+    border-radius: 50%;
     position: absolute;
     left: 50%;
     bottom: 50%;
-    color: #4717F6;
     
 }
 
@@ -221,19 +203,10 @@ h2 {
     z-index: 1;
     left: 40%;
     top: 50%;
-    height: 70%;
-    width: 40%;
+    height: 50%;
+    width: 30%;
     overflow: auto;
-    background-color: #0e0b16;
-    color: #E7DFDD;
-}
-
-.modal-header {
-    font-weight: bold;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 150%;
-    color: #4717F6;
-    padding: 10px;
+    background-color: #E7DFDD;
 }
 
 .modal-body {
@@ -241,17 +214,13 @@ h2 {
     margin: 20% auto;
     padding: 20px;
     width: 70%;
-    animation-name: modalopen;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0);
+    animation-name:modalopen;
     animation-duration: 1s;
-    padding: 20px;
-}
-
-.modal-footer {
-    padding: 20px;
 }
 
 #modal-close {
-    color: #E7DFDD;
+    color: #000;
     float: right;
     font-size: 30px;
 }
@@ -281,7 +250,11 @@ h2 {
     align-items: center;
     padding: 20px;
     margin: 20px;
-    border-radius: 5px;  
+    border-radius: 5px;
+    
+
+    
+    
 }
 
 .error-modal h3 {
@@ -296,17 +269,10 @@ h2 {
     padding: 3px;
 }
 
-.error-modal h3 {
-    background-color: #E7DFDD;
-    color: black;
-    padding: 5px;
-}
 
-#error-close {
-    background-color: #4717F6;
-    border-radius: 5px;
-    padding: 3px;
-}
+
+
+
 
 /* Media Queries */
 
@@ -316,5 +282,6 @@ h2 {
 }
 
 /* Media query for tablets and smaller */
-@media screen and (max-width: 768px) {    
+@media screen and (max-width: 768px) {
+    
 }
