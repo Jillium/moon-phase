@@ -372,24 +372,29 @@ const normalize = value => {
 //get percentages for various phases to tell moon type 
 // if statement 
 const lunarPhase = (date = new Date()) => {
-    if (age < 1.845)
+    if (LunarAge() < 1.845)
     return "New Moon";
-    else if (age < 5.53) 
+    else if (LunarAge() < 5.53) 
     return "waxing cresent";
-    else if (age < 9.228)
+    else if (LunarAge() < 9.228)
     return "First Quarter";
-    else if (age < 12.919)
+    else if (LunarAge() < 12.919)
     return "Waxing Gibbious";
-    else if (age < 16.61)
+    else if (LunarAge() < 16.61)
     return "Full Moon";
-    else if (age < 20.30)
+    else if (LunarAge() < 20.30)
     return "Waning Gibbious";
-    else if (age < 23.99)
+    else if (LunarAge() < 23.99)
     return "Last Quarter";
-    else if (age < 27.68)
+    else if (LunarAge() < 27.68)
     return "Waning Crescent";
 
 }
+
+document.addEventListener("DOMContentLoaded", ()=> {
+const phase = lunarPhase ();
+console.log(phase);
+} )
 
 
 // Pulling the weather information
