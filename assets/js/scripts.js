@@ -166,6 +166,9 @@ var errorBox = document.querySelector(".error-modal-container");
                 
             })
         })
+        .catch(function(error) {
+            alert("There was an error!");
+        })
         
         
     };
@@ -207,7 +210,14 @@ var errorBox = document.querySelector(".error-modal-container");
             const precipitation = res.daily[0].rain
             // Saving Precipitation
             localStorage.setItem('savedPrecipitation', precipitation);
+            try {
+                
+            } catch (err) {
+                 
+            }
         });
+        
+       
         
         // Astronomy Fetch
         let end = '2021-11-30';

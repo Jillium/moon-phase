@@ -270,6 +270,35 @@ header form button {
     padding: 3px;
 }
 
+/* .error-catch-container {
+    display: none;
+} */
+
+.error-catch-modal {
+    background-color: #E7DFDD;
+    /* width: 70%; */
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    
+}
+
+.error-catch-modal h2 {
+    background-color: #E7DFDD;
+    color: black;
+    padding: 5px;
+}
+
+#error-catch-close {
+    background-color: #4717F6;
+    border-radius: 5px;
+    padding: 3px;
+}
+
 
 
 
