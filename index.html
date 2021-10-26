@@ -26,7 +26,6 @@
             </form>
         </div>
 
-
         <!-- container for modal-->
         <div class = "error-modal-container">
             <div class="error-modal">
@@ -34,8 +33,7 @@
                 <button id="error-close">Close</button>
             </div>
         </div>
-        <!-- <label for="start">Select Month:</label>
-        <input type="month" id="start" name="start" min="2021-01" value="2021-10" onchange="loadPage()"> -->
+
 
     </header>
     <div class="month-input">
@@ -111,6 +109,7 @@
             <div class="days column" data-wom="6" data-dow="5"></div>
             <div class="days column" data-wom="6" data-dow="6"></div>
         </div>
+
         <div class="weeks seven columns is-mobile">
             <div class="test column is-mobile">
             31
@@ -139,14 +138,18 @@
         <div id="moon-modal" class="modal">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button id="modal-close" type="button">&times;</button>
-                    <h2>Todays Moon Information</h2>
+                    <button type="button" id="modal-close">&times;</button>
+                    <h2 class="modal-h2">Todays Moon Information</h2>
                     </div>
-                <div class="modal-body">
+                <div class= "city">
+                    <input id= "city-input" type = "text">
+                </div>
+                <div class="modal-body" id="moon-info">
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. A non minus magni vitae. Incidunt ipsum voluptas fugiat optio, sed blanditiis et sunt! Architecto animi mollitia nostrum ratione, et voluptatibus id.</p>
                 </div>
+                <div id="moon-img"></div>
                 <div class="modal-footer">
-                    <h3>modal footer</h3>  
+                    <h3 id="rise-set">Rise and Set</h3>  
                 </div>
             </div>
          </div>

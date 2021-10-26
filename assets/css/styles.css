@@ -16,12 +16,17 @@ font-family: 'Noto Serif', serif; */
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background-color: var(--black);
+    /* background-color: var(--black); */
     color: var(--grey)
 }
 
 body {
     font-family: 'BioRhyme', serif;
+    background-image: url("../images/moon-header-background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-position: 80%;
 }
 
 h1,
@@ -81,6 +86,13 @@ header form button {
     font-size: 1em;
     margin-top: 2em;
 }
+
+.city-search-btn:hover {
+    border: var(--grey);
+    border-width: 3px;
+    border-style: solid;
+}
+
 
 .weather-background {
     background-color: var(--grey);
@@ -165,15 +177,65 @@ header form button {
     border-style: solid;
 }
 
+/* Fonts Added */
+/*  font-family: 'BioRhyme', serif;
+    font-family: 'IM Fell English SC', serif;
+    font-family: 'Noto Serif', serif; */
+
+/* Color Variables */
+
+
+/* Root Colors */
+
+
+:root {
+    --black: #0E0B16;
+    --fuschia: #A239CA;
+    --blue: #4717F6;
+    --grey: #E7DFDD;
+}
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: var(--black);
+    color: var(--grey)
+  }
+
+body {
+    font-family: 'BioRhyme', serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'IM Fell English SC', serif;
+}
+
+h1 {
+    font-size: 5em;
+}
+  
+h2 {
+    font-size: 3em;
+}
+
+/* modal start*/
+
 .modal-open-btn{
     background: #A239CA;
     padding: 1em 2em;
-    color: #fff;
-    border: 0;
-    border-radius: 50%;
+    color: #E7DFDD;
+    border: 2px;
     position: absolute;
     left: 50%;
     bottom: 50%;
+    color: #4717F6;
     
 }
 
@@ -191,10 +253,19 @@ header form button {
     z-index: 1;
     left: 40%;
     top: 50%;
-    height: 50%;
-    width: 30%;
+    height: 70%;
+    width: 40%;
     overflow: auto;
-    background-color: #E7DFDD;
+    background-color: #0e0b16;
+    color: #E7DFDD;
+}
+
+.modal-header {
+    font-weight: bold;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 150%;
+    color: #4717F6;
+    padding: 10px;
 }
 
 .modal-body {
@@ -202,13 +273,17 @@ header form button {
     margin: 20% auto;
     padding: 20px;
     width: 70%;
-    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0);
-    animation-name:modalopen;
+    animation-name: modalopen;
     animation-duration: 1s;
+    padding: 20px;
+}
+
+.modal-footer {
+    padding: 20px;
 }
 
 #modal-close {
-    color: #000;
+    color: #E7DFDD;
     float: right;
     font-size: 30px;
 }
@@ -238,10 +313,21 @@ header form button {
     align-items: center;
     padding: 20px;
     margin: 20px;
-    border-radius: 5px;
-    
+    border-radius: 5px;  
+}
 
-    
+.error-modal h3 {
+    background-color: #E7DFDD;
+    color: black;
+    padding: 5px;
+}
+
+#error-close {
+    background-color: #4717F6;
+    border-radius: 5px;
+    padding: 3px;
+}
+
     
 }
 
@@ -257,11 +343,6 @@ header form button {
     padding: 3px;
 }
 
-
-
-
-
-
 /* Media Queries */
 
 /* Media query for phones and smaller */
@@ -270,6 +351,5 @@ header form button {
 }
 
 /* Media query for tablets and smaller */
-@media screen and (max-width: 768px) {
-    
+@media screen and (max-width: 768px) {    
 }
