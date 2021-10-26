@@ -39,8 +39,6 @@
     <div class="month-input">
         <label for="start" class="is-size-3">Select Month:</label>
         <input type="month" id="start" name="start" min="2021-01" value="2021-10" onchange="loadPage()">
-        <!-- error modal for any other errors -->
- 
     </div>
     </div>
     <div class="columns">
@@ -126,11 +124,13 @@
     
 
     <div id="weather-container" class="weather column ml-2">
-        <div class = "error-catch-container">
+         <!-- error modal for any other errors -->
+        <div id ="error-catch-container">
             <div class="error-catch-modal">
                 <h2>There has been an error!</h2>
-                <button id="error-catch-close">Try Again</button>
+                <button id="error-catch-close">Try again</button>
             </div>
+        </div>    
         <h3 class="weather-background is-size-3"> Weather</h3>
         <div id="weather-data-container" class="weather-background">
             <div id="city-name" class="is-size-5 is-inline mb-4 pl-6 weather-background"></div>

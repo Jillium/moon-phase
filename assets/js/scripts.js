@@ -18,6 +18,8 @@ var clearCityButtonEl = document.querySelector('#clear-city');
 var weatherDataContainerEl = document.getElementById('weather-data-container');
 
 
+
+
 let loadArray = function(){
     calendarData = [];
     let selected = selectedMonth.value.split('-');
@@ -111,7 +113,7 @@ function outsideModal(event) {
 
 //variable for the submit button
 var submitButton = document.querySelector("#search-btn");
-// variable for the close button on error modal
+// variable for the close button on city search error modal
 var errorCloseButton = document.querySelector("#error-close");
 //variable for the input to search a city 
 var cityInputEl = document.querySelector("input");
@@ -167,7 +169,7 @@ var errorBox = document.querySelector(".error-modal-container");
             })
         })
         .catch(function(error) {
-            alert("There was an error!");
+            errorCatchBox.setAttribute("style", "display: block");
         })
         
         
@@ -213,7 +215,7 @@ var errorBox = document.querySelector(".error-modal-container");
             try {
                 
             } catch (err) {
-                 
+                errorCatchBox.setAttribute("style", "display: block");
             }
         });
         
@@ -245,6 +247,11 @@ var errorBox = document.querySelector(".error-modal-container");
             const moonSetTime = moonSetDate.slice(0, -9)
             // Saving Moon Rise
             localStorage.setItem('savedMoonSet', moonSetTime);
+            try {
+                
+            } catch (err) {
+                errorCatchBox.setAttribute("style", "display: block");
+            }
         });
         
     }
@@ -310,6 +317,16 @@ getWeather();
 errorCloseButton.addEventListener("click", function() {
     errorBox.setAttribute("style", "display: none");
 });
+
+
+// variables for the box to catch general errors
+var errorCatchBox = document.querySelector("#error-catch-container");
+var errorCatchCloseButton = document.querySelector("#error-catch-close");
+
+// event listener for general error modal close button 
+errorCatchCloseButton.addEventListener("click", function() {
+    errorCatchBox.setAttribute("style", "display: none");
+})
 
 
 // Clear City Data

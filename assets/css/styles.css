@@ -215,7 +215,7 @@ header form button {
     padding: 20px;
     width: 70%;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0);
-    animation-name:modalopen;
+    animation-name: modalopen;
     animation-duration: 1s;
 }
 
@@ -251,11 +251,10 @@ header form button {
     padding: 15px;
     margin: 15px;
     border-radius: 5px;
+    animation-name: modalopen;
+    animation-duration: .5s;
     text-align: center;
     opacity: .6;
-
-    
-    
 }
 
 .error-modal h3 {
@@ -270,9 +269,9 @@ header form button {
     padding: 3px;
 }
 
-/* .error-catch-container {
+#error-catch-container {
     display: none;
-} */
+}
 
 .error-catch-modal {
     background-color: #E7DFDD;
@@ -284,6 +283,7 @@ header form button {
     padding: 10px;
     margin: 10px;
     border-radius: 5px;
+    
     
 }
 
