@@ -17,16 +17,30 @@
 
       <h1 class="title is-1">Phases of the Moon</h1>
     
-        <div>
-            <h3>Weather by City</h3>
-            <form class="form">
+        <div class="weather-by-city">
+            <h2 class="is-size-3 is-inline">Weather by City</h2>
+            <form class="form is-inline ml-4">
                 <input name="city" type="text" id="input">
-                <button type="submit" id="search-btn">Search</button>
+                <button type="submit" id="search-btn" class="city-search-btn">Search</button>
+                <button id="clear-city" class="city-search-btn ml-2" type="button">Clear City</button>
             </form>
         </div>
-        <label for="start">Select Month:</label>
-        <input type="month" id="start" name="start" min="2021-01" value="2021-10" onchange="loadPage()">
+
+        <!-- container for modal-->
+        <div class = "error-modal-container">
+            <div class="error-modal">
+                <h3>Please search a valid city!</h3>
+                <button id="error-close">Close</button>
+            </div>
+        </div>
+
+
     </header>
+    <div class="month-input">
+        <label for="start" class="is-size-3">Select Month:</label>
+        <input type="month" id="start" name="start" min="2021-01" value="2021-10" onchange="loadPage()">
+    </div>
+    <div class="columns">
     <div class="calendar">
         <div class="monthYear columns">
             <div class="month column">Month</div>
@@ -86,23 +100,56 @@
             <div class="days column" data-wom="5" data-dow="5"></div>
             <div class="days column" data-wom="5" data-dow="6"></div>
         </div>
+        <div class="weeks sixth columns is-mobile">
+            <div class="days column" data-wom="6" data-dow="0"></div>
+            <div class="days column" data-wom="6" data-dow="1"></div>
+            <div class="days column" data-wom="6" data-dow="2"></div>
+            <div class="days column" data-wom="6" data-dow="3"></div>
+            <div class="days column" data-wom="6" data-dow="4"></div>
+            <div class="days column" data-wom="6" data-dow="5"></div>
+            <div class="days column" data-wom="6" data-dow="6"></div>
+        </div>
+
+        <div class="weeks seven columns is-mobile">
+            <div class="test column is-mobile">
+            31
+            <img src="./assets/images/full-moon-cartoon.png" alt="Full Moon" class="test" height=80 width=80>
+            </div>
+        </div>
     </div>
     <div class="weather"></div>
 
-    <div id="weather-container"></div>
+    <div id="weather-container" class="weather column ml-2">
+        <h3 class="weather-background is-size-3"> Weather</h3>
+        <div id="weather-data-container" class="weather-background">
+            <div id="city-name" class="is-size-5 is-inline mb-4 pl-6 weather-background"></div>
+            <div id="weather-today" class="is-size-5 is-inline mb-4 weather-background"></div>
+            <div id="moon-phase" class="is-size-6 has-text-left mb-3 weather-background pl-5"></div>
+            <div id="moon-rise" class="is-size-6 has-text-left mb-3 weather-background pl-5"></div>
+            <div id="moon-set" class="is-size-6 has-text-left mb-3 weather-background pl-5"></div>
+            <div id="cloud-coverage" class="is-size-6 has-text-left mb-3 weather-background pl-5"></div>
+            <div id="air-temp" class="is-size-6 has-text-left mb-3 weather-background pl-5"></div>
+            <div id="precipitation" class="is-size-6 has-text-left mb-3 weather-background pl-5"></div>
+        </div>
+    </div>
+    </div>
   
-    <button id="modal-btn" class="model-open-btn">Click</button>
+    <button id="modal-btn" class="modal-open-btn">Click</button>
         <div id="moon-modal" class="modal">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button id="modal-close" type="button">&times;</button>
-                    <h2>Todays Moon Information</h2>
+                    <button type="button" id="modal-close">&times;</button>
+                    <h2 class="modal-h2">Todays Moon Information</h2>
                     </div>
-                <div class="modal-body">
+                <div class= "city">
+                    <input id= "city-input" type = "text">
+                </div>
+                <div class="modal-body" id="moon-info">
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. A non minus magni vitae. Incidunt ipsum voluptas fugiat optio, sed blanditiis et sunt! Architecto animi mollitia nostrum ratione, et voluptatibus id.</p>
                 </div>
+                <div id="moon-img"></div>
                 <div class="modal-footer">
-                    <h3>modal footer</h3>  
+                    <h3 id="rise-set">Rise and Set</h3>  
                 </div>
             </div>
          </div>
