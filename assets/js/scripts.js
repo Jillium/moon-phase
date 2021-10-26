@@ -477,7 +477,7 @@ getMoonPhase();
                 console.log(lat);
                 console.log(lon);
 
-                console.log(`Lat/Lon ${lat} & ${lon}`);
+                console.log(`First Log: Lat/Lon ${lat} & ${lon}`);
                 
                 localStorage.setItem('savedLat', lat);
                 localStorage.setItem('savedLon', lon);
@@ -498,8 +498,7 @@ getMoonPhase();
         const lat = localStorage.getItem('savedLat');
         const lng = localStorage.getItem('savedLon');
         
-        console.log(`Lat/Lon ${lat} & ${lng}`);
-        
+        if (lat && lng) {
         // Storm Glass API 1e6476cc-3387-11ec-b37c-0242ac130002-1e647744-3387-11ec-b37c-0242ac130002
         let params = 'cloudCover,precipitation,airTemperature';
         
@@ -572,6 +571,7 @@ getMoonPhase();
             localStorage.setItem('savedMoonSet', moonSetTime);
         });
         
+    }
         showWeather();
     };
     
