@@ -129,6 +129,7 @@ var errorBox = document.querySelector(".error-modal-container");
             getLatLong(selectedCity);
 
             localStorage.setItem('savedCity',selectedCity);
+            errorBox.setAttribute("class", "display: none");
             
         }
         else {
