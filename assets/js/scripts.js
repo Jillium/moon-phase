@@ -277,67 +277,79 @@ var getLatLong = function (selectedCity) {
 
     });
 
-
- var moonModal = {
-    phases: ['new-moon', 'waxing-crescent-moon', 'quarter-moon', 'waxing-gibbious-moon', 'full-moon', 'waning-gibbious-moon', 'last-quarter-moon', 'waning-crescent-moon'],
-    phase: (year, month, day)=> {
-        var moonYear = moonMonth = moonDays = moonCycle = integerCycle = 0;
-        if (month < 3) {
-            year --;
-            month += 12;
-        } 
-
-        ++month; 
-        moonYear = 365.25 * year;
-        moonMonth = 30.6 * month; 
-        //get the total number of days 
-        moonDays = moonYear + moonMonth + day - 694039; 
-        //divide by mooncycle lunar cycle is 29.5305882
-        moonCycle /= 29.5305882; 
-        // get integer of moon cycle 
-        integerCycle = parseInt(moonCycle);
-        // subtract integer of cycle 
-        moonCycle =- integerCycle;
-        //8 because there are 8 phases 
-        integerCycle = Math.round(moonDays * 8);
-
-        if (integerCycle >= 8) integerCycle = 0;
-        return {phase: integerCycle, name: moonModal.Phases[b]};
-    }
 };
-moonModal();
-console.log(moonModal);
 
-        // switch(integerCycle) {
-        //     case 0: 
-        //     return 'new-moon';
-        //     break; 
-        //     case 1: 
-        //     return 'waxing-crescent-moon';
-        //     break;
-        //     case 2: 
-        //     return 'quarter-moon';
-        //     break; 
-        //     case 3: 
-        //     return 'waxing-gibbious-moon';
-        //     break;
-        //     case 4: 
-        //     return 'full-moon';
-        //     break; 
-        //     case 5: 
-        //     return 'waning-gibbious-moon';
-        //     break;
-        //     case 6: 
-        //     return 'last-quarter-moon';
-        //     break; 
-        //     case 7: 
-        //     return 'waning-crescent-moon';
-        //     break;
+// function moonModal(year, month, day) {
+//     // phases: ['new-moon', 'waxing-crescent-moon', 'quarter-moon', 'waxing-gibbious-moon', 'full-moon', 'waning-gibbious-moon', 'last-quarter-moon', 'waning-crescent-moon'],
+//     // phase: (year, month, day)=> {
+//         var moonYear = moonMonth = moonDays = moonCycle = integerCycle = 0;
+//         if (month < 3) {
+//             year --;
+//             month += 12;
+//         } 
 
+//         ++month; 
         
+        
+//         moonYear = 365.25 * year;
+//         moonMonth = 30.6 * month; 
+//         //get the total number of days 
+//         moonDays = moonYear + moonMonth + day - 694039; 
+//         //divide by mooncycle lunar cycle is 29.5305882
+//         moonCycle /= 29.5305882; 
+//         // get integer of moon cycle 
+//         integerCycle = parseInt(moonCycle);
+//         // subtract integer of cycle 
+//         moonCycle =- integerCycle;
+//         //8 because there are 8 phases 
+//         integerCycle = Math.round(moonDays * 8);
 
+//         if (integerCycle >= 8) integerCycle = 0;
+//         return integerCycle;
 
-console.log(moonModal('2018', '01', '19'));
+//         // switch(integerCycle) {
+//         //     case 0: 
+//         //     return 'new-moon';
+//         //     break; 
+//         //     case 1: 
+//         //     return 'waxing-crescent-moon';
+//         //     break;
+//         //     case 2: 
+//         //     return 'quarter-moon';
+//         //     break; 
+//         //     case 3: 
+//         //     return 'waxing-gibbious-moon';
+//         //     break;
+//         //     case 4: 
+//         //     return 'full-moon';
+//         //     break; 
+//         //     case 5: 
+//         //     return 'waning-gibbious-moon';
+//         //     break;
+//         //     case 6: 
+//         //     return 'last-quarter-moon';
+//         //     break; 
+//         //     case 7: 
+//         //     return 'waning-crescent-moon';
+//         //     break;
+
+//         // }
+
+    
+//     };
+
+// console.log('moon info added');
+
+// calculate julian month to get moon phase 
+const julianDate = (date = new Date()) => {
+    const time =date.getTime();
+    const timeZone = date.getTimezoneOffset()
+    
+    return (time / 86400000) - (timeZone / 1440) + 2440587.5;
+}
+
+const lunarMonth = 
+
 
 
 // Pulling the weather information
@@ -400,7 +412,7 @@ function getWeather() {
         });
         
         showWeather();
-    };
+    
     
     // Function to display saved Weather/Astrology info
     function showWeather() {
