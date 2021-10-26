@@ -348,8 +348,48 @@ const julianDate = (date = new Date()) => {
     return (time / 86400000) - (timeZone / 1440) + 2440587.5;
 }
 
-const lunarMonth = 
+// create lunar month  
+const lunarMonth = 29.530588853; 
 
+const LunarAge = (date = new Date()) => {
+    const percent = LunarAgePercent(date);
+    const age = percent * lunarMonth;
+
+    return age;
+}
+
+const LunarAgePercent = (date = new Date()) => {
+    return normalize((julianDate(date) - 2451550.1) / lunarMonth);
+}
+
+const normalize = value => {
+    value = value - Math.floor(value);
+    if (value < 0)
+    value = value + 1
+    return value;
+}
+
+//get percentages for various phases to tell moon type 
+// if statement 
+const lunarPhase = (date = new Date()) => {
+    if (age < 1.845)
+    return "New Moon";
+    else if (age < 5.53) 
+    return "waxing cresent";
+    else if (age < 9.228)
+    return "First Quarter";
+    else if (age < 12.919)
+    return "Waxing Gibbious";
+    else if (age < 16.61)
+    return "Full Moon";
+    else if (age < 20.30)
+    return "Waning Gibbious";
+    else if (age < 23.99)
+    return "Last Quarter";
+    else if (age < 27.68)
+    return "Waning Crescent";
+
+}
 
 
 // Pulling the weather information
