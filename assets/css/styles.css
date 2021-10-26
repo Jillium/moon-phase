@@ -255,8 +255,9 @@ h2 {
     height: 70%;
     width: 60%;
     overflow: auto;
-    background-color: #0e0b16;
+    background: rgba(128, 128, 128, 0.37);
     color: #E7DFDD;
+
 }
 
 .modal-header {
@@ -275,6 +276,7 @@ h2 {
     animation-name: modalopen;
     animation-duration: 3s;
     padding: 20px;
+    
 }
 
 .modal-footer {

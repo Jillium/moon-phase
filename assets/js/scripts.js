@@ -279,66 +279,6 @@ var getLatLong = function (selectedCity) {
 
 };
 
-// function moonModal(year, month, day) {
-//     // phases: ['new-moon', 'waxing-crescent-moon', 'quarter-moon', 'waxing-gibbious-moon', 'full-moon', 'waning-gibbious-moon', 'last-quarter-moon', 'waning-crescent-moon'],
-//     // phase: (year, month, day)=> {
-//         var moonYear = moonMonth = moonDays = moonCycle = integerCycle = 0;
-//         if (month < 3) {
-//             year --;
-//             month += 12;
-//         } 
-
-//         ++month; 
-        
-        
-//         moonYear = 365.25 * year;
-//         moonMonth = 30.6 * month; 
-//         //get the total number of days 
-//         moonDays = moonYear + moonMonth + day - 694039; 
-//         //divide by mooncycle lunar cycle is 29.5305882
-//         moonCycle /= 29.5305882; 
-//         // get integer of moon cycle 
-//         integerCycle = parseInt(moonCycle);
-//         // subtract integer of cycle 
-//         moonCycle =- integerCycle;
-//         //8 because there are 8 phases 
-//         integerCycle = Math.round(moonDays * 8);
-
-//         if (integerCycle >= 8) integerCycle = 0;
-//         return integerCycle;
-
-//         // switch(integerCycle) {
-//         //     case 0: 
-//         //     return 'new-moon';
-//         //     break; 
-//         //     case 1: 
-//         //     return 'waxing-crescent-moon';
-//         //     break;
-//         //     case 2: 
-//         //     return 'quarter-moon';
-//         //     break; 
-//         //     case 3: 
-//         //     return 'waxing-gibbious-moon';
-//         //     break;
-//         //     case 4: 
-//         //     return 'full-moon';
-//         //     break; 
-//         //     case 5: 
-//         //     return 'waning-gibbious-moon';
-//         //     break;
-//         //     case 6: 
-//         //     return 'last-quarter-moon';
-//         //     break; 
-//         //     case 7: 
-//         //     return 'waning-crescent-moon';
-//         //     break;
-
-//         // }
-
-    
-//     };
-
-// console.log('moon info added');
 
 // calculate julian month to get moon phase 
 const julianDate = (date = new Date()) => {
@@ -370,9 +310,9 @@ const normalize = value => {
 }
 
 //get percentages for various phases to tell moon type 
-// if statement 
+// if statement  use lunar age variable to call 
 const lunarPhase = (date = new Date()) => {
-    if (LunarAge() < 1.845)
+    if (LunarAge() < 1.845) 
     return "New Moon";
     else if (LunarAge() < 5.53) 
     return "waxing cresent";
@@ -391,11 +331,22 @@ const lunarPhase = (date = new Date()) => {
 
 }
 
+//get images for phases 
+function moonImages() {
+var newMoonImg = document.createElement('img');
+img.src="https://cdn.images.express.co.uk/img/dynamic/151/590x/secondary/New-Moon-2021-lunar-phases-moon-stages-2845362.jpg?r=1610366835008";
+document.getElementById('moon-img').appendChild(newMoonImg);
+}
+
+
 document.addEventListener("DOMContentLoaded", ()=> {
 const phase = lunarPhase ();
 console.log(phase);
 } )
-
+ //append this data to modal use div idi 
+ var modalInfoDiv = document.getElementById("moon-age");
+ var divContent = document.createTextNode(lunarPhase.response);
+ modalInfoDiv.appendChild(divContent);
 
 // Pulling the weather information
 function getWeather() {
