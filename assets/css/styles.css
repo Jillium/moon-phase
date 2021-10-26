@@ -243,20 +243,18 @@ header form button {
 
 .error-modal {
     background-color: #E7DFDD;
-    width: 30%;
-    height: 40%;
+    width: 60%;
+    height: 30%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
-    margin: 20px;
+    padding: 15px;
+    margin: 15px;
     border-radius: 5px;
     animation-name: modalopen;
     animation-duration: .5s;
-    
-
-    
-    
+    text-align: center;
+    opacity: .6;
 }
 
 .error-modal h3 {
@@ -266,7 +264,7 @@ header form button {
 }
 
 #error-close {
-    background-color: #4717F6;
+    background-color: #A239CA;
     border-radius: 5px;
     padding: 3px;
 }
