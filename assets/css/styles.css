@@ -21,7 +21,7 @@ font-family: 'Noto Serif', serif; */
 
 body {
     font-family: 'BioRhyme', serif;
-    background-image: url("../assets/images/moon-header-background.jpg");
+    background-image: url("../images/moon-header-background.jpg");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -325,9 +325,6 @@ h2 {
     background-color: #4717F6;
     border-radius: 5px;
     padding: 3px;
-}
-
-    
 }
 
 .error-modal h3 {

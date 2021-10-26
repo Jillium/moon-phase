@@ -24,10 +24,6 @@ let loadArray = function(){
     currentYear = selected[0];
     currentMonth = selected[1];
 
-    let lastDay = new Date(currentYear,currentMonth+1,0).getDate();
-    console.log(lastDay);
-
-    
     let lastDay = new Date(currentYear,parseInt(currentMonth),0).getDate();
 
     for (let i = 1; i <= lastDay;i++){
@@ -48,7 +44,7 @@ let getData = function(dOW,wOM){
             currentDay = entry;
             return true;
         }
-});
+    });
 }
 
 let loadCalendar = function() {
@@ -130,7 +126,7 @@ var submitButton = document.querySelector("#search-btn");
 // variable for the close button on error modal
 var errorCloseButton = document.querySelector("#error-close");
 //variable for the input to search a city 
-var cityInputEl = document.querySelector("input")
+var cityInputEl = document.querySelector("input");
 // variable for the error modal box
 var errorBox = document.querySelector(".error-modal-container");
 
@@ -209,10 +205,6 @@ var getLatLong = function (selectedCity) {
         response.json().then(function (data) {
             
             // Hey Corrie, you can use these variables in your api call for the weather information. This will give you the latitude and longitude based on their search 
-            var lat = data.data[0].latitude;
-            var lon = data.data[0].longitude;
-           
-            
             let lat = data.data[0].latitude;
             let lon = data.data[0].longitude;
             console.log(lat);
@@ -221,10 +213,10 @@ var getLatLong = function (selectedCity) {
             localStorage.setItem('savedLat', lat);
             localStorage.setItem('savedLon', lon);
             // need to figure out how to pull latitude and longitude from the data, it isn't working
-        }
+        })
         
-    };
-    
+    });
+}
     
     // this function will get the latitude and longitude to be used in the weather search 
     var getLatLong = function (selectedCity) {
@@ -277,13 +269,13 @@ var getLatLong = function (selectedCity) {
             localStorage.setItem('savedCloudCoverage', cloudCoverage);
             
 
-const apiKey = "02465fec-307a-11ec-93e3-0242ac130002-0246608c-307a-11ec-93e3-0242ac130002";
-const apiUrlWeather = "https://api.stormglass.io/v2/weather/point";
-const apiUrlAstronomy = "https://api.stormglass.io/v2/astronomy/point";
-var riseSet = document.getElementById('rise-set');
-var phaseInfo = document.getElementById('moon-info');
+    const apiKey = "02465fec-307a-11ec-93e3-0242ac130002-0246608c-307a-11ec-93e3-0242ac130002";
+    const apiUrlWeather = "https://api.stormglass.io/v2/weather/point";
+    const apiUrlAstronomy = "https://api.stormglass.io/v2/astronomy/point";
+    var riseSet = document.getElementById('rise-set');
+    var phaseInfo = document.getElementById('moon-info');
 
-    }
+    });
 
 
 
@@ -327,7 +319,7 @@ function getWeather() {
             // localStorage.setItem('savedPrecipitation', precipitation);
             
             
-        });
+        };
 
         // Precipitation Fetch
         fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&exclude=current,minute,hourly,alert&appid=f17ddf4709497b276463e08f28044887`, {
@@ -428,10 +420,6 @@ function getWeather() {
     
 getWeather();
 
-getMoonPhase();
-
-    
-    
     //variable for the submit button
     var submitButton = document.querySelector("#search-btn");
     //variable for the input to search a city 
@@ -633,7 +621,7 @@ getWeather();
 // event listener for error modal close button
 errorCloseButton.addEventListener("click", function() {
     errorBox.setAttribute("style", "display: none");
-})
+});
 
 
 // Clear City Data
@@ -642,7 +630,7 @@ clearCityButtonEl.addEventListener('click', function() {
     weatherDataContainerEl.textContent = "Enter a City to Get Started!"
 });
 // event listener for the submit button-- needs to be near bottom of page 
-submitButton.addEventListener("click", submitButtonHandler)
+submitButton.addEventListener("click", submitButtonHandler);
 
 // // event listener for the submit button-- needs to be near bottom of page 
 // submitButton.addEventListener("click", submitButtonHandler)*/
