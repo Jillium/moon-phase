@@ -206,7 +206,13 @@ header form button {
     height: 50%;
     width: 30%;
     overflow: auto;
-    background-color: #E7DFDD;
+    background: rgba(128, 128, 128, 1.9);
+    border-radius: 6px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, .3);
+    height: 625px;
+    padding:  20px 0 0 20px;
+    width: 70%;
+    margin-left: 2rem;
 }
 
 .modal-body {
