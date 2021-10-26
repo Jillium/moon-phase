@@ -79,6 +79,9 @@ let loadPage = function(){
     loadCalendar();
 }
 
+loadPage();
+
+
 // get modal elements and make variable 
 var modal = document.getElementById('moon-modal');
 var modalbtn = document.getElementById('modal-btn');
@@ -485,9 +488,6 @@ getMoonPhase();
                 getWeather();
                 
             })
-
-
-
         })
         
         
@@ -550,7 +550,7 @@ getMoonPhase();
                 'Authorization': '1e6476cc-3387-11ec-b37c-0242ac130002-1e647744-3387-11ec-b37c-0242ac130002'
             }
         }).then((response) => response.json()).then((res) => {
-
+            console.log(res.data);
             // Pulling in Moon Phase
             const moonPhase = res.data[0].moonPhase.current.text
             // Saving Moon Phase
