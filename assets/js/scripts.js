@@ -169,7 +169,7 @@ var phaseInfo = document.getElementById('moon-info');
 function getMoonPhase () {
      var lat = 58.7984;
      var lng = 17.8081;
-var end = 2021-25-10;
+var end = 2021-10-25;
 
 fetch(`https://api.stormglass.io/v2/astronomy/point?lat=${lat}&lng=${lng}&end=${end})`, {
     headers: {
