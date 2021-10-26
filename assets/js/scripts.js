@@ -22,6 +22,7 @@ let loadArray = function(){
     let lastDay = new Date(currentYear,currentMonth+1,0).getDate();
     console.log(lastDay);
     
+    let lastDay = new Date(currentYear,parseInt(currentMonth),0).getDate();
 
     for (let i = 1; i <= lastDay;i++){
         var d = new Date(currentYear,currentMonth-1,i);
@@ -54,7 +55,6 @@ let loadCalendar = function() {
         
         if (currentDay.weekOfMonth == "6"){
             sixthWeek[0].style.visibility = "visible";
-            console.log(sixthWeek[0].style.visibility);
         }
         currentDay = {};
     }
@@ -292,6 +292,8 @@ fetch(`https://api.stormglass.io/v2/astronomy/point?lat=${lat}&lng=${lng}&end=${
     console.log(jsondata);
 });
 }
+
+getMoonPhase();
 console.log("get");
 // if(response.ok) {
 //     response.json().then(function(data) {
