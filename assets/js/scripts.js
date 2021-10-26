@@ -56,13 +56,13 @@ let loadCalendar = function() {
     }
 }
 
-// let loadPage = function(){
-//     sixthWeek[0].style.visibility = "hidden";
-//     loadArray();
-//     loadCalendar();
-// }
+let loadPage = function(){
+    sixthWeek[0].style.visibility = "hidden";
+    loadArray();
+    loadCalendar();
+}
 
-// loadPage();
+loadPage();
 
 
 
