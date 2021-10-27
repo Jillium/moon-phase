@@ -544,7 +544,11 @@ getWeather();
             const airTemp = res.hours[0].airTemperature.noaa
             // Saving Temp
             localStorage.setItem('savedAirTemperature', airTemp);
+        })
+        .catch(() => {
+            errorCatchBox.setAttribute("style", "display: block");
         });
+
 
         // Precipitation Fetch
         fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&exclude=current,minute,hourly,alert&appid=f17ddf4709497b276463e08f28044887`, {
@@ -553,11 +557,11 @@ getWeather();
             const precipitation = res.daily[0].rain
             // Saving Precipitation
             localStorage.setItem('savedPrecipitation', precipitation);
-            try {
-                
-            } catch (err) {
-                errorCatchBox.setAttribute("style", "display: block");
-            }
+            
+           
+        })
+        .catch(() => {
+            errorCatchBox.setAttribute("style", "display: block");
         });
         
        
@@ -588,11 +592,11 @@ getWeather();
             const moonSetTime = moonSetDate.slice(0, -9)
             // Saving Moon Rise
             localStorage.setItem('savedMoonSet', moonSetTime);
-            try {
-                
-            } catch (err) {
-                errorCatchBox.setAttribute("style", "display: block");
-            }
+            
+           
+        })
+        .catch(() => {
+            errorCatchBox.setAttribute("style", "display: block");
         });
         
     }
