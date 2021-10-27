@@ -34,7 +34,8 @@ let loadArray = function(){
         var day = d.getDay();
 
         var weekOfMonth = Math.ceil((date - 1 - day) / 7)+1;
-        calendarData.push({day:i,dayOfWeek:day,weekOfMonth:weekOfMonth,image:'image name',brightness:.1});
+        var moonImage = "Moon-"+i+".jpg";
+        calendarData.push({day:i,dayOfWeek:day,weekOfMonth:weekOfMonth,image:moonImage,brightness:.1});
         
     };
 }
@@ -54,13 +55,19 @@ let loadCalendar = function() {
     yearEl.textContent = currentYear;
     for (let i = 0; i < calendarDay.length; i++) {
         getData(calendarDay[i].dataset.dow, calendarDay[i].dataset.wom);
+        let dayEl = calendarDay[i].querySelector(".dayBox");
+        let imgEl = calendarDay[i].querySelector(".moonImg");
+        console.log(currentDay);
 
-        if(currentDay){
-            calendarDay[i].textContent=currentDay.day;   
+        if(!currentDay.day){
+            imgEl.style.visibility = "hidden";
         }
-        
-
-        calendarDay[i].textContent=currentDay.day;   
+        else {
+            dayEl.textContent=currentDay.day;   
+            imgEl.src='./assets/images/Moon/' + currentDay.image; 
+            imgEl.alt='Description'; 
+            imgEl.style.visibility = "visible";  
+        }
 
         if (currentDay.weekOfMonth == "6"){
             sixthWeek[0].style.visibility = "visible";
@@ -659,3 +666,23 @@ clearCityButtonEl.addEventListener('click', function() {
 });
 // event listener for the submit button-- needs to be near bottom of page 
 submitButton.addEventListener("click", submitButtonHandler);
+
+
+
+
+
+// var testEl = document.getElementsByClassName('test');
+// console.log(testEl);
+
+// for (let i = 0; i < 7;i++){
+
+//     let dayEl = testEl[i].querySelector(".dayBox");
+//     console.log(dayEl);
+//     let imgEl = testEl[i].querySelector(".testImg");
+//     console.log(imgEl);
+
+//     dayEl.textContent = i;
+//     imgEl.src='./assets/images/Moon/Moon-' + i + '.jpg';
+
+
+// }

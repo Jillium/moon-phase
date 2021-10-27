@@ -202,8 +202,23 @@ input:hover {
     visibility: hidden;
 }
 
+.dayBox{
+    object-position: left top;
+}
+
+.testImg {
+    object-position: right bottom;
+}
+
 .btn:hover{
     background: #333;
+}
+
+code {
+    font-family: 'BioRhyme', serif;
+    font-size: 16px;
+    background-color: var(--grey);
+    color: var(--black);
 }
 
 .modal{
