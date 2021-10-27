@@ -199,66 +199,140 @@ var getLatLong = function (selectedCity) {
 
 
 // calculate julian month to get moon phase 
-const julianDate = (date) => {
-    const time =date.getTime();
-    const timeZone = date.getTimezoneOffset()
+// const julianDate = (date = new Date()) => {
+//     const time =date.getTime();
+//     const timeZone = date.getTimezoneOffset()
     
-    return (time / 86400000) - (timeZone / 1440) + 2440587.5;
+//     return Math.floor(time / 86400000) - (timeZone / 1440) + 2440587.5;
+// }
+// function julianDate() {
+//     return Math.floor(this / 86400000) - (this.getTimeZoneOffest() / 1440) + 2440587.5;
+// }
+// var today = new Date(10-27-2021);
+// var julian = today.julianDate();
+// console.log(julian);
+
+// // create lunar month  
+// const lunarMonth = 29.53; 
+
+// const LunarAge = (date) => {
+//     const percent = LunarAgePercent(date);
+//     const age = percent * lunarMonth;
+// console.log(age);
+//     return age;
+// }
+
+// const LunarAgePercent = (date) => {
+//     return normalize((julianDate(date) - 2451550.1) / lunarMonth);
+// }
+
+// const normalize = value => {
+//     value = value - Math.floor(value);
+//     if (value < 0)
+//     value = value + 1
+//     return value;
+// }
+
+// //get percentages for various phases to tell moon type 
+// // if statement  use lunar age variable to call 
+// const lunarPhase = () => {
+//     if (LunarAge() < 1.84566) {
+//     return "New Moon";
+//     }
+//     else if (LunarAge() < 5.53699) {
+//     return "waxing cresent";
+//     }
+//     else if (LunarAge() < 9.22831) {
+//     return "First Quarter";
+//     }
+//     else if (LunarAge() < 12.91963) {
+//     return "Waxing Gibbious";
+//     }
+//     else if (LunarAge() < 16.61096) {
+//     return "Full Moon";
+//     }
+//     else if (LunarAge() < 20.30228) {
+//     return "Waning Gibbious";
+//     }
+//     else if (LunarAge() < 23.99361) {
+//     return "Last Quarter";
+//     }
+//     else if (LunarAge() < 27.68) {
+//     return "Waning Crescent";
+//     }
+
+//     return "New";
+// }
+
+// document.addEventListener("DOMContentLoaded", ()=> {
+//     const phase = lunarPhase ();
+//     console.log(LunarAge());
+//      //append this data to modal use div idi 
+//      var modalInfoDiv = document.getElementById("moon-age");
+     
+     
+//      modalInfoDiv.innerHTML=phase;
+// });
+
+//use raw math 
+var month = 10;
+var day = 28;
+var year = 2021;
+const getJulianDate = () => {
+    var a = (year / 100);
+    var b = (a /4);
+    var c = (2 - a + b);
+    var e = 365.25 * (year + 4716);
+    var f = 30.6001 * (month + 1);
+    var JD = (c + day + e + f - 1524.5);
+    console.log(JD);
+    //calculate days since last new moon
+
+    var lastNew = (JD - 2451549.5);
+    var newMoons = (lastNew / 29.53)
+    console.log(newMoons);
+
+    //get how many days we are into cycle by multiplying fraction end of new Moons variable
+    var newMoonsFraction = (newMoons %1);
+    var daysInCycle = (newMoonsFraction * 29.53);
+    console.log(daysInCycle);
+    return daysInCycle;
+
 }
+        
+getJulianDate();
 
-// create lunar month  
-const lunarMonth = 29.53; 
 
-const LunarAge = (date = new Date()) => {
-    const percent = LunarAgePercent(date);
-    const age = percent * lunarMonth;
-console.log(age);
-    return age;
-}
-
-const LunarAgePercent = (date) => {
-    return normalize((julianDate(date) - 2451550.1) / lunarMonth);
-}
-
-const normalize = value => {
-    value = value - Math.floor(value);
-    if (value < 0)
-    value = value + 1
-    return value;
+document.addEventListener("DOMContentLoaded", ()=> {
+    const phase = lunarPhase ();
+    console.log(getJulianDate());
+     //append this data to modal use div idi 
+     var modalInfoDiv = document.getElementById("moon-age");
+     
+     
+     modalInfoDiv.innerHTML=phase;
 }
 
 //get percentages for various phases to tell moon type 
 // if statement  use lunar age variable to call 
-const lunarPhase = () => {
-    if (LunarAge() < 1.845) 
-    return "New Moon";
-    else if (LunarAge() < 5.53) 
-    return "waxing cresent";
-    else if (LunarAge() < 9.228)
-    return "First Quarter";
-    else if (LunarAge() < 12.919)
-    return "Waxing Gibbious";
-    else if (LunarAge() < 16.61)
-    return "Full Moon";
-    else if (LunarAge() < 20.30)
-    return "Waning Gibbious";
-    else if (LunarAge() < 23.99)
-    return "Last Quarter";
-    else if (LunarAge() < 27.68)
-    return "Waning Crescent";
 
+
+
+
+
+
+
+
+//add information about each moon phase to append depending on the phase
+//enter info into an array 
+function phaseDocs() {
+    var eachPhase = document.createElement('p');
+    const newMoonNode = document.createTextNode("The new moon marks the beginning of a Lunar cycle. When the moon is new it is located between the Earth and sun. During this time  we see the side of the mon that is not illuminated by the Sun which is why it will blend in with the sky.");
+    // document.getElementById("new-moon").appendChild(eachPhase);
+    eachPhase.appendChild(newMoonNode);
 }
-
-
-
-// days[i].addEventListener("click", () => {
-//     const phase = lunarPhase ();
-//     console.log(phase);
-//    console.log('click');
-//      //append this data to modal use div idi 
-//      var modalInfoDiv = document.getElementById("moon-age");
-//      modalInfoDiv.innerHTML=phase;
-//     });
+phaseDocs();
+console.log(phaseDocs());
 
 //get images for phases 
 function moonImages() {
@@ -276,9 +350,12 @@ var closeBtn = document.getElementById('modal-close');
 //get days from calander to make an array from the days class
 var days = document.querySelectorAll(".days");
 for (var i=0; i<days.length; i++) {
-days[i].addEventListener("click", openModal, lunarPhase);
+days[i].addEventListener("click", openModal);
 console.log("lunar phase is called");
 }
+//get month input from calender 
+monthEl[1].addEventListener("click", openModal);
+
 //listen for open click 
 modalbtn.addEventListener('click', openModal);
 
