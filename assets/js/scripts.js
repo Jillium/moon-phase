@@ -116,18 +116,6 @@ function outsideModal(event) {
     modal.style.display = 'none';}
 }
 
-//stormglass API 
-//get variables 
-var savedCities = [];
-//neeed city locations 
-function cityLocation () {
-    let city = document.getElementById('city-input').value;
-
-}
-//Use get request to get moonphase rise and set 
-
-
-
 //variable for the submit button
 var submitButton = document.querySelector("#search-btn");
 // variable for the close button on error modal
@@ -136,50 +124,8 @@ var errorCloseButton = document.querySelector("#error-close");
 var cityInputEl = document.querySelector("input");
 // variable for the error modal box
 var errorBox = document.querySelector(".error-modal-container");
-
-// variable for the selected city
-
-
-// Storm Glass Weather API 1e6476cc-3387-11ec-b37c-0242ac130002-1e647744-3387-11ec-b37c-0242ac130002
-const lat = 58.7984;
-const lng = 17.8081;
-const params = 'windSpeed';
-
-fetch(`https://api.stormglass.io/v2/weather/point?lat=${lat}&lng=${lng}&params=${params}`, {
-  headers: {
-    'Authorization': '1e6476cc-3387-11ec-b37c-0242ac130002-1e647744-3387-11ec-b37c-0242ac130002'
-  }
-}).then((response) => response.json()).then((jsonData) => {
-  console.log('This Works!!!')
-});
-
-// this function runs when the submit button is clicked 
-var submitButtonHandler = function (event) {
-    event.preventDefault();
-    // get city value from input element
-    var selectedCity = cityInputEl.value.trim();
-
-    // if a city is entered then run code 
-    if (selectedCity) {
-        getLatLong(selectedCity);
-        cityInputEl.value = "";
-
-    }
-    else {
-        // error modal appears 
-        
-        errorBox.setAttribute("class", "display: block");
-
-        modal.style.display = 'none';}
-    }
     
-    
-    //variable for the submit button
-    var submitButton = document.querySelector("#search-btn");
-    //variable for the input to search a city 
-    var cityInputEl = document.querySelector("input")
-    // variable for the selected city
-    
+
     // this function runs when the submit button is clicked 
     var submitButtonHandler = function (event) {
         event.preventDefault();
@@ -495,6 +441,7 @@ getWeather();
     
     
     // this function runs when the submit button is clicked 
+// this function runs when the submit button is clicked 
     var submitButtonHandler = function (event) {
         event.preventDefault();
         // get city value from input element
@@ -573,13 +520,6 @@ getWeather();
             const airTemp = res.hours[0].airTemperature.noaa
             // Saving Temp
             localStorage.setItem('savedAirTemperature', airTemp);
-            
-            // // Pulling in Precipitation
-            // const precipitation = res.hours[0].precipitation.noaa + '%'
-            // // Saving Precipitation
-            // localStorage.setItem('savedPrecipitation', precipitation);
-            
-            
         });
 
         // Precipitation Fetch
@@ -587,11 +527,8 @@ getWeather();
             }).then((response) => response.json()).then((res) => {
             // Pulling in Precipitation
             const precipitation = res.daily[0].rain
-            console.log(`API pulled this for precipication: ${precipitation}`)
             // Saving Precipitation
             localStorage.setItem('savedPrecipitation', precipitation);
-            
-            
         });
         
         // Astronomy Fetch
@@ -602,7 +539,6 @@ getWeather();
                 'Authorization': '1e6476cc-3387-11ec-b37c-0242ac130002-1e647744-3387-11ec-b37c-0242ac130002'
             }
         }).then((response) => response.json()).then((res) => {
-            console.log(res.data);
             // Pulling in Moon Phase
             const moonPhase = res.data[0].moonPhase.current.text
             // Saving Moon Phase
@@ -695,6 +631,3 @@ clearCityButtonEl.addEventListener('click', function() {
 });
 // event listener for the submit button-- needs to be near bottom of page 
 submitButton.addEventListener("click", submitButtonHandler);
-
-// // event listener for the submit button-- needs to be near bottom of page 
-// submitButton.addEventListener("click", submitButtonHandler)*/
