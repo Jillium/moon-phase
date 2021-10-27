@@ -80,43 +80,6 @@ let loadPage = function(){
 loadPage();
 
 
-// get modal elements and make variable 
-var modal = document.getElementById('moon-modal');
-var modalbtn = document.getElementById('modal-btn');
-var closeBtn = document.getElementById('modal-close');
-//get days from calander to make an array from the days class
-var days = document.querySelectorAll(".days");
-for (var i=0; i<days.length; i++) {
-    days[i].addEventListener("click", openModal);
-}
-//listen for open click 
-modalbtn.addEventListener('click', openModal);
-
-//close click listener 
-closeBtn.addEventListener('click', closeModal);
-
-//click outside modal to close 
-document.getElementsByTagName('BODY')[0].addEventListener('click', outsideModal);
-
-//function to open modal 
-function openModal(event){
-    modal.style.display = 'block';
-    modalbtn.style.display = 'none';
-    console.log(event.target.innerHTML);
-    var day = event.target.innerHTML;
-    document.getElementById('modal-link').href=`https://www.moongiant.com/phase/10/${day}/2021/`
-}
-
-//close modal on button
-function closeModal() {
-    modal.style.display = 'none';
-}
-
-function outsideModal(event) {
-    if(event.target == modal) {
-
-    modal.style.display = 'none';}
-}
 
 //variable for the submit button
 var submitButton = document.querySelector("#search-btn");
@@ -286,14 +249,16 @@ const lunarPhase = () => {
 
 }
 
-document.addEventListener("DOMContentLoaded", ()=> {
-    const phase = lunarPhase ();
-    console.log(phase);
-   
-     //append this data to modal use div idi 
-     var modalInfoDiv = document.getElementById("moon-age");
-     modalInfoDiv.innerHTML=phase;
-    } );
+
+
+// days[i].addEventListener("click", () => {
+//     const phase = lunarPhase ();
+//     console.log(phase);
+//    console.log('click');
+//      //append this data to modal use div idi 
+//      var modalInfoDiv = document.getElementById("moon-age");
+//      modalInfoDiv.innerHTML=phase;
+//     });
 
 //get images for phases 
 function moonImages() {
@@ -304,15 +269,56 @@ document.getElementById('moon-img').appendChild(newMoonImg);
 
 moonImages();
 
+// get modal elements and make variable 
+var modal = document.getElementById('moon-modal');
+var modalbtn = document.getElementById('modal-btn');
+var closeBtn = document.getElementById('modal-close');
+//get days from calander to make an array from the days class
+var days = document.querySelectorAll(".days");
+for (var i=0; i<days.length; i++) {
+days[i].addEventListener("click", openModal, lunarPhase);
+console.log("lunar phase is called");
+}
+//listen for open click 
+modalbtn.addEventListener('click', openModal);
 
-document.addEventListener("DOMContentLoaded", ()=> {
-const phase = lunarPhase ();
-console.log(phase);
-} )
- //append this data to modal use div idi 
- var modalInfoDiv = document.getElementById("moon-age");
- var divContent = document.createTextNode(lunarPhase.response);
- modalInfoDiv.appendChild(divContent);
+//close click listener 
+closeBtn.addEventListener('click', closeModal);
+
+//click outside modal to close 
+document.getElementsByTagName('BODY')[0].addEventListener('click', outsideModal);
+
+//function to open modal 
+function openModal(event){
+    modal.style.display = 'block';
+    modalbtn.style.display = 'none';
+    console.log(event.target.innerHTML);
+    var day = event.target.innerHTML;
+    document.getElementById('modal-link').href=`https://www.moongiant.com/phase/10/${day}/2021/`;
+
+}
+
+//close modal on button
+function closeModal() {
+    modal.style.display = 'none';
+}
+
+function outsideModal(event) {
+    if(event.target == modal) {
+
+    modal.style.display = 'none';}
+}
+
+
+
+// document.addEventListener("DOMContentLoaded", ()=> {
+// const phase = lunarPhase ();
+// console.log(phase);
+// } )
+//  //append this data to modal use div idi 
+//  var modalInfoDiv = document.getElementById("moon-age");
+//  var divContent = document.createTextNode(lunarPhase.response);
+//  modalInfoDiv.appendChild(divContent);
 
 // Pulling the weather information
 function getWeather() {
