@@ -82,7 +82,11 @@ loadPage();
 var modal = document.getElementById('moon-modal');
 var modalbtn = document.getElementById('modal-btn');
 var closeBtn = document.getElementById('modal-close');
-
+//get days from calander to make an array from the days class
+var days = document.querySelectorAll(".days");
+for (var i=0; i<days.length; i++) {
+    days[i].addEventListener("click", openModal);
+}
 //listen for open click 
 modalbtn.addEventListener('click', openModal);
 
@@ -90,12 +94,15 @@ modalbtn.addEventListener('click', openModal);
 closeBtn.addEventListener('click', closeModal);
 
 //click outside modal to close 
-window.addEventListener('click', outsideModal);
+document.getElementsByTagName('BODY')[0].addEventListener('click', outsideModal);
 
 //function to open modal 
-function openModal(){
+function openModal(event){
     modal.style.display = 'block';
     modalbtn.style.display = 'none';
+    console.log(event.target.innerHTML);
+    var day = event.target.innerHTML;
+    document.getElementById('modal-link').href=`https://www.moongiant.com/phase/10/${day}/2021/`
 }
 
 //close modal on button
@@ -281,7 +288,7 @@ var getLatLong = function (selectedCity) {
 
 
 // calculate julian month to get moon phase 
-const julianDate = (date = new Date()) => {
+const julianDate = (date) => {
     const time =date.getTime();
     const timeZone = date.getTimezoneOffset()
     
@@ -289,16 +296,16 @@ const julianDate = (date = new Date()) => {
 }
 
 // create lunar month  
-const lunarMonth = 29.530588853; 
+const lunarMonth = 29.53; 
 
 const LunarAge = (date = new Date()) => {
     const percent = LunarAgePercent(date);
     const age = percent * lunarMonth;
-
+console.log(age);
     return age;
 }
 
-const LunarAgePercent = (date = new Date()) => {
+const LunarAgePercent = (date) => {
     return normalize((julianDate(date) - 2451550.1) / lunarMonth);
 }
 
@@ -311,7 +318,7 @@ const normalize = value => {
 
 //get percentages for various phases to tell moon type 
 // if statement  use lunar age variable to call 
-const lunarPhase = (date = new Date()) => {
+const lunarPhase = () => {
     if (LunarAge() < 1.845) 
     return "New Moon";
     else if (LunarAge() < 5.53) 
@@ -331,12 +338,23 @@ const lunarPhase = (date = new Date()) => {
 
 }
 
+document.addEventListener("DOMContentLoaded", ()=> {
+    const phase = lunarPhase ();
+    console.log(phase);
+   
+     //append this data to modal use div idi 
+     var modalInfoDiv = document.getElementById("moon-age");
+     modalInfoDiv.innerHTML=phase;
+    } );
+
 //get images for phases 
 function moonImages() {
 var newMoonImg = document.createElement('img');
-img.src="https://cdn.images.express.co.uk/img/dynamic/151/590x/secondary/New-Moon-2021-lunar-phases-moon-stages-2845362.jpg?r=1610366835008";
+newMoonImg.src="https://cdn.images.express.co.uk/img/dynamic/151/590x/secondary/New-Moon-2021-lunar-phases-moon-stages-2845362.jpg?r=1610366835008";
 document.getElementById('moon-img').appendChild(newMoonImg);
 }
+
+moonImages();
 
 
 document.addEventListener("DOMContentLoaded", ()=> {
