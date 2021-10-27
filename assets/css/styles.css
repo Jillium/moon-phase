@@ -20,13 +20,16 @@ font-family: 'Noto Serif', serif; */
     color: var(--grey)
 }
 
-body {
-    font-family: 'BioRhyme', serif;
+html {
     background-image: url("../images/moon-header-background.jpg");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
     background-position: 80%;
+}
+
+body {
+    font-family: 'BioRhyme', serif;
 }
 
 h1,
@@ -89,6 +92,12 @@ header form button {
 
 .city-search-btn:hover {
     border: var(--grey);
+    border-width: 3px;
+    border-style: solid;
+}
+
+input:hover {
+    border: var(--blue);
     border-width: 3px;
     border-style: solid;
 }
@@ -218,10 +227,12 @@ code {
     z-index: 1;
     left: 40%;
     top: 50%;
-    height: 50%;
-    width: 30%;
+    height: 70%;
+    width: 60%;
     overflow: auto;
     background-color: #E7DFDD;
+    animation-name: modalopen;
+    animation-duration: 3s;
 }
 
 .modal-body {
@@ -229,9 +240,16 @@ code {
     margin: 20% auto;
     padding: 20px;
     width: 70%;
+    animation-name: modalopen;
+    animation-duration: 3s;
+    padding: 20px;
+    
+}
+
+.modal-footer {
+    padding: 20px;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0);
-    animation-name:modalopen;
-    animation-duration: 1s;
+
 }
 
 #modal-close {
@@ -258,17 +276,17 @@ code {
 
 .error-modal {
     background-color: #E7DFDD;
-    width: 30%;
-    height: 40%;
+    width: 60%;
+    height: 30%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
-    margin: 20px;
+    padding: 15px;
+    margin: 15px;
     border-radius: 5px;
-    
-
-    
+    animation-name: modalopen;
+    animation-duration: .5s;
+    text-align: center;
     
 }
 
@@ -279,6 +297,36 @@ code {
 }
 
 #error-close {
+    background-color: #A239CA;
+    border-radius: 5px;
+    padding: 3px;
+}
+
+#error-catch-container {
+    display: none;
+}
+
+.error-catch-modal {
+    background-color: #E7DFDD;
+    /* width: 70%; */
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    
+    
+}
+
+.error-catch-modal h2 {
+    background-color: #E7DFDD;
+    color: black;
+    padding: 5px;
+}
+
+#error-catch-close {
     background-color: #4717F6;
     border-radius: 5px;
     padding: 3px;
