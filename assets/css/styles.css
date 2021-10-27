@@ -212,10 +212,12 @@ input:hover {
     z-index: 1;
     left: 40%;
     top: 50%;
-    height: 50%;
-    width: 30%;
+    height: 70%;
+    width: 60%;
     overflow: auto;
     background-color: #E7DFDD;
+    animation-name: modalopen;
+    animation-duration: 3s;
 }
 
 .modal-body {
@@ -223,9 +225,16 @@ input:hover {
     margin: 20% auto;
     padding: 20px;
     width: 70%;
-    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0);
     animation-name: modalopen;
-    animation-duration: 1s;
+    animation-duration: 3s;
+    padding: 20px;
+    
+}
+
+.modal-footer {
+    padding: 20px;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0);
+
 }
 
 #modal-close {
