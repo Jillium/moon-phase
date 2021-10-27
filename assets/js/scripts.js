@@ -18,6 +18,8 @@ var clearCityButtonEl = document.querySelector('#clear-city');
 var weatherDataContainerEl = document.getElementById('weather-data-container');
 
 
+
+
 let loadArray = function(){
     calendarData = [];
     let selected = selectedMonth.value.split('-');
@@ -118,7 +120,7 @@ function outsideModal(event) {
 
 //variable for the submit button
 var submitButton = document.querySelector("#search-btn");
-// variable for the close button on error modal
+// variable for the close button on city search error modal
 var errorCloseButton = document.querySelector("#error-close");
 //variable for the input to search a city 
 var cityInputEl = document.querySelector("input");
@@ -452,6 +454,7 @@ getWeather();
             getLatLong(selectedCity);
 
             localStorage.setItem('savedCity',selectedCity);
+            errorBox.setAttribute("class", "display: none");
             
         }
         else {
@@ -487,6 +490,9 @@ getWeather();
                 getWeather();
                 
             })
+        })
+        .catch(function(error) {
+            errorCatchBox.setAttribute("style", "display: block");
         })
         
         
@@ -529,7 +535,14 @@ getWeather();
             const precipitation = res.daily[0].rain
             // Saving Precipitation
             localStorage.setItem('savedPrecipitation', precipitation);
+            try {
+                
+            } catch (err) {
+                errorCatchBox.setAttribute("style", "display: block");
+            }
         });
+        
+       
         
         // Astronomy Fetch
         let end = '2021-11-30';
@@ -557,6 +570,11 @@ getWeather();
             const moonSetTime = moonSetDate.slice(0, -9)
             // Saving Moon Rise
             localStorage.setItem('savedMoonSet', moonSetTime);
+            try {
+                
+            } catch (err) {
+                errorCatchBox.setAttribute("style", "display: block");
+            }
         });
         
     }
@@ -622,6 +640,16 @@ getWeather();
 errorCloseButton.addEventListener("click", function() {
     errorBox.setAttribute("style", "display: none");
 });
+
+
+// variables for the box to catch general errors
+var errorCatchBox = document.querySelector("#error-catch-container");
+var errorCatchCloseButton = document.querySelector("#error-catch-close");
+
+// event listener for general error modal close button 
+errorCatchCloseButton.addEventListener("click", function() {
+    errorCatchBox.setAttribute("style", "display: none");
+})
 
 
 // Clear City Data
