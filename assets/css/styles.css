@@ -20,13 +20,16 @@ font-family: 'Noto Serif', serif; */
     color: var(--grey)
 }
 
-body {
-    font-family: 'BioRhyme', serif;
+html {
     background-image: url("../images/moon-header-background.jpg");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
     background-position: 80%;
+}
+
+body {
+    font-family: 'BioRhyme', serif;
 }
 
 h1,
@@ -89,6 +92,12 @@ header form button {
 
 .city-search-btn:hover {
     border: var(--grey);
+    border-width: 3px;
+    border-style: solid;
+}
+
+input:hover {
+    border: var(--blue);
     border-width: 3px;
     border-style: solid;
 }
