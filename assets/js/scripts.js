@@ -18,28 +18,6 @@ var clearCityButtonEl = document.querySelector('#clear-city');
 var weatherDataContainerEl = document.getElementById('weather-data-container');
 
 
-
-
-let loadArray = function(){
-    calendarData = [];
-    let selected = selectedMonth.value.split('-');
-    currentYear = selected[0];
-    currentMonth = selected[1];
-
-    let lastDay = new Date(currentYear,parseInt(currentMonth),0).getDate();
-
-    for (let i = 1; i <= lastDay;i++){
-        var d = new Date(currentYear,parseInt(currentMonth)-1,i);
-        var date = d.getDate();
-        var day = d.getDay();
-
-        var weekOfMonth = Math.ceil((date - 1 - day) / 7)+1;
-        var moonImage = "Moon-"+i+".jpg";
-        calendarData.push({day:i,dayOfWeek:day,weekOfMonth:weekOfMonth,image:moonImage,brightness:.1});
-        
-    };
-}
-
 let getData = function(dOW,wOM){
     
     calendarData.forEach(function(entry) {
@@ -57,7 +35,6 @@ let loadCalendar = function() {
         getData(calendarDay[i].dataset.dow, calendarDay[i].dataset.wom);
         let dayEl = calendarDay[i].querySelector(".dayBox");
         let imgEl = calendarDay[i].querySelector(".moonImg");
-        console.log(currentDay);
 
         if(!currentDay.day){
             imgEl.style.visibility = "hidden";
@@ -76,15 +53,6 @@ let loadCalendar = function() {
         
     }
 }
-
-
-let loadPage = function(){
-    sixthWeek[0].style.visibility = "hidden";
-    loadArray();
-    loadCalendar();
-}
-
-loadPage();
 
 
 // get modal elements and make variable 
@@ -242,6 +210,7 @@ var getLatLong = function (selectedCity) {
 };
 
 
+
 // calculate julian month to get moon phase 
 const julianDate = (date) => {
     const time =date.getTime();
@@ -259,6 +228,7 @@ const LunarAge = (date = new Date()) => {
 console.log(age);
     return age;
 }
+
 
 const LunarAgePercent = (date) => {
     return normalize((julianDate(date) - 2451550.1) / lunarMonth);
@@ -293,6 +263,35 @@ const lunarPhase = () => {
 
 }
 
+const moonAge = (date = new Date(newdate)) => {
+    const percent = LunarAgePercent(date);
+    const age = percent * lunarMonth;
+    return age;
+}
+
+let loadArray = function(){
+    calendarData = [];
+    let selected = selectedMonth.value.split('-');
+    currentYear = selected[0];
+    currentMonth = selected[1];
+
+    let lastDay = new Date(currentYear,parseInt(currentMonth),0).getDate();
+    
+
+    for (let i = 1; i <= lastDay;i++){
+        var d = new Date(currentYear,parseInt(currentMonth)-1,i);
+        var date = d.getDate();
+        var day = d.getDay();
+        var moonDate = new Date(currentYear+'-'+ String(currentMonth).padStart(2,'0')+'-'+String(i).padStart(2,'0')+'T23:59:59Z');
+        var mAge = moonAge(moonDate);
+
+        var weekOfMonth = Math.ceil((date - 1 - day) / 7)+1;
+        var moonImage = "Moon-"+Math.floor(mAge)+".jpg";
+        calendarData.push({day:i,dayOfWeek:day,weekOfMonth:weekOfMonth,image:moonImage,brightness:.1});
+        
+    };
+}
+
 document.addEventListener("DOMContentLoaded", ()=> {
     const phase = lunarPhase ();
     console.log(phase);
@@ -310,6 +309,18 @@ document.getElementById('moon-img').appendChild(newMoonImg);
 }
 
 moonImages();
+
+
+
+
+let loadPage = function(){
+    sixthWeek[0].style.visibility = "hidden";
+    loadArray();
+    loadCalendar();
+}
+
+loadPage();
+
 
 
 document.addEventListener("DOMContentLoaded", ()=> {
@@ -674,19 +685,3 @@ submitButton.addEventListener("click", submitButtonHandler);
 
 
 
-
-// var testEl = document.getElementsByClassName('test');
-// console.log(testEl);
-
-// for (let i = 0; i < 7;i++){
-
-//     let dayEl = testEl[i].querySelector(".dayBox");
-//     console.log(dayEl);
-//     let imgEl = testEl[i].querySelector(".testImg");
-//     console.log(imgEl);
-
-//     dayEl.textContent = i;
-//     imgEl.src='./assets/images/Moon/Moon-' + i + '.jpg';
-
-
-// }
