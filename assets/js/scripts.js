@@ -18,27 +18,6 @@ var clearCityButtonEl = document.querySelector('#clear-city');
 var weatherDataContainerEl = document.getElementById('weather-data-container');
 
 
-
-
-let loadArray = function(){
-    calendarData = [];
-    let selected = selectedMonth.value.split('-');
-    currentYear = selected[0];
-    currentMonth = selected[1];
-
-    let lastDay = new Date(currentYear,parseInt(currentMonth),0).getDate();
-
-    for (let i = 1; i <= lastDay;i++){
-        var d = new Date(currentYear,parseInt(currentMonth)-1,i);
-        var date = d.getDate();
-        var day = d.getDay();
-
-        var weekOfMonth = Math.ceil((date - 1 - day) / 7)+1;
-        calendarData.push({day:i,dayOfWeek:day,weekOfMonth:weekOfMonth,image:'image name',brightness:.1});
-        
-    };
-}
-
 let getData = function(dOW,wOM){
     
     calendarData.forEach(function(entry) {
@@ -54,13 +33,18 @@ let loadCalendar = function() {
     yearEl.textContent = currentYear;
     for (let i = 0; i < calendarDay.length; i++) {
         getData(calendarDay[i].dataset.dow, calendarDay[i].dataset.wom);
+        let dayEl = calendarDay[i].querySelector(".dayBox");
+        let imgEl = calendarDay[i].querySelector(".moonImg");
 
-        if(currentDay){
-            calendarDay[i].textContent=currentDay.day;   
+        if(!currentDay.day){
+            imgEl.style.visibility = "hidden";
         }
-        
-
-        calendarDay[i].textContent=currentDay.day;   
+        else {
+            dayEl.textContent=currentDay.day;   
+            imgEl.src='./assets/images/Moon/' + currentDay.image; 
+            imgEl.alt='Description'; 
+            imgEl.style.visibility = "visible";  
+        }
 
         if (currentDay.weekOfMonth == "6"){
             sixthWeek[0].style.visibility = "visible";
@@ -71,15 +55,43 @@ let loadCalendar = function() {
 }
 
 
-let loadPage = function(){
-    sixthWeek[0].style.visibility = "hidden";
-    loadArray();
-    loadCalendar();
+// get modal elements and make variable 
+var modal = document.getElementById('moon-modal');
+var modalbtn = document.getElementById('modal-btn');
+var closeBtn = document.getElementById('modal-close');
+//get days from calander to make an array from the days class
+var days = document.querySelectorAll(".days");
+for (var i=0; i<days.length; i++) {
+    days[i].addEventListener("click", openModal);
+}
+//listen for open click 
+modalbtn.addEventListener('click', openModal);
+
+//close click listener 
+closeBtn.addEventListener('click', closeModal);
+
+//click outside modal to close 
+document.getElementsByTagName('BODY')[0].addEventListener('click', outsideModal);
+
+//function to open modal 
+function openModal(event){
+    modal.style.display = 'block';
+    modalbtn.style.display = 'none';
+    console.log(event.target.innerHTML);
+    var day = event.target.innerHTML;
+    document.getElementById('modal-link').href=`https://www.moongiant.com/phase/10/${day}/2021/`
 }
 
-loadPage();
+//close modal on button
+function closeModal() {
+    modal.style.display = 'none';
+}
 
+function outsideModal(event) {
+    if(event.target == modal) {
 
+    modal.style.display = 'none';}
+}
 
 //variable for the submit button
 var submitButton = document.querySelector("#search-btn");
@@ -198,6 +210,15 @@ var getLatLong = function (selectedCity) {
 };
 
 
+
+// calculate julian month to get moon phase 
+const julianDate = (date) => {
+    const time =date.getTime();
+    const timeZone = date.getTimezoneOffset()
+    
+    return (time / 86400000) - (timeZone / 1440) + 2440587.5;
+}
+
 // create lunar month  
 const lunarMonth = 29.53; 
 
@@ -248,34 +269,37 @@ const moonAge = (date = new Date(newdate)) => {
     return age;
 }
 
+let loadArray = function(){
+    calendarData = [];
+    let selected = selectedMonth.value.split('-');
+    currentYear = selected[0];
+    currentMonth = selected[1];
 
+    let lastDay = new Date(currentYear,parseInt(currentMonth),0).getDate();
+    
 
+    for (let i = 1; i <= lastDay;i++){
+        var d = new Date(currentYear,parseInt(currentMonth)-1,i);
+        var date = d.getDate();
+        var day = d.getDay();
+        var moonDate = new Date(currentYear+'-'+ String(currentMonth).padStart(2,'0')+'-'+String(i).padStart(2,'0')+'T23:59:59Z');
+        var mAge = moonAge(moonDate);
 
-//get percentages for various phases to tell moon type 
-// if statement  use lunar age variable to call 
-
-
-
-
-
-
-
-
-//add information about each moon phase to append depending on the phase
-//enter info into an array 
-function phaseDocs() {
-    var eachPhase = document.createElement('p');
-    const description = []; 
-    description[0] = "The new moon marks the beginning of a Lunar cycle. When the moon is new it is located between the Earth and sun. During this time  we see the side of the mon that is not illuminated by the Sun which is why it will blend in with the sky.";
-    description[1] = "The Waxing Crescent phase is the small sliver of the moon that appears after the new moon. In this phase the moons light increases from 0.1% to 49.9%; waxing means that the light of the moon is growing. and is one of the longest lasting phases in the Lunar month.";
-    description[2] = "The first quarter moon in the moon phase halfway between the new moon and full moon, it is one quarter of the way around earths orbit."
-    description[3] = "During the waxing Gibbious phase the moons illumination grows from 50% to 99.9%."
-    description[4] = "During the Full Moon the Earth is located between the sun and the moon and the entire moon looks illuminated from Earths perspective."
-    document.getElementById("moon-descriptions").appendChild(eachPhase);
-//use map on array function can map through this data 
-// if statement from earlier and map this data to show right description 
+        var weekOfMonth = Math.ceil((date - 1 - day) / 7)+1;
+        var moonImage = "Moon-"+Math.floor(mAge)+".jpg";
+        calendarData.push({day:i,dayOfWeek:day,weekOfMonth:weekOfMonth,image:moonImage,brightness:.1});
+        
+    };
 }
-phaseDocs();
+
+document.addEventListener("DOMContentLoaded", ()=> {
+    const phase = lunarPhase ();
+    console.log(phase);
+   
+     //append this data to modal use div idi 
+     var modalInfoDiv = document.getElementById("moon-age");
+     modalInfoDiv.innerHTML=phase;
+    } );
 
 //get images for phases 
 function moonImages() {
@@ -326,14 +350,26 @@ function outsideModal(event) {
 
 
 
-// document.addEventListener("DOMContentLoaded", ()=> {
-// const phase = lunarPhase ();
-// console.log(phase);
-// } )
-//  //append this data to modal use div idi 
-//  var modalInfoDiv = document.getElementById("moon-age");
-//  var divContent = document.createTextNode(lunarPhase.response);
-//  modalInfoDiv.appendChild(divContent);
+
+
+let loadPage = function(){
+    sixthWeek[0].style.visibility = "hidden";
+    loadArray();
+    loadCalendar();
+}
+
+loadPage();
+
+
+
+document.addEventListener("DOMContentLoaded", ()=> {
+const phase = lunarPhase ();
+console.log(phase);
+} )
+ //append this data to modal use div idi 
+ var modalInfoDiv = document.getElementById("moon-age");
+ var divContent = document.createTextNode(lunarPhase.response);
+ modalInfoDiv.appendChild(divContent);
 
 // Pulling the weather information
 function getWeather() {
@@ -547,7 +583,11 @@ getWeather();
             const airTemp = res.hours[0].airTemperature.noaa
             // Saving Temp
             localStorage.setItem('savedAirTemperature', airTemp);
+        })
+        .catch(() => {
+            errorCatchBox.setAttribute("style", "display: block");
         });
+
 
         // Precipitation Fetch
         fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&exclude=current,minute,hourly,alert&appid=f17ddf4709497b276463e08f28044887`, {
@@ -556,11 +596,11 @@ getWeather();
             const precipitation = res.daily[0].rain
             // Saving Precipitation
             localStorage.setItem('savedPrecipitation', precipitation);
-            try {
-                
-            } catch (err) {
-                errorCatchBox.setAttribute("style", "display: block");
-            }
+            
+           
+        })
+        .catch(() => {
+            errorCatchBox.setAttribute("style", "display: block");
         });
         
        
@@ -591,11 +631,11 @@ getWeather();
             const moonSetTime = moonSetDate.slice(0, -9)
             // Saving Moon Rise
             localStorage.setItem('savedMoonSet', moonSetTime);
-            try {
-                
-            } catch (err) {
-                errorCatchBox.setAttribute("style", "display: block");
-            }
+            
+           
+        })
+        .catch(() => {
+            errorCatchBox.setAttribute("style", "display: block");
         });
         
     }
@@ -680,3 +720,7 @@ clearCityButtonEl.addEventListener('click', function() {
 });
 // event listener for the submit button-- needs to be near bottom of page 
 submitButton.addEventListener("click", submitButtonHandler);
+
+
+
+
