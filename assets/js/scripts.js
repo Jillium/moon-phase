@@ -57,48 +57,6 @@ let loadCalendar = function() {
     }
 }
 
-// //Add click event on any calendar day
-// var dayClick = document.querySelector(".days");
-// dayClick.addEventListener("click",openModal);
-
-// // get modal elements and make variable 
-// var modal = document.getElementById('moon-modal');
-// // var modalbtn = document.getElementById('modal-btn');
-// var closeBtn = document.getElementById('modal-close');
-// //get days from calander to make an array from the days class
-// var days = document.querySelectorAll(".days");
-// for (var i=0; i<days.length; i++) {
-//     days[i].addEventListener("click", openModal);
-// }
-//listen for open click 
-// modalbtn.addEventListener('click', openModal);
-
-//close click listener 
-//closeBtn.addEventListener('click', closeModal);
-
-//click outside modal to close 
-//document.getElementsByTagName('BODY')[0].addEventListener('click', outsideModal);
-
-//function to open modal 
-function openModal(event){
-    modal.style.display = 'block';
-    // modalbtn.style.display = 'none';
-    console.log(event.target.innerHTML);
-    var day = event.target.innerHTML;
-    document.getElementById('modal-link').href=`https://www.moongiant.com/phase/10/${day}/2021/`
-}
-
-//close modal on button
-function closeModal() {
-    modal.style.display = 'none';
-}
-
-function outsideModal(event) {
-    if(event.target == modal) {
-
-    modal.style.display = 'none';}
-}
-
 //variable for the submit button
 var submitButton = document.querySelector("#search-btn");
 // variable for the close button on city search error modal
@@ -107,115 +65,6 @@ var errorCloseButton = document.querySelector("#error-close");
 var cityInputEl = document.querySelector("input");
 // variable for the error modal box
 var errorBox = document.querySelector(".error-modal-container");
-    
-
-    // this function runs when the submit button is clicked 
-    var submitButtonHandler = function (event) {
-        event.preventDefault();
-        // get city value from input element
-        var selectedCity = cityInputEl.value.trim();
-        
-        // if a city is entered then run code 
-        if (selectedCity) {
-            getLatLong(selectedCity);
-
-            localStorage.setItem('savedCity',selectedCity);
-            
-        }
-        else {
-            // I need to make this into a modal 
-            alert("please enter a city");
-    }
-
-};
-
-
-// this function will get the latitude and longitude to be used in the weather search 
-var getLatLong = function (selectedCity) {
-    // this creates a URL for the api request based off of the city entered
-    var apiUrl = "http://api.positionstack.com/v1/forward?access_key=c4bf58a019f128c64c20b6e41582639b&query=" + selectedCity + "&limit=1";
-    console.log(apiUrl);
-    // fetch request to get lat and long from url we just created
-    fetch(apiUrl).then(function (response) {
-        // take response and convert it to data we cna use
-        response.json().then(function (data) {
-            
-            // Hey Corrie, you can use these variables in your api call for the weather information. This will give you the latitude and longitude based on their search 
-            let lat = data.data[0].latitude;
-            let lon = data.data[0].longitude;
-            console.log(lat);
-            console.log(lon);
-
-            localStorage.setItem('savedLat', lat);
-            localStorage.setItem('savedLon', lon);
-            // need to figure out how to pull latitude and longitude from the data, it isn't working
-        })
-        
-    });
-}
-    
-    // this function will get the latitude and longitude to be used in the weather search 
-    var getLatLong = function (selectedCity) {
-        // this creates a URL for the api request based off of the city entered
-        var apiUrl = "http://api.positionstack.com/v1/forward?access_key=c4bf58a019f128c64c20b6e41582639b&query=" + selectedCity + "&limit=1";
-        console.log(apiUrl);
-        // fetch request to get lat and long from url we just created
-        fetch(apiUrl).then(function (response) {
-            // take response and convert it to data we cna use
-            response.json().then(function (data) {
-                
-                // Hey Corrie, you can use these variables in your api call for the weather information. This will give you the latitude and longitude based on their search 
-                let lat = data.data[0].latitude;
-                let lon = data.data[0].longitude;
-                console.log(lat);
-                console.log(lon);
-                
-                localStorage.setItem('savedLat', lat);
-                localStorage.setItem('savedLon', lon);
-
-                getWeather();
-                // need to figure out how to pull latitude and longitude from the data, it isn't working
-            })
-        })
-        
-        
-    };
-    
-    // Pulling the weather information
-    function getWeather() {
-        const lat = localStorage.getItem('savedLat');
-        const lng = localStorage.getItem('savedLon');
-        
-        console.log(`Lat/Lon ${lat} & ${lng}`);
-        
-        // Storm Glass API 1e6476cc-3387-11ec-b37c-0242ac130002-1e647744-3387-11ec-b37c-0242ac130002
-        let params = 'cloudCover,precipitation,airTemperature';
-        
-        // Weather Fetch
-        fetch(`https://api.stormglass.io/v2/weather/point?lat=${lat}&lng=${lng}&params=${params}`, {
-            headers: {
-                'Authorization': '1e6476cc-3387-11ec-b37c-0242ac130002-1e647744-3387-11ec-b37c-0242ac130002'
-            }
-            }).then((response) => response.json()).then((res) => {
-    
-            
-            // Pulling in Cloud Coverage
-            const cloudCoverage = res.hours[0].cloudCover.noaa + '%'
-            // Saving Cloud Coverage
-            localStorage.setItem('savedCloudCoverage', cloudCoverage);
-            
-
-    const apiKey = "02465fec-307a-11ec-93e3-0242ac130002-0246608c-307a-11ec-93e3-0242ac130002";
-    const apiUrlWeather = "https://api.stormglass.io/v2/weather/point";
-    const apiUrlAstronomy = "https://api.stormglass.io/v2/astronomy/point";
-    var riseSet = document.getElementById('rise-set');
-    var phaseInfo = document.getElementById('moon-info');
-
-    });
-
-};
-
-
 
 // calculate julian month to get moon phase 
 const julianDate = (date) => {
@@ -293,7 +142,7 @@ let loadArray = function(){
 
         var weekOfMonth = Math.ceil((date - 1 - day) / 7)+1;
         var moonImage = "Moon-"+Math.floor(mAge)+".jpg";
-        calendarData.push({day:i,dayOfWeek:day,weekOfMonth:weekOfMonth,image:moonImage,brightness:.1});
+        calendarData.push({day:i,dayOfWeek:day,weekOfMonth:weekOfMonth,image:moonImage,stage:mAge});
         
     };
 }
@@ -378,16 +227,6 @@ console.log(phase);
  var divContent = document.createTextNode(lunarPhase.response);
  modalInfoDiv.appendChild(divContent);
 
-    //variable for the submit button
-    var submitButton = document.querySelector("#search-btn");
-    //variable for the input to search a city 
-    var cityInputEl = document.querySelector("input")
-    // variable for the selected city
-    
-    
-    
-    
-    
     // this function runs when the submit button is clicked 
 // this function runs when the submit button is clicked 
     var submitButtonHandler = function (event) {
