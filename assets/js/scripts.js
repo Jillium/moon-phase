@@ -42,7 +42,8 @@ let loadCalendar = function() {
             dayEl.textContent="";
         }
         else {
-            dayEl.textContent=currentDay.day;   
+            dayEl.textContent=currentDay.day; 
+            dayEl.dataset.stage = currentDay.stage;  
             imgEl.src='./assets/images/Moon/' + currentDay.image; 
             imgEl.alt='Description'; 
             imgEl.style.visibility = "visible";  
@@ -117,9 +118,10 @@ const lunarPhase = (x) => {
     else if (x < 27.68)
     return "Waning Crescent";
 
-    return "New Moon";
+    return "";
 
 }
+
 
 const moonAge = (date = new Date(newdate)) => {
     const percent = LunarAgePercent(date);
@@ -155,18 +157,12 @@ document.addEventListener("DOMContentLoaded", ()=> {
     console.log(phase);
    
      //append this data to modal use div idi 
-     var modalInfoDiv = document.getElementById("moon-age");
-     modalInfoDiv.innerHTML=phase;
     } );
 
-//get images for phases 
-function moonImages() {
-var newMoonImg = document.createElement('img');
-newMoonImg.src="https://cdn.images.express.co.uk/img/dynamic/151/590x/secondary/New-Moon-2021-lunar-phases-moon-stages-2845362.jpg?r=1610366835008";
-document.getElementById('moon-img').appendChild(newMoonImg);
-}
+// //get images for phases 
+// function moonImages() {
+// }
 
-moonImages();
 
 // get modal elements and make variable 
 var modal = document.getElementById('moon-modal');
@@ -176,13 +172,11 @@ var dayClick = document.querySelectorAll(".days");
 
 //dayClick is an array of HTMLElement
 dayClick.forEach(element => element.addEventListener("click", function () {
-    console.log(this);
+   
     var day = this.getElementsByClassName("dayBox");
-    // (openModal(day, ));
-    console.log(day[0].innerHTML);
     var image = this.getElementsByClassName("moonImg");
-    console.log(image[0].src);
-    
+    console.log(day);
+    (openModal(day[0].innerHTML, image[0].src, day[0].dataset.stage));
 }));
 closeBtn.addEventListener('click', closeModal);
 
@@ -191,14 +185,22 @@ document.getElementsByTagName('BODY')[0].addEventListener('click', outsideModal)
 console.log("clicked outside modal");
 
 //function to open modal 
-function openModal(event){
+function openModal(day, image, stage){
     modal.style.display = 'block';
-    //modalbtn.style.display = 'none';
-    // console.log(event.target.innerHTML);
     // var day = event.target.innerHTML;
-    // document.getElementById('modal-link').href=`https://www.moongiant.com/phase/10/${day}/2021/`;
-
+    console.log(lunarPhase(stage));
+    document.getElementById('modal-link').href=`https://www.moongiant.com/phase/10/${day}/2021/`;
+    var newMoonImg = document.createElement('img');
+    console.log(image);
+    newMoonImg.src=image;
+    var modalInfoDiv = document.getElementById("moon-age");
+    modalInfoDiv.innerHTML=lunarPhase(stage);
+    document.getElementById('moon-img').appendChild(newMoonImg);
 }
+//work on this 
+var moondescription = [{"Waxing Gibbious": "ldksahgfldsa"}, {"New Moon":dlsjhgfosdh}];
+
+
 
 //close modal on button
 function closeModal() {
