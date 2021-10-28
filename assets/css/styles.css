@@ -225,31 +225,34 @@ code {
     display: none;
     position: absolute;
     z-index: 1;
-    left: 40%;
+    left: 20%;
     top: 50%;
     height: 70%;
     width: 60%;
     overflow: auto;
-    background-color: #E7DFDD;
+    background-color: #4b4847d7;
     animation-name: modalopen;
     animation-duration: 3s;
+    border-radius: 5px;
 }
 
 .modal-body {
-    background-color:#4717F6;
+    background-color:#E7DFDD;
     margin: 20% auto;
     padding: 20px;
     width: 70%;
     animation-name: modalopen;
     animation-duration: 3s;
     padding: 20px;
+    color: #4717F6;
     
 }
 
 .modal-footer {
     padding: 20px;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0);
-
+    animation-name: modalopen;
+    animation-duration: 1s;
 }
 
 #modal-close {
