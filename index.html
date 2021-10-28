@@ -13,16 +13,21 @@
 </head>
 <body>
   <main>
-    <header>
+    
+    <header class="level">
 
       <h1 class="title is-1">Phases of the Moon</h1>
     
         <div class="weather-by-city">
-            <h2 class="is-size-3 is-inline">Weather by City</h2>
-            <form class="form is-inline ml-4">
+            <h2 class="is-size-4 is-inline is-mobile">Weather by City</h2>
+            <form class="form is-inline is-mobile ml-4">
+                
                 <input name="city" type="text" id="input">
-                <button type="submit" id="search-btn" class="city-search-btn">Search</button>
-                <button id="clear-city" class="city-search-btn ml-2" type="button">Clear City</button>
+                
+                <div class="form-buttons is-inline is-mobile"></div>
+                <button type="submit" id="search-btn" class="city-search-btn is-inline">Search</button>
+                <button id="clear-city" class="city-search-btn is-inline ml-2" type="button">Clear City</button>
+                </div>
             </form>
         </div>
 
@@ -36,14 +41,14 @@
 
 
     </header>
-    <div class="month-input">
+    <div class="month-input level">
         <label for="start" class="is-size-3">Select Month:</label>
         <input type="month" id="start" name="start" min="2021-01" value="2021-10" onchange="loadPage()">
     </div>
     </div>
-    <div class="columns">
+    <div class="columns is-mobile">
     <div class="calendar">
-        <div class="monthYear columns">
+        <div class="monthYear columns is-mobile">
             <div class="month column">Month</div>
             <div class="year column">Year</div>
         </div>
@@ -238,11 +243,11 @@
         </div>
     </div>
    
-    <div class="weather"></div>
+    
 
     
 
-    <div id="weather-container" class="weather column ml-2">
+    <div id="weather-container" class="weather ml-2">
          <!-- error modal for any other errors -->
         <div id ="error-catch-container">
             <div class="error-catch-modal">
@@ -252,8 +257,8 @@
         </div>    
         <h3 class="weather-background is-size-3"> Weather</h3>
         <div id="weather-data-container" class="weather-background">
-            <div id="city-name" class="is-size-5 is-inline mb-4 pl-6 weather-background"></div>
-            <div id="weather-today" class="is-size-5 is-inline mb-4 weather-background"></div>
+            <div id="city-name" class="is-size-5 has-text-left mb-3 pl-5 weather-background"></div>
+            <div id="weather-today" class="is-size-5 has-text-left mb-3 pl-5 weather-background"></div>
             <div id="moon-phase" class="is-size-6 has-text-left mb-3 weather-background pl-5"></div>
             <div id="moon-rise" class="is-size-6 has-text-left mb-3 weather-background pl-5"></div>
             <div id="moon-set" class="is-size-6 has-text-left mb-3 weather-background pl-5"></div>
