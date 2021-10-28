@@ -57,27 +57,27 @@ let loadCalendar = function() {
     }
 }
 
-//Add click event on any calendar day
-var dayClick = document.querySelector(".days");
-dayClick.addEventListener("click",openModal);
+// //Add click event on any calendar day
+// var dayClick = document.querySelector(".days");
+// dayClick.addEventListener("click",openModal);
 
-// get modal elements and make variable 
-var modal = document.getElementById('moon-modal');
-// var modalbtn = document.getElementById('modal-btn');
-var closeBtn = document.getElementById('modal-close');
-//get days from calander to make an array from the days class
-var days = document.querySelectorAll(".days");
-for (var i=0; i<days.length; i++) {
-    days[i].addEventListener("click", openModal);
-}
+// // get modal elements and make variable 
+// var modal = document.getElementById('moon-modal');
+// // var modalbtn = document.getElementById('modal-btn');
+// var closeBtn = document.getElementById('modal-close');
+// //get days from calander to make an array from the days class
+// var days = document.querySelectorAll(".days");
+// for (var i=0; i<days.length; i++) {
+//     days[i].addEventListener("click", openModal);
+// }
 //listen for open click 
 // modalbtn.addEventListener('click', openModal);
 
 //close click listener 
-closeBtn.addEventListener('click', closeModal);
+//closeBtn.addEventListener('click', closeModal);
 
 //click outside modal to close 
-document.getElementsByTagName('BODY')[0].addEventListener('click', outsideModal);
+//document.getElementsByTagName('BODY')[0].addEventListener('click', outsideModal);
 
 //function to open modal 
 function openModal(event){
@@ -318,7 +318,7 @@ moonImages();
 
 // get modal elements and make variable 
 var modal = document.getElementById('moon-modal');
-var modalbtn = document.getElementById('modal-btn');
+//var modalbtn = document.getElementById('modal-btn');
 var closeBtn = document.getElementById('modal-close');
 //get days from calander to make an array from the days class
 var days = document.querySelectorAll(".days");
@@ -336,7 +336,7 @@ console.log("clicked outside modal");
 //function to open modal 
 function openModal(event){
     modal.style.display = 'block';
-    modalbtn.style.display = 'none';
+    //modalbtn.style.display = 'none';
     console.log(event.target.innerHTML);
     var day = event.target.innerHTML;
     document.getElementById('modal-link').href=`https://www.moongiant.com/phase/10/${day}/2021/`;
@@ -377,124 +377,6 @@ console.log(phase);
  var modalInfoDiv = document.getElementById("moon-age");
  var divContent = document.createTextNode(lunarPhase.response);
  modalInfoDiv.appendChild(divContent);
-
-// Pulling the weather information
-function getWeather() {
-    const lat = localStorage.getItem('savedLat');
-    const lng = localStorage.getItem('savedLon');
-    // Pulling in Precipitation
-    const precipitation = res.hours[0].precipitation.noaa + '%'
-            // Pulling in Air Temp
-            const airTemp = res.hours[0].airTemperature.noaa
-            // Saving Temp
-            localStorage.setItem('savedAirTemperature', airTemp);
-            
-            // // Pulling in Precipitation
-            // const precipitation = res.hours[0].precipitation.noaa + '%'
-            // // Saving Precipitation
-            // localStorage.setItem('savedPrecipitation', precipitation);
-            
-            
-        };
-
-        // Precipitation Fetch
-        fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&exclude=current,minute,hourly,alert&appid=f17ddf4709497b276463e08f28044887`, {
-            }).then((response) => response.json()).then((res) => {
-            // Pulling in Precipitation
-            const precipitation = res.daily[0].rain
-            // Saving Precipitation
-            localStorage.setItem('savedPrecipitation', precipitation);
-            
-            
-        });
-        
-        // Astronomy Fetch
-        let end = '2021-11-30';
-        
-        fetch(`https://api.stormglass.io/v2/astronomy/point?lat=${lat}&lng=${lng}&end=${end}`, {
-            headers: {
-                'Authorization': '1e6476cc-3387-11ec-b37c-0242ac130002-1e647744-3387-11ec-b37c-0242ac130002'
-            }
-        }).then((response) => response.json()).then((res) => {
-
-            // Pulling in Moon Phase
-            const moonPhase = res.data[0].moonPhase.current.text
-            // Saving Moon Phase
-            localStorage.setItem('savedMoonPhase', moonPhase);
-            
-            // Pulling in Moon Rise
-            const moonRise = res.data[0].moonrise
-            const moonRiseDate = moonRise.replace(/202.+?-.+?-.+?T0/, '');
-            const moonRiseTime = moonRiseDate.slice(0, -9)
-            // Saving Moon Rise
-            localStorage.setItem('savedMoonRise', moonRiseTime);
-            
-            // Pulling in Moon Rise
-            const moonSet = res.data[0].moonset
-            const moonSetDate = moonSet.replace(/202.+?-.+?-.+?T/, '');
-            const moonSetTime = moonSetDate.slice(0, -9)
-            // Saving Moon Rise
-            localStorage.setItem('savedMoonSet', moonSetTime);
-        });
-        
-        showWeather();
-    
-    
-    // Function to display saved Weather/Astrology info
-    function showWeather() {
-        const cityName = localStorage.getItem('savedCity');
-        
-        if (cityName) {
-        // Displaying City Weather is pulling
-        var cityNameEl = document.querySelector('#city-name');
-        
-        cityNameEl.textContent = cityName;
-        cityInputEl.value = "";
-        
-        // Displaying Today's Date
-        var weatherTodayEl = document.querySelector('#weather-today');
-        
-        const today = new Date();
-        weatherTodayEl.textContent = (today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear();
-        
-        // Display Cloud Coverage Information
-        const cloudCoverageDisplay = localStorage.getItem('savedCloudCoverage')
-        var cloudCoverEl = document.querySelector('#cloud-coverage');
-        cloudCoverEl.textContent = `Cloud Coverage: ${cloudCoverageDisplay}`;
-        
-        // Display Air Temparature Information
-        const airTempDisplay = localStorage.getItem('savedAirTemperature')
-        var airTempEl = document.querySelector('#air-temp');
-        const celsius = Math.round(parseInt(airTempDisplay));
-        const fahrenheit = Math.round(celsius * 9/5 + 32);
-        airTempEl.textContent = `Temperature: ${celsius}°C/ ${fahrenheit}°F`;
-        
-        // Display Precipitation
-        const precipitationDisplay = localStorage.getItem('savedPrecipitation');
-        var precipitationEl = document.querySelector('#precipitation')
-        precipitationEl.textContent = `Precipitation: ${precipitationDisplay}mm`;
-        
-        // Displaying Moon Phase
-        const moonPhaseDisplay = localStorage.getItem('savedMoonPhase');
-        var moonPhaseEl = document.querySelector('#moon-phase');
-        moonPhaseEl.textContent = `Moon Phase: ${moonPhaseDisplay}`;
-
-        // Displaying Moon Rise
-        const moonRiseDisplay = localStorage.getItem('savedMoonRise');
-        var moonRiseEl = document.querySelector('#moon-rise');
-        moonRiseEl.textContent = `Moon Rise: ${moonRiseDisplay} am`;
-
-        // Displaying Moon Set
-        const moonSetDisplay = localStorage.getItem('savedMoonSet');
-        var moonSetEl = document.querySelector('#moon-set');
-        moonSetEl.textContent = `Moon Set: ${moonSetDisplay} pm`;
-        }
-        else {
-            weatherDataContainerEl.textContent = "Enter a City to Get Started!"
-        };
-    };
-    
-getWeather();
 
     //variable for the submit button
     var submitButton = document.querySelector("#search-btn");
