@@ -317,7 +317,7 @@ document.getElementById('moon-img').appendChild(newMoonImg);
 moonImages();
 
 // get modal elements and make variable 
-var modal = document.getElementById('moon-modal');
+var modal = document.getElementById('#moon-modal');
 var modalbtn = document.getElementById('modal-btn');
 var closeBtn = document.getElementById('modal-close');
 //get days from calander to make an array from the days class
@@ -353,10 +353,6 @@ function outsideModal(event) {
 
     modal.style.display = 'none';}
 }
-
-
-
-
 
 let loadPage = function(){
     sixthWeek[0].style.visibility = "hidden";
