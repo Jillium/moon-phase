@@ -4,6 +4,7 @@ var currentDay = {};
 var currentYear = 2021;
 var currentMonth = 5; //June
 var calendarDay = document.getElementsByClassName("days");
+var calendar = document.querySelector(".calendar");
 
 var clearCityButtonEl = document.querySelector('#clear-city');
 var weatherDataContainerEl = document.getElementById('weather-data-container');
@@ -38,6 +39,7 @@ let loadCalendar = function() {
 
         if(!currentDay.day){
             imgEl.style.visibility = "hidden";
+            dayEl.textContent="";
         }
         else {
             dayEl.textContent=currentDay.day;   
@@ -48,16 +50,20 @@ let loadCalendar = function() {
 
         if (currentDay.weekOfMonth == "6"){
             sixthWeek[0].style.visibility = "visible";
+            calendar.style.height = "735px";
         }
         currentDay = {};
         
     }
 }
 
+//Add click event on any calendar day
+var dayClick = document.querySelector(".days");
+dayClick.addEventListener("click",openModal);
 
 // get modal elements and make variable 
 var modal = document.getElementById('moon-modal');
-var modalbtn = document.getElementById('modal-btn');
+// var modalbtn = document.getElementById('modal-btn');
 var closeBtn = document.getElementById('modal-close');
 //get days from calander to make an array from the days class
 var days = document.querySelectorAll(".days");
@@ -65,7 +71,7 @@ for (var i=0; i<days.length; i++) {
     days[i].addEventListener("click", openModal);
 }
 //listen for open click 
-modalbtn.addEventListener('click', openModal);
+// modalbtn.addEventListener('click', openModal);
 
 //close click listener 
 closeBtn.addEventListener('click', closeModal);
@@ -76,7 +82,7 @@ document.getElementsByTagName('BODY')[0].addEventListener('click', outsideModal)
 //function to open modal 
 function openModal(event){
     modal.style.display = 'block';
-    modalbtn.style.display = 'none';
+    // modalbtn.style.display = 'none';
     console.log(event.target.innerHTML);
     var day = event.target.innerHTML;
     document.getElementById('modal-link').href=`https://www.moongiant.com/phase/10/${day}/2021/`
@@ -354,6 +360,7 @@ function outsideModal(event) {
 
 let loadPage = function(){
     sixthWeek[0].style.visibility = "hidden";
+    calendar.style.height = "630px";
     loadArray();
     loadCalendar();
 }
