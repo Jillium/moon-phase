@@ -77,12 +77,12 @@ const julianDate = (date) => {
 // create lunar month  
 const lunarMonth = 29.53; 
 
-const LunarAge = (date = new Date()) => {
-    const percent = LunarAgePercent(date);
-    const age = percent * lunarMonth;
-console.log(age);
-    return age;
-}
+// const LunarAge = (date = new Date()) => {
+//     const percent = LunarAgePercent(date);
+//     const age = percent * lunarMonth;
+// console.log(age);
+//     return age;
+// }
 
 
 const LunarAgePercent = (date) => {
@@ -98,22 +98,23 @@ const normalize = value => {
 
 //get percentages for various phases to tell moon type 
 // if statement  use lunar age variable to call 
-const lunarPhase = () => {
-    if (LunarAge() < 1.845) 
+const lunarPhase = (x) => {
+
+    if (x < 1.845) 
     return "New Moon";
-    else if (LunarAge() < 5.53) 
+    else if (x < 5.53) 
     return "waxing cresent";
-    else if (LunarAge() < 9.228)
+    else if (x < 9.228)
     return "First Quarter";
-    else if (LunarAge() < 12.919)
+    else if (x < 12.919)
     return "Waxing Gibbious";
-    else if (LunarAge() < 16.61)
+    else if (x < 16.61)
     return "Full Moon";
-    else if (LunarAge() < 20.30)
+    else if (x < 20.30)
     return "Waning Gibbious";
-    else if (LunarAge() < 23.99)
+    else if (x < 23.99)
     return "Last Quarter";
-    else if (LunarAge() < 27.68)
+    else if (x < 27.68)
     return "Waning Crescent";
 
     return "New Moon";
@@ -171,13 +172,18 @@ moonImages();
 var modal = document.getElementById('moon-modal');
 //var modalbtn = document.getElementById('modal-btn');
 var closeBtn = document.getElementById('modal-close');
-//get days from calander to make an array from the days class
-var days = document.querySelectorAll(".days");
-for (var i=0; i<days.length; i++) {
-days[i].addEventListener("click", openModal);
-}
+var dayClick = document.querySelectorAll(".days");
 
-//close click listener 
+//dayClick is an array of HTMLElement
+dayClick.forEach(element => element.addEventListener("click", function () {
+    console.log(this);
+    var day = this.getElementsByClassName("dayBox");
+    // (openModal(day, ));
+    console.log(day[0].innerHTML);
+    var image = this.getElementsByClassName("moonImg");
+    console.log(image[0].src);
+    
+}));
 closeBtn.addEventListener('click', closeModal);
 
 //click outside modal to close 
@@ -188,9 +194,9 @@ console.log("clicked outside modal");
 function openModal(event){
     modal.style.display = 'block';
     //modalbtn.style.display = 'none';
-    console.log(event.target.innerHTML);
-    var day = event.target.innerHTML;
-    document.getElementById('modal-link').href=`https://www.moongiant.com/phase/10/${day}/2021/`;
+    // console.log(event.target.innerHTML);
+    // var day = event.target.innerHTML;
+    // document.getElementById('modal-link').href=`https://www.moongiant.com/phase/10/${day}/2021/`;
 
 }
 
