@@ -116,6 +116,8 @@ const lunarPhase = () => {
     else if (LunarAge() < 27.68)
     return "Waning Crescent";
 
+    return "New Moon";
+
 }
 
 const moonAge = (date = new Date(newdate)) => {
@@ -202,10 +204,6 @@ function outsideModal(event) {
 
     modal.style.display = 'none';}
 }
-
-
-
-
 
 let loadPage = function(){
     sixthWeek[0].style.visibility = "hidden";
