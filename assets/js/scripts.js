@@ -316,6 +316,45 @@ document.getElementById('moon-img').appendChild(newMoonImg);
 
 moonImages();
 
+// get modal elements and make variable 
+var modal = document.getElementById('moon-modal');
+var modalbtn = document.getElementById('modal-btn');
+var closeBtn = document.getElementById('modal-close');
+//get days from calander to make an array from the days class
+var days = document.querySelectorAll(".days");
+for (var i=0; i<days.length; i++) {
+days[i].addEventListener("click", openModal);
+}
+
+//close click listener 
+closeBtn.addEventListener('click', closeModal);
+
+//click outside modal to close 
+document.getElementsByTagName('BODY')[0].addEventListener('click', outsideModal);
+console.log("clicked outside modal");
+
+//function to open modal 
+function openModal(event){
+    modal.style.display = 'block';
+    modalbtn.style.display = 'none';
+    console.log(event.target.innerHTML);
+    var day = event.target.innerHTML;
+    document.getElementById('modal-link').href=`https://www.moongiant.com/phase/10/${day}/2021/`;
+
+}
+
+//close modal on button
+function closeModal() {
+    modal.style.display = 'none';
+}
+
+function outsideModal(event) {
+    if(event.target == modal) {
+
+    modal.style.display = 'none';}
+}
+
+
 
 
 
