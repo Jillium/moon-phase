@@ -255,7 +255,7 @@ console.log(phase);
     var getLatLong = function (selectedCity) {
         // this creates a URL for the api request based off of the city entered
         var apiUrl = "http://api.positionstack.com/v1/forward?access_key=c4bf58a019f128c64c20b6e41582639b&query=" + selectedCity + "&limit=1";
-        console.log(apiUrl);
+       
         // fetch request to get lat and long from url we just created
         fetch(apiUrl).then(function (response) {
             // take response and convert it to data we cna use
