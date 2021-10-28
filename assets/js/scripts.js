@@ -198,7 +198,7 @@ function openModal(day, image, stage){
     document.getElementById('moon-img').appendChild(newMoonImg);
 }
 //work on this 
-var moondescription = [{"Waxing Gibbious": "ldksahgfldsa"}, {"New Moon":dlsjhgfosdh}];
+// var moondescription = [{"Waxing Gibbious": "ldksahgfldsa"}, {"New Moon":dlsjhgfosdh}];
 
 
 
