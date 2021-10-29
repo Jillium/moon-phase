@@ -198,7 +198,14 @@ function openModal(day, image, stage){
     document.getElementById('moon-img').appendChild(newMoonImg);
 }
 //work on this 
-// var moondescription = [{"Waxing Gibbious": "ldksahgfldsa"}, {"New Moon":dlsjhgfosdh}];
+var moondescription = [{"New Moon": "A new moon is when the moon cannot be seen because we are looking at the unlit half of the Moon. The new moon phase occurs when the Moon is directly between the Earth and Sun. A solar eclipse can only happen at new moon."}, 
+{"Waxing Crescent": "A waxing crescent moon is when the Moon looks like a crescent and the crescent increases or waxes in size from one day to the next. This phase is usually only seen in the west."}, 
+{"First Quartar": "The first quarter moon (or a half moon) is when half of the lit portion of the Moon is visible after the waxing crescent phase. It comes a week after new moon."},
+{ "Waxing Gibbious": "A waxing gibbous moon occurs when more than half of the lit portion of the Moon can be seen and the shape increases or waxes in size from one day to the next. The waxing gibbous phase occurs between the first quarter and full moon phases."},
+{"Full Moon": "A full moon is when we can see the entire lit portion of the Moon. The full moon phase occurs when the Moon is on the opposite side of the Earth from the Sun, called opposition. A lunar eclipse can only happen at full moon."},
+{"Waning Gibbious": "A waning gibbous moon occurs when more than half of the lit portion of the Moon can be seen and the shape decreases or wanes in size from one day to the next. The waning gibbous phase occurs between the full moon and third quarter phases."},
+{"Last Quarter": "The last quarter moon (or a half moon) is when half of the lit portion of the Moon is visible after the waning gibbous phase."},
+{"Waning Crescent": "A waning crescent moon is when the Moon looks like a crescent and the crescent decreases or wanes in size from one day to the next."}];
 
 
 
