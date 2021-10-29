@@ -15,7 +15,6 @@ var precipitationEl = document.querySelector('#precipitation')
 var moonPhaseEl = document.querySelector('#moon-phase');
 var moonRiseEl = document.querySelector('#moon-rise');
 var moonSetEl = document.querySelector('#moon-set');
-const cityName = localStorage.getItem('savedCity');
 
 var sixthWeek = document.getElementsByClassName("sixth");
 var selectedMonth = document.getElementById("start");
@@ -43,7 +42,7 @@ let loadCalendar = function() {
         getData(calendarDay[i].dataset.dow, calendarDay[i].dataset.wom);
         let dayEl = calendarDay[i].querySelector(".dayBox");
         let imgEl = calendarDay[i].querySelector(".moonImg");
-
+        
         if(!currentDay.day){
             imgEl.style.visibility = "hidden";
             dayEl.textContent="";
@@ -107,7 +106,7 @@ const normalize = value => {
 //get percentages for various phases to tell moon type 
 // if statement  use lunar age variable to call 
 const lunarPhase = (x) => {
-
+    
     if (x < 1.845) 
     return "New Moon";
     else if (x < 5.53) 
@@ -124,9 +123,9 @@ const lunarPhase = (x) => {
     return "Last Quarter";
     else if (x < 27.68)
     return "Waning Crescent";
-
+    
     return "";
-
+    
 }
 
 
@@ -141,17 +140,17 @@ let loadArray = function(){
     let selected = selectedMonth.value.split('-');
     currentYear = selected[0];
     currentMonth = selected[1];
-
+    
     let lastDay = new Date(currentYear,parseInt(currentMonth),0).getDate();
     
-
+    
     for (let i = 1; i <= lastDay;i++){
         var d = new Date(currentYear,parseInt(currentMonth)-1,i);
         var date = d.getDate();
         var day = d.getDay();
         var moonDate = new Date(currentYear+'-'+ String(currentMonth).padStart(2,'0')+'-'+String(i).padStart(2,'0')+'T23:59:59Z');
         var mAge = moonAge(moonDate);
-
+        
         var weekOfMonth = Math.ceil((date - 1 - day) / 7)+1;
         var moonImage = "Moon-"+Math.floor(mAge)+".jpg";
         calendarData.push({day:i,dayOfWeek:day,weekOfMonth:weekOfMonth,image:moonImage,stage:mAge});
@@ -162,26 +161,26 @@ let loadArray = function(){
 document.addEventListener("DOMContentLoaded", ()=> {
     const phase = lunarPhase ();
     console.log(phase);
-   
-     //append this data to modal use div idi 
-    } );
+    
+    //append this data to modal use div idi 
+} );
 
 // //get images for phases 
 // function moonImages() {
-// }
-
-
-// get modal elements and make variable 
-var modal = document.getElementById('moon-modal');
-//var modalbtn = document.getElementById('modal-btn');
-var closeBtn = document.getElementById('modal-close');
-var dayClick = document.querySelectorAll(".days");
-
-//dayClick is an array of HTMLElement
-dayClick.forEach(element => element.addEventListener("click", function () {
-   
-    var day = this.getElementsByClassName("dayBox");
-    var image = this.getElementsByClassName("moonImg");
+    // }
+    
+    
+    // get modal elements and make variable 
+    var modal = document.getElementById('moon-modal');
+    //var modalbtn = document.getElementById('modal-btn');
+    var closeBtn = document.getElementById('modal-close');
+    var dayClick = document.querySelectorAll(".days");
+    
+    //dayClick is an array of HTMLElement
+    dayClick.forEach(element => element.addEventListener("click", function () {
+        
+        var day = this.getElementsByClassName("dayBox");
+        var image = this.getElementsByClassName("moonImg");
     console.log(day);
     (openModal(day[0].innerHTML, image[0].src, day[0].dataset.stage));
 }));
@@ -216,32 +215,32 @@ function closeModal() {
 
 function outsideModal(event) {
     if(event.target == modal) {
+        
+        modal.style.display = 'none';}
+    }
+    
+    let loadPage = function(){
+        sixthWeek[0].style.visibility = "hidden";
+        calendar.style.height = "630px";
+        loadArray();
+        loadCalendar();
+    }
+    
+    loadPage();
+    
+    
 
-    modal.style.display = 'none';}
-}
-
-let loadPage = function(){
-    sixthWeek[0].style.visibility = "hidden";
-    calendar.style.height = "630px";
-    loadArray();
-    loadCalendar();
-}
-
-loadPage();
-
-
-
-document.addEventListener("DOMContentLoaded", ()=> {
-const phase = lunarPhase ();
-console.log(phase);
-} )
- //append this data to modal use div idi 
- var modalInfoDiv = document.getElementById("moon-age");
- var divContent = document.createTextNode(lunarPhase.response);
- modalInfoDiv.appendChild(divContent);
-
+    document.addEventListener("DOMContentLoaded", ()=> {
+        const phase = lunarPhase ();
+        console.log(phase);
+    } )
+    //append this data to modal use div idi 
+    var modalInfoDiv = document.getElementById("moon-age");
+    var divContent = document.createTextNode(lunarPhase.response);
+    modalInfoDiv.appendChild(divContent);
+    
     // this function runs when the submit button is clicked 
-// this function runs when the submit button is clicked 
+    // this function runs when the submit button is clicked 
     var submitButtonHandler = function (event) {
         event.preventDefault();
         // get city value from input element
@@ -250,15 +249,15 @@ console.log(phase);
         // if a city is entered then run code 
         if (selectedCity) {
             getLatLong(selectedCity);
-
+            
             localStorage.setItem('savedCity',selectedCity);
             errorBox.setAttribute("class", "display: none");
             
         }
         else {
-        // error modal appears 
-        
-        errorBox.setAttribute("class", "display: block");
+            // error modal appears 
+            
+            errorBox.setAttribute("class", "display: block");
         }
         
     };
@@ -299,53 +298,53 @@ console.log(phase);
     
     // Pulling the weather information
     function getWeather() {
-        const lat = localStorage.getItem('savedLat');
-        const lng = localStorage.getItem('savedLon');
-        
-        if (lat && lng) {
-        // Storm Glass API 1e6476cc-3387-11ec-b37c-0242ac130002-1e647744-3387-11ec-b37c-0242ac130002
-        let params = 'cloudCover,precipitation,airTemperature';
-        
-        // Weather Fetch
-        fetch(`https://api.stormglass.io/v2/weather/point?lat=${lat}&lng=${lng}&params=${params}`, {
-            headers: {
+            const lat = localStorage.getItem('savedLat');
+            const lng = localStorage.getItem('savedLon');
+            
+            if (lat && lng) {
+                // Storm Glass API 1e6476cc-3387-11ec-b37c-0242ac130002-1e647744-3387-11ec-b37c-0242ac130002
+                let params = 'cloudCover,precipitation,airTemperature';
+                
+                // Weather Fetch
+                fetch(`https://api.stormglass.io/v2/weather/point?lat=${lat}&lng=${lng}&params=${params}`, {
+                    headers: {
                 'Authorization': '1e6476cc-3387-11ec-b37c-0242ac130002-1e647744-3387-11ec-b37c-0242ac130002'
             }
             }).then((response) => response.json()).then((res) => {
-    
+                
             
-            // Pulling in Cloud Coverage
-            const cloudCoverage = res.hours[0].cloudCover.noaa + '%'
-            // Saving Cloud Coverage
-            localStorage.setItem('savedCloudCoverage', cloudCoverage);
-            
-
-
-            // Pulling in Air Temp
-            const airTemp = res.hours[0].airTemperature.noaa
-            // Saving Temp
-            localStorage.setItem('savedAirTemperature', airTemp);
-        })
+                // Pulling in Cloud Coverage
+                const cloudCoverage = res.hours[0].cloudCover.noaa + '%'
+                // Saving Cloud Coverage
+                localStorage.setItem('savedCloudCoverage', cloudCoverage);
+                
+                
+                
+                // Pulling in Air Temp
+                const airTemp = res.hours[0].airTemperature.noaa
+                // Saving Temp
+                localStorage.setItem('savedAirTemperature', airTemp);
+            })
         .catch(() => {
             errorCatchBox.setAttribute("style", "display: block");
         });
-
-
+        
+        
         // Precipitation Fetch
         fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&exclude=current,minute,hourly,alert&appid=f17ddf4709497b276463e08f28044887`, {
-            }).then((response) => response.json()).then((res) => {
+        }).then((response) => response.json()).then((res) => {
             // Pulling in Precipitation
             const precipitation = res.daily[0].rain
             // Saving Precipitation
             localStorage.setItem('savedPrecipitation', precipitation);
             
-           
+            
         })
         .catch(() => {
             errorCatchBox.setAttribute("style", "display: block");
         });
         
-       
+        
         
         // Astronomy Fetch
         let end = '2021-11-30';
@@ -374,7 +373,7 @@ console.log(phase);
             // Saving Moon Rise
             localStorage.setItem('savedMoonSet', moonSetTime);
             
-           
+            
         })
         .catch(() => {
             errorCatchBox.setAttribute("style", "display: block");
@@ -386,7 +385,7 @@ console.log(phase);
 
 // Function to display saved Weather/Astrology info
 function showWeather() {
-    // const cityName = localStorage.getItem('savedCity');
+    const cityName = localStorage.getItem('savedCity');
     
     if (cityName) {
         // Displaying City Weather is pulling
