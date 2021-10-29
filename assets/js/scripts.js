@@ -207,13 +207,14 @@ function openModal(day, image, stage, moonDescriptionElement){
  {"phase": "WaningGibbious", "description":"A waning gibbous moon occurs when more than half of the lit portion of the Moon can be seen and the shape decreases or wanes in size from one day to the next. The waning gibbous phase occurs between the full moon and third quarter phases."},
  {"phase": "LastQuarter", "description":"The last quarter moon (or a half moon) is when half of the lit portion of the Moon is visible after the waning gibbous phase."},
  {"phase": "WaningCrescent", "description":"A waning crescent moon is when the Moon looks like a crescent and the crescent decreases or wanes in size from one day to the next."}];
-  var descript1 =JSON.stringify(moonDescriptionElement[0]); 
-  let moonDiv = document.getElementById("moon-descriptions");
+
+ let moonDiv = document.getElementById("moon-descriptions");
   
  console.log(moonDescriptionElement);
  if (lunarPhase(stage) === "New Moon") {
-    moonDiv.innerHTML += '<br>' + moonDescriptionElement.join('<br>');
-    document.body.prepend(moonDiv);
+//    moonDiv.innerHTML= moonDescriptionElement[0].description;
+   
+    
 
      console.log(descript1);
  } 
