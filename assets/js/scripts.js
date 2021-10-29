@@ -7,7 +7,14 @@ var calendarDay = document.getElementsByClassName("days");
 var calendar = document.querySelector(".calendar");
 
 var clearCityButtonEl = document.querySelector('#clear-city');
-var weatherDataContainerEl = document.getElementById('weather-data-container');
+var cityNameEl = document.querySelector('#city-name');
+var weatherTodayEl = document.querySelector('#weather-today');
+var cloudCoverEl = document.querySelector('#cloud-coverage');
+var airTempEl = document.querySelector('#air-temp');
+var precipitationEl = document.querySelector('#precipitation')
+var moonPhaseEl = document.querySelector('#moon-phase');
+var moonRiseEl = document.querySelector('#moon-rise');
+var moonSetEl = document.querySelector('#moon-set');
 
 var sixthWeek = document.getElementsByClassName("sixth");
 var selectedMonth = document.getElementById("start");
@@ -17,7 +24,6 @@ var yearEl = document.querySelector(".year");
 var selectedMonth = document.getElementById("start");
 var clearCityButtonEl = document.querySelector('#clear-city');
 var weatherDataContainerEl = document.getElementById('weather-data-container');
-
 
 let getData = function(dOW,wOM){
     
@@ -36,7 +42,7 @@ let loadCalendar = function() {
         getData(calendarDay[i].dataset.dow, calendarDay[i].dataset.wom);
         let dayEl = calendarDay[i].querySelector(".dayBox");
         let imgEl = calendarDay[i].querySelector(".moonImg");
-
+        
         if(!currentDay.day){
             imgEl.style.visibility = "hidden";
             dayEl.textContent="";
@@ -100,7 +106,7 @@ const normalize = value => {
 //get percentages for various phases to tell moon type 
 // if statement  use lunar age variable to call 
 const lunarPhase = (x) => {
-
+    
     if (x < 1.845) 
     return "New Moon";
     else if (x < 5.53) 
@@ -117,9 +123,9 @@ const lunarPhase = (x) => {
     return "Last Quarter";
     else if (x < 27.68)
     return "Waning Crescent";
-
+    
     return "";
-
+    
 }
 
 
@@ -134,17 +140,17 @@ let loadArray = function(){
     let selected = selectedMonth.value.split('-');
     currentYear = selected[0];
     currentMonth = selected[1];
-
+    
     let lastDay = new Date(currentYear,parseInt(currentMonth),0).getDate();
     
-
+    
     for (let i = 1; i <= lastDay;i++){
         var d = new Date(currentYear,parseInt(currentMonth)-1,i);
         var date = d.getDate();
         var day = d.getDay();
         var moonDate = new Date(currentYear+'-'+ String(currentMonth).padStart(2,'0')+'-'+String(i).padStart(2,'0')+'T23:59:59Z');
         var mAge = moonAge(moonDate);
-
+        
         var weekOfMonth = Math.ceil((date - 1 - day) / 7)+1;
         var moonImage = "Moon-"+Math.floor(mAge)+".jpg";
         calendarData.push({day:i,dayOfWeek:day,weekOfMonth:weekOfMonth,image:moonImage,stage:mAge});
@@ -155,26 +161,26 @@ let loadArray = function(){
 document.addEventListener("DOMContentLoaded", ()=> {
     const phase = lunarPhase ();
     console.log(phase);
-   
-     //append this data to modal use div idi 
-    } );
+    
+    //append this data to modal use div idi 
+} );
 
 // //get images for phases 
 // function moonImages() {
-// }
-
-
-// get modal elements and make variable 
-var modal = document.getElementById('moon-modal');
-//var modalbtn = document.getElementById('modal-btn');
-var closeBtn = document.getElementById('modal-close');
-var dayClick = document.querySelectorAll(".days");
-
-//dayClick is an array of HTMLElement
-dayClick.forEach(element => element.addEventListener("click", function () {
-   
-    var day = this.getElementsByClassName("dayBox");
-    var image = this.getElementsByClassName("moonImg");
+    // }
+    
+    
+    // get modal elements and make variable 
+    var modal = document.getElementById('moon-modal');
+    //var modalbtn = document.getElementById('modal-btn');
+    var closeBtn = document.getElementById('modal-close');
+    var dayClick = document.querySelectorAll(".days");
+    
+    //dayClick is an array of HTMLElement
+    dayClick.forEach(element => element.addEventListener("click", function () {
+        
+        var day = this.getElementsByClassName("dayBox");
+        var image = this.getElementsByClassName("moonImg");
     console.log(day);
     (openModal(day[0].innerHTML, image[0].src, day[0].dataset.stage));
 }));
@@ -197,8 +203,8 @@ function openModal(day, image, stage){
     modalInfoDiv.innerHTML=lunarPhase(stage);
     document.getElementById('moon-img').appendChild(newMoonImg);
 }
-//work on this 
-var moondescription = [{"Waxing Gibbious": "ldksahgfldsa"}, {"New Moon":dlsjhgfosdh}];
+// //work on this 
+// var moondescription = [{"Waxing Gibbious": "ldksahgfldsa"}, {"New Moon":dlsjhgfosdh}];
 
 
 
@@ -209,32 +215,32 @@ function closeModal() {
 
 function outsideModal(event) {
     if(event.target == modal) {
+        
+        modal.style.display = 'none';}
+    }
+    
+    let loadPage = function(){
+        sixthWeek[0].style.visibility = "hidden";
+        calendar.style.height = "630px";
+        loadArray();
+        loadCalendar();
+    }
+    
+    loadPage();
+    
+    
 
-    modal.style.display = 'none';}
-}
-
-let loadPage = function(){
-    sixthWeek[0].style.visibility = "hidden";
-    calendar.style.height = "630px";
-    loadArray();
-    loadCalendar();
-}
-
-loadPage();
-
-
-
-document.addEventListener("DOMContentLoaded", ()=> {
-const phase = lunarPhase ();
-console.log(phase);
-} )
- //append this data to modal use div idi 
- var modalInfoDiv = document.getElementById("moon-age");
- var divContent = document.createTextNode(lunarPhase.response);
- modalInfoDiv.appendChild(divContent);
-
+    document.addEventListener("DOMContentLoaded", ()=> {
+        const phase = lunarPhase ();
+        console.log(phase);
+    } )
+    //append this data to modal use div idi 
+    var modalInfoDiv = document.getElementById("moon-age");
+    var divContent = document.createTextNode(lunarPhase.response);
+    modalInfoDiv.appendChild(divContent);
+    
     // this function runs when the submit button is clicked 
-// this function runs when the submit button is clicked 
+    // this function runs when the submit button is clicked 
     var submitButtonHandler = function (event) {
         event.preventDefault();
         // get city value from input element
@@ -243,15 +249,15 @@ console.log(phase);
         // if a city is entered then run code 
         if (selectedCity) {
             getLatLong(selectedCity);
-
+            
             localStorage.setItem('savedCity',selectedCity);
             errorBox.setAttribute("class", "display: none");
             
         }
         else {
-        // error modal appears 
-        
-        errorBox.setAttribute("class", "display: block");
+            // error modal appears 
+            
+            errorBox.setAttribute("class", "display: block");
         }
         
     };
@@ -261,7 +267,7 @@ console.log(phase);
     var getLatLong = function (selectedCity) {
         // this creates a URL for the api request based off of the city entered
         var apiUrl = "http://api.positionstack.com/v1/forward?access_key=c4bf58a019f128c64c20b6e41582639b&query=" + selectedCity + "&limit=1";
-       
+        
         // fetch request to get lat and long from url we just created
         fetch(apiUrl).then(function (response) {
             // take response and convert it to data we cna use
@@ -272,12 +278,13 @@ console.log(phase);
                 let lon = data.data[0].longitude;
                 console.log(lat);
                 console.log(lon);
-
+                
                 console.log(`First Log: Lat/Lon ${lat} & ${lon}`);
                 
                 localStorage.setItem('savedLat', lat);
                 localStorage.setItem('savedLon', lon);
-
+                
+                cityNameEl.textContent = "Your daily moon and weather information is populating!"
                 getWeather();
                 
             })
@@ -291,41 +298,41 @@ console.log(phase);
     
     // Pulling the weather information
     function getWeather() {
-        const lat = localStorage.getItem('savedLat');
-        const lng = localStorage.getItem('savedLon');
-        
-        if (lat && lng) {
-        // Storm Glass API 1e6476cc-3387-11ec-b37c-0242ac130002-1e647744-3387-11ec-b37c-0242ac130002
-        let params = 'cloudCover,precipitation,airTemperature';
-        
-        // Weather Fetch
-        fetch(`https://api.stormglass.io/v2/weather/point?lat=${lat}&lng=${lng}&params=${params}`, {
-            headers: {
+            const lat = localStorage.getItem('savedLat');
+            const lng = localStorage.getItem('savedLon');
+            
+            if (lat && lng) {
+                // Storm Glass API 1e6476cc-3387-11ec-b37c-0242ac130002-1e647744-3387-11ec-b37c-0242ac130002
+                let params = 'cloudCover,precipitation,airTemperature';
+                
+                // Weather Fetch
+                fetch(`https://api.stormglass.io/v2/weather/point?lat=${lat}&lng=${lng}&params=${params}`, {
+                    headers: {
                 'Authorization': '1e6476cc-3387-11ec-b37c-0242ac130002-1e647744-3387-11ec-b37c-0242ac130002'
             }
             }).then((response) => response.json()).then((res) => {
-    
+                
             
-            // Pulling in Cloud Coverage
-            const cloudCoverage = res.hours[0].cloudCover.noaa + '%'
-            // Saving Cloud Coverage
-            localStorage.setItem('savedCloudCoverage', cloudCoverage);
-            
-
-
-            // Pulling in Air Temp
-            const airTemp = res.hours[0].airTemperature.noaa
-            // Saving Temp
-            localStorage.setItem('savedAirTemperature', airTemp);
-        })
+                // Pulling in Cloud Coverage
+                const cloudCoverage = res.hours[0].cloudCover.noaa + '%'
+                // Saving Cloud Coverage
+                localStorage.setItem('savedCloudCoverage', cloudCoverage);
+                
+                
+                
+                // Pulling in Air Temp
+                const airTemp = res.hours[0].airTemperature.noaa
+                // Saving Temp
+                localStorage.setItem('savedAirTemperature', airTemp);
+            })
         .catch(() => {
             errorCatchBox.setAttribute("style", "display: block");
         });
-
-
+        
+        
         // Precipitation Fetch
         fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&exclude=current,minute,hourly,alert&appid=f17ddf4709497b276463e08f28044887`, {
-            }).then((response) => response.json()).then((res) => {
+        }).then((response) => response.json()).then((res) => {
             // Pulling in Precipitation
             const precipitation = res.daily[0].rain
             
@@ -336,13 +343,13 @@ console.log(phase);
             
             
             
-           
+            
         })
         .catch(() => {
             errorCatchBox.setAttribute("style", "display: block");
         });
         
-       
+        
         
         // Astronomy Fetch
         let end = '2021-11-30';
@@ -371,47 +378,44 @@ console.log(phase);
             // Saving Moon Rise
             localStorage.setItem('savedMoonSet', moonSetTime);
             
-           
+            
         })
         .catch(() => {
             errorCatchBox.setAttribute("style", "display: block");
         });
         
     }
-        showWeather();
-    };
+    setTimeout(showWeather,5000);
+};
+
+// Function to display saved Weather/Astrology info
+function showWeather() {
+    const cityName = localStorage.getItem('savedCity');
     
-    // Function to display saved Weather/Astrology info
-    function showWeather() {
-        const cityName = localStorage.getItem('savedCity');
-        
-        if (cityName) {
+    if (cityName) {
         // Displaying City Weather is pulling
-        var cityNameEl = document.querySelector('#city-name');
         
         cityNameEl.textContent = cityName;
         cityInputEl.value = "";
         
         // Displaying Today's Date
-        var weatherTodayEl = document.querySelector('#weather-today');
         
         const today = new Date();
         weatherTodayEl.textContent = (today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear();
         
         // Display Cloud Coverage Information
         const cloudCoverageDisplay = localStorage.getItem('savedCloudCoverage')
-        var cloudCoverEl = document.querySelector('#cloud-coverage');
         cloudCoverEl.textContent = `Cloud Coverage: ${cloudCoverageDisplay}`;
         
         // Display Air Temparature Information
         const airTempDisplay = localStorage.getItem('savedAirTemperature')
-        var airTempEl = document.querySelector('#air-temp');
         const celsius = Math.round(parseInt(airTempDisplay));
         const fahrenheit = Math.round(celsius * 9/5 + 32);
         airTempEl.textContent = `Temperature: ${celsius}°C/ ${fahrenheit}°F`;
         
         // Display Precipitation
         const precipitationDisplay = localStorage.getItem('savedPrecipitation');
+
         var precipitationEl = document.querySelector('#precipitation')
         console.log(precipitationDisplay);
         if (precipitationDisplay) {
@@ -424,21 +428,18 @@ console.log(phase);
         
         // Displaying Moon Phase
         const moonPhaseDisplay = localStorage.getItem('savedMoonPhase');
-        var moonPhaseEl = document.querySelector('#moon-phase');
         moonPhaseEl.textContent = `Moon Phase: ${moonPhaseDisplay}`;
 
         // Displaying Moon Rise
         const moonRiseDisplay = localStorage.getItem('savedMoonRise');
-        var moonRiseEl = document.querySelector('#moon-rise');
         moonRiseEl.textContent = `Moon Rise: ${moonRiseDisplay} am`;
 
         // Displaying Moon Set
         const moonSetDisplay = localStorage.getItem('savedMoonSet');
-        var moonSetEl = document.querySelector('#moon-set');
         moonSetEl.textContent = `Moon Set: ${moonSetDisplay} pm`;
         }
         else {
-            weatherDataContainerEl.textContent = "Enter a City to Get Started!"
+            cityNameEl.textContent = "Enter a City to Get Started!"
         };
     };
     
@@ -462,7 +463,14 @@ errorCatchCloseButton.addEventListener("click", function() {
 // Clear City Data
 clearCityButtonEl.addEventListener('click', function() {
     localStorage.clear();
-    weatherDataContainerEl.textContent = "Enter a City to Get Started!"
+    cityNameEl.textContent = "Enter a City to Get Started!";    
+    weatherTodayEl.textContent = "";
+    cloudCoverEl.textContent = "";
+    airTempEl.textContent = "";
+    precipitationEl.textContent = "";
+    moonPhaseEl.textContent = "";
+    moonRiseEl.textContent = "";
+    moonSetEl.textContent = "";
 });
 // event listener for the submit button-- needs to be near bottom of page 
 submitButton.addEventListener("click", submitButtonHandler);
