@@ -8,6 +8,9 @@ var calendar = document.querySelector(".calendar");
 
 var clearCityButtonEl = document.querySelector('#clear-city');
 var weatherDataContainerEl = document.getElementById('weather-data-container');
+var weatherInfoEl = document.querySelector('#weather-info');
+var cityNameEl = document.querySelector('#city-name');
+var weatherTodayEl = document.querySelector('#weather-today');
 
 var sixthWeek = document.getElementsByClassName("sixth");
 var selectedMonth = document.getElementById("start");
@@ -197,8 +200,8 @@ function openModal(day, image, stage){
     modalInfoDiv.innerHTML=lunarPhase(stage);
     document.getElementById('moon-img').appendChild(newMoonImg);
 }
-//work on this 
-var moondescription = [{"Waxing Gibbious": "ldksahgfldsa"}, {"New Moon":dlsjhgfosdh}];
+// //work on this 
+// var moondescription = [{"Waxing Gibbious": "ldksahgfldsa"}, {"New Moon":dlsjhgfosdh}];
 
 
 
@@ -261,7 +264,7 @@ console.log(phase);
     var getLatLong = function (selectedCity) {
         // this creates a URL for the api request based off of the city entered
         var apiUrl = "http://api.positionstack.com/v1/forward?access_key=c4bf58a019f128c64c20b6e41582639b&query=" + selectedCity + "&limit=1";
-       
+        
         // fetch request to get lat and long from url we just created
         fetch(apiUrl).then(function (response) {
             // take response and convert it to data we cna use
@@ -272,12 +275,13 @@ console.log(phase);
                 let lon = data.data[0].longitude;
                 console.log(lat);
                 console.log(lon);
-
+                
                 console.log(`First Log: Lat/Lon ${lat} & ${lon}`);
                 
                 localStorage.setItem('savedLat', lat);
                 localStorage.setItem('savedLon', lon);
-
+                
+                cityNameEl.textContent = "Your daily moon and weather information is populating!"
                 getWeather();
                 
             })
@@ -373,22 +377,20 @@ console.log(phase);
         });
         
     }
-        showWeather();
-    };
+    setTimeout(showWeather,3000);
+};
+
+// Function to display saved Weather/Astrology info
+function showWeather() {
+    const cityName = localStorage.getItem('savedCity');
     
-    // Function to display saved Weather/Astrology info
-    function showWeather() {
-        const cityName = localStorage.getItem('savedCity');
-        
-        if (cityName) {
+    if (cityName) {
         // Displaying City Weather is pulling
-        var cityNameEl = document.querySelector('#city-name');
         
         cityNameEl.textContent = cityName;
         cityInputEl.value = "";
         
         // Displaying Today's Date
-        var weatherTodayEl = document.querySelector('#weather-today');
         
         const today = new Date();
         weatherTodayEl.textContent = (today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear();
@@ -426,7 +428,7 @@ console.log(phase);
         moonSetEl.textContent = `Moon Set: ${moonSetDisplay} pm`;
         }
         else {
-            weatherDataContainerEl.textContent = "Enter a City to Get Started!"
+            cityNameEl.textContent = "Enter a City to Get Started!"
         };
     };
     
@@ -450,7 +452,7 @@ errorCatchCloseButton.addEventListener("click", function() {
 // Clear City Data
 clearCityButtonEl.addEventListener('click', function() {
     localStorage.clear();
-    weatherDataContainerEl.textContent = "Enter a City to Get Started!"
+    cityNameEl.textContent = "Enter a City to Get Started!";
 });
 // event listener for the submit button-- needs to be near bottom of page 
 submitButton.addEventListener("click", submitButtonHandler);
