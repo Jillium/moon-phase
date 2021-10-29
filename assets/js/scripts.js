@@ -7,10 +7,15 @@ var calendarDay = document.getElementsByClassName("days");
 var calendar = document.querySelector(".calendar");
 
 var clearCityButtonEl = document.querySelector('#clear-city');
-var weatherDataContainerEl = document.getElementById('weather-data-container');
-var weatherInfoEl = document.querySelector('#weather-info');
 var cityNameEl = document.querySelector('#city-name');
 var weatherTodayEl = document.querySelector('#weather-today');
+var cloudCoverEl = document.querySelector('#cloud-coverage');
+var airTempEl = document.querySelector('#air-temp');
+var precipitationEl = document.querySelector('#precipitation')
+var moonPhaseEl = document.querySelector('#moon-phase');
+var moonRiseEl = document.querySelector('#moon-rise');
+var moonSetEl = document.querySelector('#moon-set');
+const cityName = localStorage.getItem('savedCity');
 
 var sixthWeek = document.getElementsByClassName("sixth");
 var selectedMonth = document.getElementById("start");
@@ -20,7 +25,6 @@ var yearEl = document.querySelector(".year");
 var selectedMonth = document.getElementById("start");
 var clearCityButtonEl = document.querySelector('#clear-city');
 var weatherDataContainerEl = document.getElementById('weather-data-container');
-
 
 let getData = function(dOW,wOM){
     
@@ -377,12 +381,12 @@ console.log(phase);
         });
         
     }
-    setTimeout(showWeather,3000);
+    setTimeout(showWeather,5000);
 };
 
 // Function to display saved Weather/Astrology info
 function showWeather() {
-    const cityName = localStorage.getItem('savedCity');
+    // const cityName = localStorage.getItem('savedCity');
     
     if (cityName) {
         // Displaying City Weather is pulling
@@ -397,34 +401,28 @@ function showWeather() {
         
         // Display Cloud Coverage Information
         const cloudCoverageDisplay = localStorage.getItem('savedCloudCoverage')
-        var cloudCoverEl = document.querySelector('#cloud-coverage');
         cloudCoverEl.textContent = `Cloud Coverage: ${cloudCoverageDisplay}`;
         
         // Display Air Temparature Information
         const airTempDisplay = localStorage.getItem('savedAirTemperature')
-        var airTempEl = document.querySelector('#air-temp');
         const celsius = Math.round(parseInt(airTempDisplay));
         const fahrenheit = Math.round(celsius * 9/5 + 32);
         airTempEl.textContent = `Temperature: ${celsius}°C/ ${fahrenheit}°F`;
         
         // Display Precipitation
         const precipitationDisplay = localStorage.getItem('savedPrecipitation');
-        var precipitationEl = document.querySelector('#precipitation')
         precipitationEl.textContent = `Precipitation: ${precipitationDisplay}mm`;
         
         // Displaying Moon Phase
         const moonPhaseDisplay = localStorage.getItem('savedMoonPhase');
-        var moonPhaseEl = document.querySelector('#moon-phase');
         moonPhaseEl.textContent = `Moon Phase: ${moonPhaseDisplay}`;
 
         // Displaying Moon Rise
         const moonRiseDisplay = localStorage.getItem('savedMoonRise');
-        var moonRiseEl = document.querySelector('#moon-rise');
         moonRiseEl.textContent = `Moon Rise: ${moonRiseDisplay} am`;
 
         // Displaying Moon Set
         const moonSetDisplay = localStorage.getItem('savedMoonSet');
-        var moonSetEl = document.querySelector('#moon-set');
         moonSetEl.textContent = `Moon Set: ${moonSetDisplay} pm`;
         }
         else {
@@ -452,7 +450,14 @@ errorCatchCloseButton.addEventListener("click", function() {
 // Clear City Data
 clearCityButtonEl.addEventListener('click', function() {
     localStorage.clear();
-    cityNameEl.textContent = "Enter a City to Get Started!";
+    cityNameEl.textContent = "Enter a City to Get Started!";    
+    weatherTodayEl.textContent = "";
+    cloudCoverEl.textContent = "";
+    airTempEl.textContent = "";
+    precipitationEl.textContent = "";
+    moonPhaseEl.textContent = "";
+    moonRiseEl.textContent = "";
+    moonSetEl.textContent = "";
 });
 // event listener for the submit button-- needs to be near bottom of page 
 submitButton.addEventListener("click", submitButtonHandler);
