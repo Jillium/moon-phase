@@ -185,7 +185,7 @@ document.getElementsByTagName('BODY')[0].addEventListener('click', outsideModal)
 console.log("clicked outside modal");
 
 //function to open modal 
-function openModal(day, image, stage){
+function openModal(day, image, stage, moonDescriptionElement){
     modal.style.display = 'block';
     // var day = event.target.innerHTML;
     console.log(lunarPhase(stage));
@@ -207,18 +207,22 @@ function openModal(day, image, stage){
  {"phase": "WaningGibbious", "description":"A waning gibbous moon occurs when more than half of the lit portion of the Moon can be seen and the shape decreases or wanes in size from one day to the next. The waning gibbous phase occurs between the full moon and third quarter phases."},
  {"phase": "LastQuarter", "description":"The last quarter moon (or a half moon) is when half of the lit portion of the Moon is visible after the waning gibbous phase."},
  {"phase": "WaningCrescent", "description":"A waning crescent moon is when the Moon looks like a crescent and the crescent decreases or wanes in size from one day to the next."}];
-   
+  var descript1 =JSON.stringify(moonDescriptionElement[0]); 
+  let moonDiv = document.getElementById("moon-descriptions");
+  
  console.log(moonDescriptionElement);
  if (lunarPhase(stage) === "New Moon") {
-     document.getElementById("moon-descriptions").append(JSON.stringify(moonDescriptionElement[0]));
-     console.log(JSON.stringify(moonDescriptionElement[0]));
+    moonDiv.innerHTML += '<br>' + moonDescriptionElement.join('<br>');
+    document.body.prepend(moonDiv);
+
+     console.log(descript1);
  } 
    else if (lunarPhase(stage) === "Waxing Crescent "){
     document.getElementById("moon-descriptions");
     console.log(moonDescriptionElement[1]);
     }
  else if (lunarPhase(stage) === "First Quarter "){
-    document.getElementById("moon-descriptions");
+    document.getElementById("#moon-descriptions");
     console.log(moonDescriptionElement[2]);
  } 
  else if (lunarPhase(stage) === "Waxing Gibbious "){
