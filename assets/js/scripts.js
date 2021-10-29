@@ -335,8 +335,13 @@ function outsideModal(event) {
         }).then((response) => response.json()).then((res) => {
             // Pulling in Precipitation
             const precipitation = res.daily[0].rain
-            // Saving Precipitation
-            localStorage.setItem('savedPrecipitation', precipitation);
+            
+            if (precipitation) {
+                    // Saving Precipitation
+            localStorage.setItem('savedPrecipitation',(precipitation));
+            }
+            
+            
             
             
         })
@@ -410,7 +415,16 @@ function showWeather() {
         
         // Display Precipitation
         const precipitationDisplay = localStorage.getItem('savedPrecipitation');
-        precipitationEl.textContent = `Precipitation: ${precipitationDisplay}mm`;
+
+        var precipitationEl = document.querySelector('#precipitation')
+        console.log(precipitationDisplay);
+        if (precipitationDisplay) {
+            precipitationEl.textContent = `Precipitation: ${precipitationDisplay}mm`;
+        }
+        else {
+            precipitationEl.textContent = `Precipitation: none`;
+        }
+        
         
         // Displaying Moon Phase
         const moonPhaseDisplay = localStorage.getItem('savedMoonPhase');
