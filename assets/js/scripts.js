@@ -170,8 +170,9 @@ document.addEventListener("DOMContentLoaded", ()=> {
         
         var day = this.getElementsByClassName("dayBox");
         var image = this.getElementsByClassName("moonImg");
-    console.log(day);
+        if (day[0].innerHTML != "") {
     (openModal(day[0].innerHTML, image[0].src, day[0].dataset.stage));
+        }
 }));
 
 
@@ -183,14 +184,20 @@ function closeModal() {
     modal.style.display = 'none';
 }
 
-// function outsideModal(event) {
-//     if (event) {
-        
-//         modal.style.display = 'none';}
-//     }
-    
 
 //click outside modal to close 
+
+document.addEventListener('click', outsideModal);
+function outsideModal(event) {
+  
+    if (event.target.closest(".calendar")){
+        return;    
+    }
+    else if (!event.target.closest(".modal")) {
+       modal.style.display = 'none'
+    }
+}
+
 
 // document.getElementsByTagName('BODY')[0].addEventListener
 
@@ -204,12 +211,6 @@ function openModal(day, image, stage){
     modalInfoDiv.innerHTML=lunarPhase(stage);
     let phaseImg = document.querySelector("#moon-img");
     phaseImg.src = image;
-   function emptyDay() {
-       if ( day = !day)
-   closeModal();
-   }
-   console.log(day);
-   emptyDay();
 
 
     //put definitions in an array to add to modal depending on moon phase 
