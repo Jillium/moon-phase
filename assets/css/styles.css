@@ -90,10 +90,6 @@ header form button {
     margin-top: 2em;
 }
 
-.weather-by-city {
-    padding-left: 60em;
-}
-
 .title {
     color: var(--grey);
 }
@@ -402,8 +398,6 @@ code {
         background-color: var(--fuschia);
         font-size: 1em;
         margin-bottom: 5px;
-        
-        
     }
 
     header form input  {
@@ -422,7 +416,8 @@ code {
     }
 
     .weather-by-city {
-        padding-left: 8em;
+        display: flex;
+        align-items: center;
     }
 
    
