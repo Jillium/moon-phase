@@ -120,8 +120,8 @@ input:hover {
 
 
 .weather-background {
-    background-color: var(--grey);
-    color: var(--black);
+    background-color: var(--black);
+    color: var(--grey);
     border-radius: 6px;
 }
 
@@ -149,7 +149,7 @@ input:hover {
     border-style: solid;
     border-width: .5px;
     border-radius: 15px;
-    color: var(--black);
+    color: var(--grey);
 }
 
 #weather-data-container{
@@ -171,7 +171,7 @@ input:hover {
     border-style: solid;
     border-width: .5px;
     border-radius: 15px;
-    color: var(--black);
+    color: var(--grey);
 }
 
 .columns {
@@ -186,14 +186,14 @@ input:hover {
     height: 50px;
     align-items: center;
     text-align: center;
-    background-color: var(--grey);
+    background-color: var(--black);
 }
 
 .weekDays div {
     height: 50px;
     align-items: center;
     text-align: center;
-    background-color: var(--grey);
+    background-color: var(--black);
 }
 
 .weeks div {
@@ -375,6 +375,9 @@ code {
     padding: 3px;
 }
 
+.days img {
+    border-radius: 50%;
+}
 
 
 
@@ -417,11 +420,11 @@ code {
     }
 
     header form input  {
-        background-color: var(--grey);
+        background-color: var(--black);
         padding: 1em;
         border-radius: 25%;
         margin-right: 1em;
-        color: var(--black);
+        color: var(--grey);
         font-size: 1em;
         width: 140px;
     }
