@@ -297,7 +297,7 @@ function outsideModal(event) {
             getLatLong(selectedCity);
             
             localStorage.setItem('savedCity',selectedCity);
-            errorBox.setAttribute("class", "display: none");
+            // errorBox.setAttribute("class", "display: none");
             
         }
         else {
@@ -467,7 +467,7 @@ function showWeather() {
             precipitationEl.textContent = `Precipitation: ${precipitationDisplay}mm`;
         }
         else {
-            precipitationEl.textContent = `Precipitation: none`;
+            precipitationEl.textContent = `Precipitation: None forecasted`;
         }
         
         
