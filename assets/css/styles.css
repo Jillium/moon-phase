@@ -192,7 +192,7 @@ input:hover {
 
 .weeks div {
     height: 100px;
-    background-color: var(--grey);
+    background-color: var(--black);
 }
 
 .weeks div:hover{
@@ -218,11 +218,8 @@ input:hover {
 }
 
 .dayBox{
-    object-position: left top;
-}
-
-.testImg {
-    object-position: right bottom;
+    background-color: var(--black);
+    color:var(--grey);
 }
 
 .btn:hover{
