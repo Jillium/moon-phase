@@ -174,11 +174,26 @@ document.addEventListener("DOMContentLoaded", ()=> {
     console.log(day);
     (openModal(day[0].innerHTML, image[0].src, day[0].dataset.stage));
 }));
+
+
+
 closeBtn.addEventListener('click', closeModal);
+
+//close modal on button
+function closeModal() {
+    modal.style.display = 'none';
+}
+
+// function outsideModal(event) {
+//     if (event) {
+        
+//         modal.style.display = 'none';}
+//     }
+    
 
 //click outside modal to close 
 
-document.getElementsByTagName('BODY')[0].addEventListener('click', outsideModal);
+// document.getElementsByTagName('BODY')[0].addEventListener
 
 //function to open modal 
 function openModal(day, image, stage){
@@ -240,22 +255,16 @@ function openModal(day, image, stage){
         else if (lunarPhase(stage) === "Waning Crescent"){
                     moonDiv.innerText = moonDescriptionElement[7].description;
         }
-    }
-
-
-
-
-//close modal on button
-function closeModal() {
-    modal.style.display = 'none';
+        else {
+            moonDiv.innerText = "There is no moon Information for this day!"
 }
-
-function outsideModal(event) {
-    if(event.target == modal) {
-        
-        modal.style.display = 'none';}
     }
-    
+
+
+
+
+
+
     let loadPage = function(){
         sixthWeek[0].style.visibility = "hidden";
         calendar.style.height = "630px";
