@@ -103,7 +103,7 @@ const lunarPhase = (x) => {
     if (x < 1.845) 
     return "New Moon";
     else if (x < 5.53) 
-    return "Waxing Cresent";
+    return "Waxing Crescent";
     else if (x < 9.228)
     return "First Quarter";
     else if (x < 12.919)
@@ -162,7 +162,6 @@ document.addEventListener("DOMContentLoaded", ()=> {
     
     // get modal elements and make variable 
     var modal = document.getElementById('moon-modal');
-    //var modalbtn = document.getElementById('modal-btn');
     var closeBtn = document.getElementById('modal-close');
     var dayClick = document.querySelectorAll(".days");
     
@@ -198,16 +197,19 @@ function closeModal() {
 //function to open modal 
 function openModal(day, image, stage){
     modal.style.display = 'block';
-    // var day = event.target.innerHTML;
     console.log(lunarPhase(stage));
     document.getElementById('modal-link').href=`https://www.moongiant.com/phase/10/${day}/2021/`;
-    // var newMoonImg = document.createElement('img');
-    // newMoonImg.src=image;
+    //put images for that day into a div 
     var modalInfoDiv = document.getElementById("moon-age");
     modalInfoDiv.innerHTML=lunarPhase(stage);
-    // document.getElementById('moon-img').appendChild(newMoonImg);
     let phaseImg = document.querySelector("#moon-img");
     phaseImg.src = image;
+   function emptyDay() {
+       if ( day = !day)
+   closeModal();
+   }
+   console.log(day);
+   emptyDay();
 
 
     //put definitions in an array to add to modal depending on moon phase 
