@@ -133,12 +133,13 @@ input:hover {
     box-shadow: 0 5px 20px rgba(0, 0, 0, .3);
     height: 630px;
     padding:  20px 0 0 20px;
-    width: 70%;
+    width: 75%;
     margin-left: 2rem;
 }
 
 #weather-container {
     padding: 5px 0 0 5px;
+    width: 25%;
 }
 
 #weather-container h3, #weather-data-container {

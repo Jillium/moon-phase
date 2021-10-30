@@ -200,6 +200,7 @@ function openModal(day, image, stage){
     modalInfoDiv.innerHTML=lunarPhase(stage);
     document.getElementById('moon-img').appendChild(newMoonImg);
 
+
 // //work on this 
     //put definitions in an array to add to modal depending on moon phase 
 
@@ -250,6 +251,7 @@ function openModal(day, image, stage){
         }
     
     }
+
 
 
 //close modal on button
