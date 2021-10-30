@@ -84,13 +84,6 @@ const julianDate = (date) => {
 // create lunar month  
 const lunarMonth = 29.53; 
 
-// const LunarAge = (date = new Date()) => {
-//     const percent = LunarAgePercent(date);
-//     const age = percent * lunarMonth;
-// console.log(age);
-//     return age;
-// }
-
 
 const LunarAgePercent = (date) => {
     return normalize((julianDate(date) - 2451550.1) / lunarMonth);
@@ -184,8 +177,8 @@ document.addEventListener("DOMContentLoaded", ()=> {
 closeBtn.addEventListener('click', closeModal);
 
 //click outside modal to close 
+
 document.getElementsByTagName('BODY')[0].addEventListener('click', outsideModal);
-console.log("clicked outside modal");
 
 //function to open modal 
 function openModal(day, image, stage){
@@ -193,15 +186,15 @@ function openModal(day, image, stage){
     // var day = event.target.innerHTML;
     console.log(lunarPhase(stage));
     document.getElementById('modal-link').href=`https://www.moongiant.com/phase/10/${day}/2021/`;
-    var newMoonImg = document.createElement('img');
-    console.log(image);
-    newMoonImg.src=image;
+    // var newMoonImg = document.createElement('img');
+    // newMoonImg.src=image;
     var modalInfoDiv = document.getElementById("moon-age");
     modalInfoDiv.innerHTML=lunarPhase(stage);
-    document.getElementById('moon-img').appendChild(newMoonImg);
+    // document.getElementById('moon-img').appendChild(newMoonImg);
+    let phaseImg = document.querySelector("#moon-img");
+    phaseImg.src = image;
 
 
-// //work on this 
     //put definitions in an array to add to modal depending on moon phase 
 
     var moonDescriptionElement = [
@@ -214,43 +207,41 @@ function openModal(day, image, stage){
         {"phase": "LastQuarter", "description":"The last quarter moon (or a half moon) is when half of the lit portion of the Moon is visible after the waning gibbous phase."},
         {"phase": "WaningCrescent", "description":"A waning crescent moon is when the Moon looks like a crescent and the crescent decreases or wanes in size from one day to the next."}];
        
-        let moonDiv = document.getElementById("moon-descriptions");
+        let moonDiv = document.querySelector("#moon-descriptions");
          
-        console.log(moonDescriptionElement);
         if (lunarPhase(stage) === "New Moon") {
        //    moonDiv.innerHTML= moonDescriptionElement[0].description;
-          
+          moonDiv.innerText = moonDescriptionElement[0].description;
         } 
-          else if (lunarPhase(stage) === "Waxing Crescent "){
-           document.getElementById("moon-descriptions");
-           console.log(moonDescriptionElement[1]);
+          else if (lunarPhase(stage) === "Waxing Crescent"){
+                    moonDiv.innerText = moonDescriptionElement[1].description;
+
            }
-        else if (lunarPhase(stage) === "First Quarter "){
-           document.getElementById("#moon-descriptions");
-           console.log(moonDescriptionElement[2]);
+        else if (lunarPhase(stage) === "First Quarter"){
+           moonDiv.innerText = moonDescriptionElement[2].description;
+
         } 
-        else if (lunarPhase(stage) === "Waxing Gibbious "){
-           document.getElementById("moon-descriptions");
-           console.log(moonDescriptionElement[3]);
+        else if (lunarPhase(stage) === "Waxing Gibbious"){
+                    moonDiv.innerText = moonDescriptionElement[3].description;
+                
         } 
-        else if (lunarPhase(stage) === "Waxing Full Moon "){
-           document.getElementById("moon-descriptions");
-           console.log(moonDescriptionElement[4]);
+        else if (lunarPhase(stage) === "Waxing Full Moon"){
+                    moonDiv.innerText = moonDescriptionElement[4].description;
+
         } 
-        else if (lunarPhase(stage) === "Waning Gibbious "){
-           document.getElementById("moon-descriptions");
-           console.log(moonDescriptionElement[5]);
+        else if (lunarPhase(stage) === "Waning Gibbious"){
+                    moonDiv.innerText = moonDescriptionElement[5].description;
+
         } 
-        else if (lunarPhase(stage) === "Last Quartar "){
-           document.getElementById("moon-descriptions");
-           console.log(moonDescriptionElement[6]);
+        else if (lunarPhase(stage) === "Last Quarter"){
+                    moonDiv.innerText = moonDescriptionElement[6].description;
+
         } 
-        else if (lunarPhase(stage) === "Waning Crescent "){
-           document.getElementById("moon-descriptions");
-           console.log(moonDescriptionElement[7]);
+        else if (lunarPhase(stage) === "Waning Crescent"){
+                    moonDiv.innerText = moonDescriptionElement[7].description;
         }
-    
     }
+
 
 
 
