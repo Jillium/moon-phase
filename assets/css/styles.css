@@ -133,12 +133,13 @@ input:hover {
     box-shadow: 0 5px 20px rgba(0, 0, 0, .3);
     height: 630px;
     padding:  20px 0 0 20px;
-    width: 70%;
+    width: 75%;
     margin-left: 2rem;
 }
 
 #weather-container {
     padding: 5px 0 0 5px;
+    width: 25%;
 }
 
 #weather-container h3, #weather-data-container {
@@ -242,7 +243,7 @@ code {
     left: 20%;
     top: 50%;
     height: 70%;
-    width: 60%;
+    width: 50%;
     overflow: auto;
     background-image: url("../images/moon-header-background.jpg");
     animation-name: modalopen;
@@ -258,11 +259,12 @@ code {
     background-color:#E7DFDD;
     margin: 20% auto;
     padding: 20px;
-    width: 70%;
+    width: 20%;
     animation-name: modalopen;
     animation-duration: 3s;
     padding: 20px;
     color: #4717F6;
+    float: left;
     
 }
 
@@ -271,11 +273,19 @@ code {
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0);
     animation-name: modalopen;
     animation-duration: 1s;
+    bottom: 0;
+}
+ .modal-link {
+     bottom: 0;
+     
+ }
+.moon-img {
+    float: right;
 }
 
 #modal-close {
     color: #fff;
-    float: right;
+    /* float: right; */
     font-size: 30px;
     background-image: url("../images/moon-header-background.jpg");
 }

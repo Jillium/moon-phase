@@ -110,7 +110,7 @@ const lunarPhase = (x) => {
     if (x < 1.845) 
     return "New Moon";
     else if (x < 5.53) 
-    return "waxing cresent";
+    return "Waxing Cresent";
     else if (x < 9.228)
     return "First Quarter";
     else if (x < 12.919)
@@ -165,9 +165,6 @@ document.addEventListener("DOMContentLoaded", ()=> {
     //append this data to modal use div idi 
 } );
 
-// //get images for phases 
-// function moonImages() {
-    // }
     
     
     // get modal elements and make variable 
@@ -202,9 +199,58 @@ function openModal(day, image, stage){
     var modalInfoDiv = document.getElementById("moon-age");
     modalInfoDiv.innerHTML=lunarPhase(stage);
     document.getElementById('moon-img').appendChild(newMoonImg);
-}
+
+
 // //work on this 
-// var moondescription = [{"Waxing Gibbious": "ldksahgfldsa"}, {"New Moon":dlsjhgfosdh}];
+    //put definitions in an array to add to modal depending on moon phase 
+
+    var moonDescriptionElement = [
+        {"phase": "NewMoon", "description": "A new moon is when the moon cannot be seen because we are looking at the unlit half of the Moon. The new moon phase occurs when the Moon is directly between the Earth and Sun. A solar eclipse can only happen at new moon."},
+        {"phase": "WaxingCrescent", "description": "A waxing crescent moon is when the Moon looks like a crescent and the crescent increases or waxes in size from one day to the next. This phase is usually only seen in the west."},
+        {"phase": "FirstQuartar", "description": "The first quarter moon (or a half moon) is when half of the lit portion of the Moon is visible after the waxing crescent phase. It comes a week after new moon."},
+        {"phase": "WaxingGibbious", "description":"A waxing gibbous moon occurs when more than half of the lit portion of the Moon can be seen and the shape increases or waxes in size from one day to the next. The waxing gibbous phase occurs between the first quarter and full moon phases."},
+        {"phase": "FullMoon",  "description":"A full moon is when we can see the entire lit portion of the Moon. The full moon phase occurs when the Moon is on the opposite side of the Earth from the Sun; called opposition. A lunar eclipse can only happen at full moon."},
+        {"phase": "WaningGibbious", "description":"A waning gibbous moon occurs when more than half of the lit portion of the Moon can be seen and the shape decreases or wanes in size from one day to the next. The waning gibbous phase occurs between the full moon and third quarter phases."},
+        {"phase": "LastQuarter", "description":"The last quarter moon (or a half moon) is when half of the lit portion of the Moon is visible after the waning gibbous phase."},
+        {"phase": "WaningCrescent", "description":"A waning crescent moon is when the Moon looks like a crescent and the crescent decreases or wanes in size from one day to the next."}];
+       
+        let moonDiv = document.getElementById("moon-descriptions");
+         
+        console.log(moonDescriptionElement);
+        if (lunarPhase(stage) === "New Moon") {
+       //    moonDiv.innerHTML= moonDescriptionElement[0].description;
+          
+        } 
+          else if (lunarPhase(stage) === "Waxing Crescent "){
+           document.getElementById("moon-descriptions");
+           console.log(moonDescriptionElement[1]);
+           }
+        else if (lunarPhase(stage) === "First Quarter "){
+           document.getElementById("#moon-descriptions");
+           console.log(moonDescriptionElement[2]);
+        } 
+        else if (lunarPhase(stage) === "Waxing Gibbious "){
+           document.getElementById("moon-descriptions");
+           console.log(moonDescriptionElement[3]);
+        } 
+        else if (lunarPhase(stage) === "Waxing Full Moon "){
+           document.getElementById("moon-descriptions");
+           console.log(moonDescriptionElement[4]);
+        } 
+        else if (lunarPhase(stage) === "Waning Gibbious "){
+           document.getElementById("moon-descriptions");
+           console.log(moonDescriptionElement[5]);
+        } 
+        else if (lunarPhase(stage) === "Last Quartar "){
+           document.getElementById("moon-descriptions");
+           console.log(moonDescriptionElement[6]);
+        } 
+        else if (lunarPhase(stage) === "Waning Crescent "){
+           document.getElementById("moon-descriptions");
+           console.log(moonDescriptionElement[7]);
+        }
+    
+    }
 
 
 
