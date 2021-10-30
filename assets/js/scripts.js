@@ -188,7 +188,7 @@ document.getElementsByTagName('BODY')[0].addEventListener('click', outsideModal)
 console.log("clicked outside modal");
 
 //function to open modal 
-function openModal(day, image, stage, moonDescriptionElement){
+function openModal(day, image, stage){
     modal.style.display = 'block';
     // var day = event.target.innerHTML;
     console.log(lunarPhase(stage));
@@ -199,7 +199,7 @@ function openModal(day, image, stage, moonDescriptionElement){
     var modalInfoDiv = document.getElementById("moon-age");
     modalInfoDiv.innerHTML=lunarPhase(stage);
     document.getElementById('moon-img').appendChild(newMoonImg);
-}
+
 // //work on this 
     //put definitions in an array to add to modal depending on moon phase 
 
@@ -219,7 +219,6 @@ function openModal(day, image, stage, moonDescriptionElement){
         if (lunarPhase(stage) === "New Moon") {
        //    moonDiv.innerHTML= moonDescriptionElement[0].description;
           
-            console.log(descript1);
         } 
           else if (lunarPhase(stage) === "Waxing Crescent "){
            document.getElementById("moon-descriptions");
@@ -250,7 +249,7 @@ function openModal(day, image, stage, moonDescriptionElement){
            console.log(moonDescriptionElement[7]);
         }
     
-
+    }
 
 
 //close modal on button
