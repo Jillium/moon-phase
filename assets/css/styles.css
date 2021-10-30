@@ -49,7 +49,7 @@ h1 {
 
 header {
     display: inline-flex;
-    align-items: center;
+    /* align-items: center; */
 }
 
 header form input, #start {
@@ -63,13 +63,35 @@ header form input, #start {
 
 header form button {
     padding: 1em;
+    border: 0;
     border-radius: 25%;
     background-color: var(--fuschia);
     font-size: 1em;
+    margin-top: 2em;
+}
+
+#clear-city {
+    background: #A239CA;
+    padding: 1em;
+    color: #fff;
+    border: 0;
+    border-radius: 25%;
+    font-size: 1em;
+    margin-top: 2em;
+}
+
+#search-btn {
+    background: #A239CA;
+    padding: 1em;
+    color: #fff;
+    border: 0;
+    border-radius: 25%;
+    font-size: 1em;
+    margin-top: 2em;
 }
 
 .weather-by-city {
-    padding-left: 8em;
+    padding-left: 60em;
 }
 
 .title {
@@ -80,15 +102,7 @@ header form button {
     text-align: center;
 }
 
-.clear-city {
-    background: #A239CA;
-    padding: 1em;
-    color: #fff;
-    border: 0;
-    border-radius: 25%;
-    font-size: 1em;
-    margin-top: 2em;
-}
+
 
 .city-search-btn:hover {
     border: var(--grey);
@@ -119,12 +133,13 @@ input:hover {
     box-shadow: 0 5px 20px rgba(0, 0, 0, .3);
     height: 630px;
     padding:  20px 0 0 20px;
-    width: 70%;
+    width: 75%;
     margin-left: 2rem;
 }
 
 #weather-container {
     padding: 5px 0 0 5px;
+    width: 25%;
 }
 
 #weather-container h3, #weather-data-container {
@@ -177,14 +192,14 @@ input:hover {
 
 .weeks div {
     height: 100px;
-    background-color: var(--grey);
+    background-color: var(--black);
 }
 
 .weeks div:hover{
     border: var(--blue);
     border-width: 3px;
     border-style: solid;
-}
+} 
 
 .modal-open-btn{
     background: #A239CA;
@@ -203,11 +218,8 @@ input:hover {
 }
 
 .dayBox{
-    object-position: left top;
-}
-
-.testImg {
-    object-position: right bottom;
+    background-color: var(--black);
+    color:var(--grey);
 }
 
 .btn:hover{
@@ -228,24 +240,36 @@ code {
     left: 20%;
     top: 50%;
     height: 70%;
-    width: 60%;
+    width: 50%;
     overflow: auto;
-    background-color: #4b4847d7;
+    background-image: url("../images/moon-header-background.jpg");
     animation-name: modalopen;
     animation-duration: 3s;
-    border-radius: 5px;
+    border-radius: 10px;
+    border: var(--fuschia);
+    border-style: solid;
+    border-width: .5px;
+    border-radius: 15px;
 }
 
 .modal-body {
     background-color:#E7DFDD;
     margin: 20% auto;
     padding: 20px;
-    width: 70%;
+    width: 20%;
     animation-name: modalopen;
     animation-duration: 3s;
     padding: 20px;
     color: #4717F6;
-    
+    float: left;
+    border-radius: 15px;
+    border: var(--fuschia);
+    border-style: solid;
+    border-width: .5px;
+}
+
+#moon-description {
+    padding: 30px;
 }
 
 .modal-footer {
@@ -253,16 +277,26 @@ code {
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0);
     animation-name: modalopen;
     animation-duration: 1s;
+    bottom: 0;
+}
+ .modal-link {
+     bottom: 0;
+     
+ }
+.moon-img {
+    float: right;
 }
 
 #modal-close {
-    color: #000;
-    float: right;
+    color: #fff;
+    /* float: right; */
     font-size: 30px;
+    background-image: url("../images/moon-header-background.jpg");
 }
 
+
+
 .close-button:hover,.close-button:focus{
-    color: black;
     text-decoration: none;
     cursor: pointer;
 }
@@ -343,11 +377,70 @@ code {
 /* Media Queries */
 
 /* Media query for phones and smaller */
-@media screen and (max-widht: 575px) {
+@media screen and (max-width: 575px) {
+    #weather-container {
+        width: 140px;
+    }
+    
+    #weather-data-container {
+        padding-right: 10px;
+        
+    }
     
 }
 
 /* Media query for tablets and smaller */
 @media screen and (max-width: 768px) {
-    
+    .level {
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    header form button {
+        padding: 1em;
+        border-radius: 25%;
+        background-color: var(--fuschia);
+        font-size: 1em;
+        margin-bottom: 5px;
+        
+        
+    }
+
+    header form input  {
+        background-color: var(--grey);
+        padding: 1em;
+        border-radius: 25%;
+        margin-right: 1em;
+        color: var(--black);
+        font-size: 1em;
+        width: 140px;
+    }
+
+    #start {
+        width: 200px;
+        margin-left: 10px;
+    }
+
+    .weather-by-city {
+        padding-left: 8em;
+    }
+
+   
+   
+}
+
+/* Media query for tablets and smaller */
+@media screen and (min-width: 768px) {
+    .level {
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .form-buttons {
+        margin-left: 10px;
+    }
+
+  
+
+   
 }
