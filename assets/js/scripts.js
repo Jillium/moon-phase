@@ -103,7 +103,7 @@ const lunarPhase = (x) => {
     if (x < 1.845) 
     return "New Moon";
     else if (x < 5.53) 
-    return "Waxing Cresent";
+    return "Waxing Crescent";
     else if (x < 9.228)
     return "First Quarter";
     else if (x < 12.919)
@@ -162,7 +162,6 @@ document.addEventListener("DOMContentLoaded", ()=> {
     
     // get modal elements and make variable 
     var modal = document.getElementById('moon-modal');
-    //var modalbtn = document.getElementById('modal-btn');
     var closeBtn = document.getElementById('modal-close');
     var dayClick = document.querySelectorAll(".days");
     
@@ -171,26 +170,45 @@ document.addEventListener("DOMContentLoaded", ()=> {
         
         var day = this.getElementsByClassName("dayBox");
         var image = this.getElementsByClassName("moonImg");
-    console.log(day);
+        if (day[0].innerHTML != "") {
     (openModal(day[0].innerHTML, image[0].src, day[0].dataset.stage));
+        }
 }));
+
+
+
 closeBtn.addEventListener('click', closeModal);
+
+//close modal on button
+function closeModal() {
+    modal.style.display = 'none';
+}
+
 
 //click outside modal to close 
 
-document.getElementsByTagName('BODY')[0].addEventListener('click', outsideModal);
+document.addEventListener('click', outsideModal);
+function outsideModal(event) {
+  
+    if (event.target.closest(".calendar")){
+        return;    
+    }
+    else if (!event.target.closest(".modal")) {
+       modal.style.display = 'none'
+    }
+}
+
+
+// document.getElementsByTagName('BODY')[0].addEventListener
 
 //function to open modal 
 function openModal(day, image, stage){
     modal.style.display = 'block';
-    // var day = event.target.innerHTML;
     console.log(lunarPhase(stage));
     document.getElementById('modal-link').href=`https://www.moongiant.com/phase/10/${day}/2021/`;
-    // var newMoonImg = document.createElement('img');
-    // newMoonImg.src=image;
+    //put images for that day into a div 
     var modalInfoDiv = document.getElementById("moon-age");
     modalInfoDiv.innerHTML=lunarPhase(stage);
-    // document.getElementById('moon-img').appendChild(newMoonImg);
     let phaseImg = document.querySelector("#moon-img");
     phaseImg.src = image;
 
@@ -240,22 +258,16 @@ function openModal(day, image, stage){
         else if (lunarPhase(stage) === "Waning Crescent"){
                     moonDiv.innerText = moonDescriptionElement[7].description;
         }
-    }
-
-
-
-
-//close modal on button
-function closeModal() {
-    modal.style.display = 'none';
+        else {
+            moonDiv.innerText = "There is no moon Information for this day!"
 }
-
-function outsideModal(event) {
-    if(event.target == modal) {
-        
-        modal.style.display = 'none';}
     }
-    
+
+
+
+
+
+
     let loadPage = function(){
         sixthWeek[0].style.visibility = "hidden";
         calendar.style.height = "630px";
