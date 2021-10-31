@@ -24,6 +24,7 @@ var yearEl = document.querySelector(".year");
 var selectedMonth = document.getElementById("start");
 var clearCityButtonEl = document.querySelector('#clear-city');
 var weatherDataContainerEl = document.getElementById('weather-data-container');
+var weatherEl = document.getElementById('weather-container');
 
 let getData = function(dOW,wOM){
     
@@ -58,6 +59,7 @@ let loadCalendar = function() {
         if (currentDay.weekOfMonth == "6"){
             sixthWeek[0].style.visibility = "visible";
             calendar.style.height = "735px";
+            weatherEl.style.height = "735px";
         }
         currentDay = {};
         
@@ -271,6 +273,7 @@ function openModal(day, image, stage){
     let loadPage = function(){
         sixthWeek[0].style.visibility = "hidden";
         calendar.style.height = "630px";
+        weatherEl.style.height = "630px";
         loadArray();
         loadCalendar();
     }
@@ -315,7 +318,7 @@ function openModal(day, image, stage){
     // this function will get the latitude and longitude to be used in the weather search 
     var getLatLong = function (selectedCity) {
         // this creates a URL for the api request based off of the city entered
-        var apiUrl = "http://api.positionstack.com/v1/forward?access_key=c4bf58a019f128c64c20b6e41582639b&query=" + selectedCity + "&limit=1";
+        var apiUrl = "https://api.positionstack.com/v1/forward?access_key=f17a81d114fb01bebd0af5544d9e26f5&query=" + selectedCity + "&limit=1";
         
         // fetch request to get lat and long from url we just created
         fetch(apiUrl).then(function (response) {
