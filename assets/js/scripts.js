@@ -26,6 +26,8 @@ var clearCityButtonEl = document.querySelector('#clear-city');
 var weatherDataContainerEl = document.getElementById('weather-data-container');
 var weatherEl = document.getElementById('weather-container');
 
+//retrieves data from the calendarData array for a given day
+//uses day of week(dOW) and week of month(wOM) data tags in thecalendar HTML
 let getData = function(dOW,wOM){
     
     calendarData.forEach(function(entry) {
@@ -36,18 +38,23 @@ let getData = function(dOW,wOM){
     });
 }
 
+//Load calendar objects with data from the calendarData array
 let loadCalendar = function() {
     monthEl.innerHTML = months[parseInt(currentMonth)-1];
     yearEl.textContent = currentYear;
+    //for each record in the calendarData array assigns data to the coresponding HTML object
     for (let i = 0; i < calendarDay.length; i++) {
+        //gets data for given day
         getData(calendarDay[i].dataset.dow, calendarDay[i].dataset.wom);
         let dayEl = calendarDay[i].querySelector(".dayBox");
         let imgEl = calendarDay[i].querySelector(".moonImg");
         
+        //if do data fro given day, hide objects in HTML
         if(!currentDay.day){
             imgEl.style.visibility = "hidden";
             dayEl.textContent="";
         }
+        //assigns values to HTML
         else {
             dayEl.textContent=currentDay.day; 
             dayEl.dataset.stage = currentDay.stage;  
@@ -56,11 +63,13 @@ let loadCalendar = function() {
             imgEl.style.visibility = "visible";  
         }
 
+        //checks if a sixth week is required for the calendar and changes week to visible
         if (currentDay.weekOfMonth == "6"){
             sixthWeek[0].style.visibility = "visible";
             calendar.style.height = "735px";
             weatherEl.style.height = "735px";
         }
+        //clears the currentDay object
         currentDay = {};
         
     }
@@ -116,29 +125,31 @@ const lunarPhase = (x) => {
     return "Waning Gibbious";
     else if (x < 23.99)
     return "Last Quarter";
-    else if (x < 27.68)
+    else if (x < 30.01)
     return "Waning Crescent";
     
     return "";
     
 }
 
-
+//Function to return the days since lsat new mood to determine which image to display on calendar
 const moonAge = (date = new Date(newdate)) => {
     const percent = LunarAgePercent(date);
     const age = percent * lunarMonth;
     return age;
 }
 
+//Load the calendarData array for the selected month/year
 let loadArray = function(){
+    //Clear the array of previous data
     calendarData = [];
     let selected = selectedMonth.value.split('-');
     currentYear = selected[0];
     currentMonth = selected[1];
-    
+    //finds the last day in the selected month
     let lastDay = new Date(currentYear,parseInt(currentMonth),0).getDate();
     
-    
+    //Create array object for each day in the selected month/year
     for (let i = 1; i <= lastDay;i++){
         var d = new Date(currentYear,parseInt(currentMonth)-1,i);
         var date = d.getDate();
@@ -214,13 +225,12 @@ function openModal(day, image, stage){
     let phaseImg = document.querySelector("#moon-img");
     phaseImg.src = image;
 
-
     //put definitions in an array to add to modal depending on moon phase 
 
     var moonDescriptionElement = [
         {"phase": "NewMoon", "description": "A new moon is when the moon cannot be seen because we are looking at the unlit half of the Moon. The new moon phase occurs when the Moon is directly between the Earth and Sun. A solar eclipse can only happen at new moon."},
         {"phase": "WaxingCrescent", "description": "A waxing crescent moon is when the Moon looks like a crescent and the crescent increases or waxes in size from one day to the next. This phase is usually only seen in the west."},
-        {"phase": "FirstQuartar", "description": "The first quarter moon (or a half moon) is when half of the lit portion of the Moon is visible after the waxing crescent phase. It comes a week after new moon."},
+        {"phase": "FirstQuarter", "description": "The first quarter moon (or a half moon) is when half of the lit portion of the Moon is visible after the waxing crescent phase. It comes a week after new moon."},
         {"phase": "WaxingGibbious", "description":"A waxing gibbous moon occurs when more than half of the lit portion of the Moon can be seen and the shape increases or waxes in size from one day to the next. The waxing gibbous phase occurs between the first quarter and full moon phases."},
         {"phase": "FullMoon",  "description":"A full moon is when we can see the entire lit portion of the Moon. The full moon phase occurs when the Moon is on the opposite side of the Earth from the Sun; called opposition. A lunar eclipse can only happen at full moon."},
         {"phase": "WaningGibbious", "description":"A waning gibbous moon occurs when more than half of the lit portion of the Moon can be seen and the shape decreases or wanes in size from one day to the next. The waning gibbous phase occurs between the full moon and third quarter phases."},
@@ -269,7 +279,7 @@ function openModal(day, image, stage){
 
 
 
-
+    //resets calendate styles and loads the calendarData array and loads the calendar HTML
     let loadPage = function(){
         sixthWeek[0].style.visibility = "hidden";
         calendar.style.height = "630px";
@@ -277,7 +287,7 @@ function openModal(day, image, stage){
         loadArray();
         loadCalendar();
     }
-    
+    //Calls functioon to load initial calendar data for the current month/year
     loadPage();
     
     
