@@ -464,7 +464,6 @@ function showWeather() {
         
         // Display Precipitation
         const precipitationDisplay = localStorage.getItem('savedPrecipitation');
-
         var precipitationEl = document.querySelector('#precipitation')
         console.log(precipitationDisplay);
         if (precipitationDisplay) {
