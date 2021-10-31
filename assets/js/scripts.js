@@ -166,7 +166,7 @@ let loadArray = function(){
 
 document.addEventListener("DOMContentLoaded", ()=> {
     const phase = lunarPhase ();
-    console.log(phase);
+    
     
     //append this data to modal use div idi 
 } );
@@ -294,7 +294,7 @@ function openModal(day, image, stage){
 
     document.addEventListener("DOMContentLoaded", ()=> {
         const phase = lunarPhase ();
-        console.log(phase);
+        
     } )
     //append this data to modal use div idi 
     var modalInfoDiv = document.getElementById("moon-age");
@@ -338,10 +338,9 @@ function openModal(day, image, stage){
                 // Hey Corrie, you can use these variables in your api call for the weather information. This will give you the latitude and longitude based on their search 
                 let lat = data.data[0].latitude;
                 let lon = data.data[0].longitude;
-                console.log(lat);
-                console.log(lon);
+               
                 
-                console.log(`First Log: Lat/Lon ${lat} & ${lon}`);
+                
                 
                 localStorage.setItem('savedLat', lat);
                 localStorage.setItem('savedLon', lon);
@@ -478,7 +477,7 @@ function showWeather() {
         // Display Precipitation
         const precipitationDisplay = localStorage.getItem('savedPrecipitation');
         var precipitationEl = document.querySelector('#precipitation')
-        console.log(precipitationDisplay);
+        
         if (precipitationDisplay) {
             precipitationEl.textContent = `Precipitation: ${precipitationDisplay}mm`;
         }
