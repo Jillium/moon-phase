@@ -314,13 +314,14 @@ code {
 
 .error-modal-container {
     display: none;
+    z-index: 1;
     
 }
 
 .error-modal {
     background-color: #E7DFDD;
-    width: 60%;
-    height: 30%;
+    width: 400px;
+    height: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
