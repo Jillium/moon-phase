@@ -255,7 +255,7 @@ function openModal(day, image, stage){
                     moonDiv.innerText = moonDescriptionElement[3].description;
                 
         } 
-        else if (lunarPhase(stage) === "Waxing Full Moon"){
+        else if (lunarPhase(stage) === "Full Moon"){
                     moonDiv.innerText = moonDescriptionElement[4].description;
 
         } 
