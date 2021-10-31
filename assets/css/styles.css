@@ -152,10 +152,6 @@ input:hover {
     color: var(--grey);
 }
 
-#weather-data-container{
-    padding-left: 1.25rem;
-}
-
 #weather-container h3:hover, #weather-data-container:hover {
     border: var(--blue);
     border-width: 3px;
@@ -163,7 +159,7 @@ input:hover {
 }
 
 #weather-data-container {
-    padding: 1rem 0 1rem 0;
+    padding: 1rem 0 1rem 1rem;
 }
 
 .calendar div {
