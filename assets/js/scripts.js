@@ -24,7 +24,10 @@ var yearEl = document.querySelector(".year");
 var selectedMonth = document.getElementById("start");
 var clearCityButtonEl = document.querySelector('#clear-city');
 var weatherDataContainerEl = document.getElementById('weather-data-container');
+var weatherEl = document.getElementById('weather-container');
 
+//retrieves data from the calendarData array for a given day
+//uses day of week(dOW) and week of month(wOM) data tags in thecalendar HTML
 let getData = function(dOW,wOM){
     
     calendarData.forEach(function(entry) {
@@ -35,18 +38,23 @@ let getData = function(dOW,wOM){
     });
 }
 
+//Load calendar objects with data from the calendarData array
 let loadCalendar = function() {
     monthEl.innerHTML = months[parseInt(currentMonth)-1];
     yearEl.textContent = currentYear;
+    //for each record in the calendarData array assigns data to the coresponding HTML object
     for (let i = 0; i < calendarDay.length; i++) {
+        //gets data for given day
         getData(calendarDay[i].dataset.dow, calendarDay[i].dataset.wom);
         let dayEl = calendarDay[i].querySelector(".dayBox");
         let imgEl = calendarDay[i].querySelector(".moonImg");
         
+        //if do data fro given day, hide objects in HTML
         if(!currentDay.day){
             imgEl.style.visibility = "hidden";
             dayEl.textContent="";
         }
+        //assigns values to HTML
         else {
             dayEl.textContent=currentDay.day; 
             dayEl.dataset.stage = currentDay.stage;  
@@ -55,10 +63,13 @@ let loadCalendar = function() {
             imgEl.style.visibility = "visible";  
         }
 
+        //checks if a sixth week is required for the calendar and changes week to visible
         if (currentDay.weekOfMonth == "6"){
             sixthWeek[0].style.visibility = "visible";
             calendar.style.height = "735px";
+            weatherEl.style.height = "735px";
         }
+        //clears the currentDay object
         currentDay = {};
         
     }
@@ -103,7 +114,7 @@ const lunarPhase = (x) => {
     if (x < 1.845) 
     return "New Moon";
     else if (x < 5.53) 
-    return "Waxing Cresent";
+    return "Waxing Crescent";
     else if (x < 9.228)
     return "First Quarter";
     else if (x < 12.919)
@@ -114,29 +125,31 @@ const lunarPhase = (x) => {
     return "Waning Gibbious";
     else if (x < 23.99)
     return "Last Quarter";
-    else if (x < 27.68)
+    else if (x < 30.01)
     return "Waning Crescent";
     
     return "";
     
 }
 
-
+//Function to return the days since lsat new mood to determine which image to display on calendar
 const moonAge = (date = new Date(newdate)) => {
     const percent = LunarAgePercent(date);
     const age = percent * lunarMonth;
     return age;
 }
 
+//Load the calendarData array for the selected month/year
 let loadArray = function(){
+    //Clear the array of previous data
     calendarData = [];
     let selected = selectedMonth.value.split('-');
     currentYear = selected[0];
     currentMonth = selected[1];
-    
+    //finds the last day in the selected month
     let lastDay = new Date(currentYear,parseInt(currentMonth),0).getDate();
     
-    
+    //Create array object for each day in the selected month/year
     for (let i = 1; i <= lastDay;i++){
         var d = new Date(currentYear,parseInt(currentMonth)-1,i);
         var date = d.getDate();
@@ -162,7 +175,6 @@ document.addEventListener("DOMContentLoaded", ()=> {
     
     // get modal elements and make variable 
     var modal = document.getElementById('moon-modal');
-    //var modalbtn = document.getElementById('modal-btn');
     var closeBtn = document.getElementById('modal-close');
     var dayClick = document.querySelectorAll(".days");
     
@@ -171,36 +183,54 @@ document.addEventListener("DOMContentLoaded", ()=> {
         
         var day = this.getElementsByClassName("dayBox");
         var image = this.getElementsByClassName("moonImg");
-    console.log(day);
+        if (day[0].innerHTML != "") {
     (openModal(day[0].innerHTML, image[0].src, day[0].dataset.stage));
+        }
 }));
+
+
+
 closeBtn.addEventListener('click', closeModal);
+
+//close modal on button
+function closeModal() {
+    modal.style.display = 'none';
+}
+
 
 //click outside modal to close 
 
-document.getElementsByTagName('BODY')[0].addEventListener('click', outsideModal);
+document.addEventListener('click', outsideModal);
+function outsideModal(event) {
+  
+    if (event.target.closest(".calendar")){
+        return;    
+    }
+    else if (!event.target.closest(".modal")) {
+       modal.style.display = 'none'
+    }
+}
+
+
+// document.getElementsByTagName('BODY')[0].addEventListener
 
 //function to open modal 
 function openModal(day, image, stage){
     modal.style.display = 'block';
-    // var day = event.target.innerHTML;
     console.log(lunarPhase(stage));
     document.getElementById('modal-link').href=`https://www.moongiant.com/phase/10/${day}/2021/`;
-    // var newMoonImg = document.createElement('img');
-    // newMoonImg.src=image;
+    //put images for that day into a div 
     var modalInfoDiv = document.getElementById("moon-age");
     modalInfoDiv.innerHTML=lunarPhase(stage);
-    // document.getElementById('moon-img').appendChild(newMoonImg);
     let phaseImg = document.querySelector("#moon-img");
     phaseImg.src = image;
-
 
     //put definitions in an array to add to modal depending on moon phase 
 
     var moonDescriptionElement = [
         {"phase": "NewMoon", "description": "A new moon is when the moon cannot be seen because we are looking at the unlit half of the Moon. The new moon phase occurs when the Moon is directly between the Earth and Sun. A solar eclipse can only happen at new moon."},
         {"phase": "WaxingCrescent", "description": "A waxing crescent moon is when the Moon looks like a crescent and the crescent increases or waxes in size from one day to the next. This phase is usually only seen in the west."},
-        {"phase": "FirstQuartar", "description": "The first quarter moon (or a half moon) is when half of the lit portion of the Moon is visible after the waxing crescent phase. It comes a week after new moon."},
+        {"phase": "FirstQuarter", "description": "The first quarter moon (or a half moon) is when half of the lit portion of the Moon is visible after the waxing crescent phase. It comes a week after new moon."},
         {"phase": "WaxingGibbious", "description":"A waxing gibbous moon occurs when more than half of the lit portion of the Moon can be seen and the shape increases or waxes in size from one day to the next. The waxing gibbous phase occurs between the first quarter and full moon phases."},
         {"phase": "FullMoon",  "description":"A full moon is when we can see the entire lit portion of the Moon. The full moon phase occurs when the Moon is on the opposite side of the Earth from the Sun; called opposition. A lunar eclipse can only happen at full moon."},
         {"phase": "WaningGibbious", "description":"A waning gibbous moon occurs when more than half of the lit portion of the Moon can be seen and the shape decreases or wanes in size from one day to the next. The waning gibbous phase occurs between the full moon and third quarter phases."},
@@ -225,7 +255,7 @@ function openModal(day, image, stage){
                     moonDiv.innerText = moonDescriptionElement[3].description;
                 
         } 
-        else if (lunarPhase(stage) === "Waxing Full Moon"){
+        else if (lunarPhase(stage) === "Full Moon"){
                     moonDiv.innerText = moonDescriptionElement[4].description;
 
         } 
@@ -240,29 +270,24 @@ function openModal(day, image, stage){
         else if (lunarPhase(stage) === "Waning Crescent"){
                     moonDiv.innerText = moonDescriptionElement[7].description;
         }
-    }
-
-
-
-
-//close modal on button
-function closeModal() {
-    modal.style.display = 'none';
+        else {
+            moonDiv.innerText = "There is no moon Information for this day!"
 }
-
-function outsideModal(event) {
-    if(event.target == modal) {
-        
-        modal.style.display = 'none';}
     }
-    
+
+
+
+
+
+    //resets calendate styles and loads the calendarData array and loads the calendar HTML
     let loadPage = function(){
         sixthWeek[0].style.visibility = "hidden";
         calendar.style.height = "630px";
+        weatherEl.style.height = "630px";
         loadArray();
         loadCalendar();
     }
-    
+    //Calls functioon to load initial calendar data for the current month/year
     loadPage();
     
     
@@ -303,7 +328,7 @@ function outsideModal(event) {
     // this function will get the latitude and longitude to be used in the weather search 
     var getLatLong = function (selectedCity) {
         // this creates a URL for the api request based off of the city entered
-        var apiUrl = "http://api.positionstack.com/v1/forward?access_key=c4bf58a019f128c64c20b6e41582639b&query=" + selectedCity + "&limit=1";
+        var apiUrl = "https://api.positionstack.com/v1/forward?access_key=f17a81d114fb01bebd0af5544d9e26f5&query=" + selectedCity + "&limit=1";
         
         // fetch request to get lat and long from url we just created
         fetch(apiUrl).then(function (response) {
@@ -452,7 +477,6 @@ function showWeather() {
         
         // Display Precipitation
         const precipitationDisplay = localStorage.getItem('savedPrecipitation');
-
         var precipitationEl = document.querySelector('#precipitation')
         console.log(precipitationDisplay);
         if (precipitationDisplay) {

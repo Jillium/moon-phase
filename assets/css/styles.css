@@ -47,6 +47,10 @@ h1 {
     padding-left: 1rem;
 }
 
+h3 {
+    font-size: 1.8rem;
+}
+
 header {
     display: inline-flex;
     /* align-items: center; */
@@ -90,10 +94,6 @@ header form button {
     margin-top: 2em;
 }
 
-.weather-by-city {
-    padding-left: 60em;
-}
-
 .title {
     color: var(--grey);
 }
@@ -102,7 +102,9 @@ header form button {
     text-align: center;
 }
 
-
+#city-name, #weather-today{
+    font-size: 1.25em;
+}
 
 .city-search-btn:hover {
     border: var(--grey);
@@ -118,8 +120,8 @@ input:hover {
 
 
 .weather-background {
-    background-color: var(--grey);
-    color: var(--black);
+    background-color: var(--black);
+    color: var(--grey);
     border-radius: 6px;
 }
 
@@ -147,7 +149,11 @@ input:hover {
     border-style: solid;
     border-width: .5px;
     border-radius: 15px;
-    color: var(--black);
+    color: var(--grey);
+}
+
+#weather-data-container{
+    padding-left: 1.25rem;
 }
 
 #weather-container h3:hover, #weather-data-container:hover {
@@ -165,7 +171,7 @@ input:hover {
     border-style: solid;
     border-width: .5px;
     border-radius: 15px;
-    color: var(--black);
+    color: var(--grey);
 }
 
 .columns {
@@ -180,14 +186,14 @@ input:hover {
     height: 50px;
     align-items: center;
     text-align: center;
-    background-color: var(--grey);
+    background-color: var(--black);
 }
 
 .weekDays div {
     height: 50px;
     align-items: center;
     text-align: center;
-    background-color: var(--grey);
+    background-color: var(--black);
 }
 
 .weeks div {
@@ -369,6 +375,9 @@ code {
     padding: 3px;
 }
 
+.days img {
+    border-radius: 50%;
+}
 
 
 
@@ -380,11 +389,17 @@ code {
 @media screen and (max-width: 575px) {
     #weather-container {
         width: 140px;
+        padding-right: 0.3em;
+        padding-left: 0px;
+        width: 90%;
+    }
+
+    .weekDays {
+        padding: 0px;
     }
     
     #weather-data-container {
-        padding-right: 10px;
-        
+        padding: 0 10px 0 2px;
     }
     
 }
@@ -402,16 +417,14 @@ code {
         background-color: var(--fuschia);
         font-size: 1em;
         margin-bottom: 5px;
-        
-        
     }
 
     header form input  {
-        background-color: var(--grey);
+        background-color: var(--black);
         padding: 1em;
         border-radius: 25%;
         margin-right: 1em;
-        color: var(--black);
+        color: var(--grey);
         font-size: 1em;
         width: 140px;
     }
@@ -422,15 +435,19 @@ code {
     }
 
     .weather-by-city {
-        padding-left: 8em;
+        display: flex;
+        align-items: center;
     }
 
-   
-   
+    #weather-container {
+        padding-right: 0.3em;
+        padding-left: 0;
+        width: 90%;
+    }
 }
 
 /* Media query for tablets and smaller */
-@media screen and (min-width: 768px) {
+@media screen and (max-width: 450px) {
     .level {
         display: flex;
         justify-content: flex-start;
@@ -439,8 +456,35 @@ code {
     .form-buttons {
         margin-left: 10px;
     }
+    
+    .calendar {
+        margin-left: 0.5rem;
+    }
 
-  
+    h1 {
+        margin-top: 0.3em;
+        padding-left: 0;
+        font-size: 2.8em;
+    }
 
-   
+    .weather-by-city h2 {
+        font-size: 1rem;
+    }
+
+    #city-name, #weather-today{
+        font-size: 0.9em;
+    }
+
+    #weather-info {
+        font-size: 0.7em;
+    }
+
+   .weekDays div{ 
+       padding: 15px 0 0 0;
+       font-size: 0.7em;
+   }
+
+   code {
+       padding: 0;
+   }
 }
