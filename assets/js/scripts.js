@@ -17,14 +17,14 @@ var moonRiseEl = document.querySelector('#moon-rise');
 var moonSetEl = document.querySelector('#moon-set');
 
 var sixthWeek = document.getElementsByClassName("sixth");
-var selectedMonth = document.getElementById("start");
-var sixthWeek = document.getElementsByClassName("sixth");
 var monthEl = document.querySelector(".month");
 var yearEl = document.querySelector(".year");
 var selectedMonth = document.getElementById("start");
 var clearCityButtonEl = document.querySelector('#clear-city');
 var weatherDataContainerEl = document.getElementById('weather-data-container');
 var weatherEl = document.getElementById('weather-container');
+
+document.getElementById('start').valueAsDate = new Date();
 
 //retrieves data from the calendarData array for a given day
 //uses day of week(dOW) and week of month(wOM) data tags in thecalendar HTML
