@@ -18,7 +18,7 @@ So that I can get the best picture of the moon in a particular phase with clear 
 The user will be able to open the app to see weather conditions for a searched city that could possibly hinder their desired outcome. They are also able to see the current moon phases to help decide if conditions are optimal. 
 
 ## Link to Site
-https://lholgate.github.io/moon-phase/
+https://jillium.github.io/moon-phase/
 
 ## Coding Scripts
 HTML
